@@ -2,98 +2,3505 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
+<title>Inyoung Hwang — Backend Developer Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Under Construction · Inyoung Hwang</title>
-<meta name="robots" content="noindex" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' fill='white' font-family='-apple-system,system-ui' font-weight='700' font-size='14'%3EIH%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  :root { --blue: #2563eb; --ink: #0b1220; --muted: #5b6577; --line: #e6eaf2; }
+  /* ============================================================
+     UNIFIED DESIGN SYSTEM  ·  Vertical (A4-portrait) portfolio
+     ----------------------------------------------------------
+     · Single-column document layout, max 800px wide
+     · One section-header pattern, one card pattern, one bullet
+     · Mono labels + diamond bullets + blue accent everywhere
+     ============================================================ */
+  :root {
+    /* surfaces */
+    --bg:        #f5f6f8;
+    --paper:     #ffffff;
+    --bg-soft:   #f6f8fc;
+
+    /* ink */
+    --ink:       #0b1220;
+    --ink-2:     #2a3142;
+    --muted:     #5b6577;
+    --muted-2:   #8c95a8;
+
+    /* lines */
+    --line:      #e6eaf2;
+    --line-2:    #eef1f7;
+    --line-dash: #d8deea;
+
+    /* accent (single hue, used for every emphasis) */
+    --accent:       #2563eb;
+    --accent-600:   #1d4ed8;
+    --accent-soft:  #eef4ff;
+    --accent-line:  #dbe7ff;
+    --chip:         #f1f5fb;
+
+    /* type */
+    --font-sans: "Pretendard Variable", Pretendard, "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* shape */
+    --radius:    12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 0 rgba(15,23,42,.04), 0 1px 2px rgba(15,23,42,.04);
+    --shadow-md: 0 1px 0 rgba(15,23,42,.04), 0 12px 28px -16px rgba(15,23,42,.18);
+
+    /* layout — vertical document */
+    --page-w:    820px;
+    --gutter:    56px;
+  }
+
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; height: 100%; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    font-family: var(--font-sans);
     color: var(--ink);
-    background: #fafbfd;
-    display: grid;
-    place-items: center;
-    padding: 24px;
+    background: var(--bg);
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  .card {
-    width: 100%;
-    max-width: 520px;
+  /* Korean-friendly word wrapping — keep Korean phrases intact, break English at word boundaries */
+  p, li, h1, h2, h3, h4, h5, h6, dt, dd, span, button {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  /* but mono code blocks should not be broken — keep their structure */
+  .term-body, .terminal, code, pre {
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  /* ============== PAGE — single column, A4-portrait feel ============== */
+  .page {
+    display: block;
+    max-width: var(--page-w);
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--line), 0 24px 60px -28px rgba(15,23,42,.18);
+    min-height: 100vh;
+  }
+
+  /* ============== TOP HEADER — replaces sidebar ============== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .brand-mark {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    overflow: hidden;
+    background: var(--bg-soft);
     border: 1px solid var(--line);
-    border-radius: 20px;
-    background: #fff;
-    padding: 48px 40px;
-    text-align: center;
-    box-shadow: 0 30px 60px -28px rgba(15,23,42,0.18);
+    flex-shrink: 0;
   }
-  .mark {
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    background: var(--blue);
-    color: #fff;
-    margin: 0 auto 20px;
-    display: grid; place-items: center;
+  .brand-mark img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    display: block;
+  }
+  .brand-name {
+    font-size: 14px;
     font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -0.04em;
-    box-shadow: 0 12px 28px -10px rgba(37,99,235,0.5);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.2;
   }
-  .tag {
-    display: inline-block;
-    font-size: 11px;
-    color: var(--blue);
-    background: #eef4ff;
-    border: 1px solid #dbe7ff;
-    padding: 4px 10px;
-    border-radius: 999px;
-    letter-spacing: 0.12em;
+  .brand-role {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 20px;
+    margin-top: 2px;
   }
-  h1 {
-    margin: 0 0 12px;
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.3;
+  .nav {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-  p { margin: 0 0 24px; color: var(--muted); line-height: 1.65; font-size: 15px; }
-  .links { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-  a.btn {
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-label { display: none; }
+  .nav a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--ink);
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
     font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+  }
+  .nav a .num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-2);
+    transition: color .15s;
+  }
+  .nav a:hover { color: var(--ink); background: var(--bg-soft); }
+  .nav a.active { color: var(--accent); background: var(--accent-soft); }
+  .nav a.active .num { color: var(--accent); }
+  .card:hover {
+    border-color: var(--accent-line);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ============== CONTENT ============== */
+  .content {
+    padding: 0 var(--gutter) 80px;
+    min-width: 0;
+  }
+  .content > section {
+    padding: 64px 0 8px;
+    scroll-margin-top: 80px;
+  }
+  .content > section:first-of-type { padding-top: 56px; }
+
+  /* ====== UNIFIED SECTION HEAD ====== */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head .idx {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+  .section-head .kicker {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ====== UNIFIED EMOJI · LABEL HEAD ====== */
+  .em-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .em-label .em {
+    width: 24px; height: 24px;
+    border-radius: 7px;
+    background: var(--accent-soft);
+    display: grid; place-items: center;
+    font-size: 13px; line-height: 1;
+    flex-shrink: 0;
+  }
+  .em-label .lbl {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ====== UNIFIED CARD (base) ====== */
+  .card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .card:hover {
+    border-color: var(--accent-line);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ====== UNIFIED LIST (diamond bullet, blue) ====== */
+  .ul-clean {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 7px;
+  }
+  .ul-clean li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .ul-clean li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 10px;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+  .ul-clean li b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* ====== UNIFIED TAGS / PILLS ====== */
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-2);
+    background: var(--chip);
+    border: 1px solid var(--line-2);
+    padding: 4px 8px;
+    border-radius: 6px;
+    line-height: 1;
+  }
+  .tag.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .tag.muted { color: var(--muted); background: var(--paper); }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .pill::before {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  /* ============== HERO ============== */
+  .hero {
+    padding-top: 72px !important;
+    padding-bottom: 56px;
+  }
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .profile-photo {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--bg-soft);
+    box-shadow: 0 12px 28px -16px rgba(15,23,42,.25), 0 0 0 1px var(--line);
+    aspect-ratio: 640 / 684;
+  }
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+
+
+  .hero .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .hero .eyebrow::before {
+    content: ""; width: 24px; height: 1px; background: var(--accent);
+  }
+  .hero h1 {
+    margin: 0 0 4px;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero h1 .dim    { color: var(--muted-2); font-weight: 700; }
+  .hero .meta-line {
+    margin: 20px 0 14px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .hero .lede {
+    font-size: 15.5px;
+    color: var(--ink-2);
+    line-height: 1.75;
+    margin: 0 0 24px;
+    text-wrap: pretty;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px 28px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+    margin: 0;
+  }
+  .hero-meta > div {
+    display: flex; flex-direction: column; gap: 3px;
+    min-width: 0;
+  }
+  .hero-meta dt {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-meta dd {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    font-weight: 500;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .hero-meta dd a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .hero-meta dd a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Hero terminal */
+  .terminal {
+    background: #0b1220;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 20px 40px -22px rgba(11,18,32,.4), 0 0 0 1px rgba(11,18,32,.06);
+    font-family: var(--font-mono);
+    color: #e7ecf3;
+    font-size: 12px;
+    line-height: 1.75;
+  }
+  .term-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .term-bar .tdot { width: 10px; height: 10px; border-radius: 50%; }
+  .term-bar .file { margin-left: 10px; color: #6b7891; font-size: 11px; }
+  .term-body { padding: 16px 18px 18px; overflow-x: auto; }
+  .term-body .row { white-space: pre; }
+  .term-body .ln { color: #475569; width: 22px; display: inline-block; user-select: none; }
+  .tk  { color: #c084fc; }
+  .ts  { color: #86efac; }
+  .tp  { color: #93c5fd; }
+  .tn  { color: #fbbf24; }
+  .to  { color: #94a3b8; }
+  .tcm { color: #475569; font-style: italic; }
+  .tfn { color: #38bdf8; }
+  .blink {
+    display: inline-block; width: 6px; height: 13px;
+    background: var(--accent); vertical-align: -2px; margin-left: 2px;
+    animation: term-bk 1s steps(1) infinite;
+  }
+  @keyframes term-bk { 50% { opacity: 0; } }
+
+  /* ============== ABOUT ============== */
+  .about-grid { display: flex; flex-direction: column; gap: 14px; }
+  .about-grid p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .about-grid p strong {
+    color: var(--ink);
+    background: linear-gradient(transparent 60%, var(--accent-line) 60%);
+    font-weight: 600;
+    padding: 0 2px;
+  }
+  .about-pills {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 8px;
+  }
+
+  /* ============== SKILLS — 2-col on desktop, 1-col vertical narrow ============== */
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .skill-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px 16px;
+    background: var(--paper);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .skill-card:hover { border-color: var(--accent-line); box-shadow: var(--shadow-md); }
+  .skill-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .skill-ico {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid; place-items: center;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .skill-card h3 {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-legend {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============== WORK ============== */
+  .work-company {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--accent-soft) 0%, var(--paper) 80%);
+    padding: 24px 26px;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .work-company-head {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .work-company-mark {
+    width: 48px; height: 48px;
+    border-radius: 11px;
+    background: var(--accent);
+    color: #fff;
+    display: grid; place-items: center;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+  }
+  .work-company-titles { min-width: 0; }
+  .work-company-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  
+    white-space: nowrap;
+  }
+  .work-company h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .work-company h3 .muted {
+    color: var(--muted-2);
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 4px;
+  }
+  .work-company-text > p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .work-company-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 24px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line-2);
+    margin: 0;
+  }
+  .work-company-meta > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .work-company-meta dt {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .work-company-meta dd {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  .work-cards { display: flex; flex-direction: column; gap: 22px; }
+
+  /* Previous role — muted variant of .work-company */
+  .work-company.prev {
+    background: var(--paper);
+    margin-top: 22px;
+    margin-bottom: 0;
+  }
+  .work-company.prev .prev-mark {
+    background: var(--bg-soft);
+    color: var(--muted);
+    border: 1px solid var(--line);
+    box-shadow: none;
+  }
+  .work-company.prev .prev-tag {
+    color: var(--muted-2);
+  }
+  .work-company.prev h3 { font-size: 17px; }
+  .work-company.prev .work-company-text > p {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .work-company.prev .work-company-text > p b {
+    color: var(--ink-2);
+    background: var(--bg-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* Previous-role nested list — 3 company entries */
+  .prev-list {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 14px 0 0;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .prev-list > li {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .prev-li-period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted-2);
+    letter-spacing: 0.02em;
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+  .prev-li-body h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-2);
+    letter-spacing: -0.01em;
+  }
+  .prev-li-body h4 .muted {
+    color: var(--muted-2);
+    font-weight: 500;
+    font-size: 13px;
+    margin-left: 2px;
+  }
+  .prev-li-body p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  @media (max-width: 760px) {
+    .prev-list > li { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* Inline mini badge — used in Education for "복수전공" tag inside h3 */
+  .edu-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted-2);
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    padding: 2px 7px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    vertical-align: 2px;
+    margin: 0 4px;
+    line-height: 1;
+  }
+
+
+  /* Work card — fully vertical, no rail */
+  .work-card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .work-card:hover { border-color: var(--accent-line); box-shadow: var(--shadow-md); }
+
+  .wc-top {
+    padding: 24px 26px 22px;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .wc-meta-rail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .wc-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: var(--accent-soft);
+    padding: 4px 9px;
+    border-radius: 6px;
+  }
+  .wc-tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .wc-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .wc-rail-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+  .wc-period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted-2);
+    margin-left: auto;
+  }
+  .wc-title-area { min-width: 0; }
+  .wc-title {
+    margin: 0 0 8px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.22;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .wc-summary {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  /* Metrics — stacked vertical tiles */
+  .wc-metrics {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px dashed var(--line);
+  }
+  .wc-metric {
+    padding: 16px 26px;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .wc-metric:last-child { border-bottom: none; }
+  .wc-metric-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    flex-shrink: 0;
+    min-width: 130px;
+    max-width: 220px;
+  }
+  .wc-metric-value i {
+    font-style: normal;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-left: 6px;
+    display: inline-block;
+  }
+  .wc-metric-value .delta {
+    color: var(--accent);
+    font-weight: 800;
+    margin-right: 2px;
+  }
+  .wc-metric-value .arrow {
+    font-family: var(--font-mono);
+    color: var(--muted-2);
+    margin: 0 5px;
+    font-size: 13px;
+  }
+  .wc-metric-value .from {
+    color: var(--muted-2);
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .wc-metric-label {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  /* ===== Highlight row (replaces metric tile grid) ===== */
+  .wc-highlight {
+    padding: 14px 26px;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .wc-highlight-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .wc-highlight-text {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: 1.55;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Work card body — same em-label + ul-clean pattern */
+  .wc-body {
+    padding: 18px 26px 20px;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .wc-section { display: flex; flex-direction: column; gap: 6px; }
+  .wc-section p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .wc-section p b,
+  .wc-section li b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .wc-reflection {
+    color: var(--ink-2);
+    font-size: 13.5px !important;
+    line-height: 1.7 !important;
+    border-left: 2px solid var(--accent);
+    padding: 2px 0 2px 12px !important;
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  .wc-foot {
+    padding: 12px 26px 14px;
+    display: flex;
+    gap: 12px;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    align-items: center;
+  }
+  .wc-stack {
+    display: flex; gap: 5px; flex-wrap: wrap; flex: 1;
+  }
+  .wc-stack .tag { background: var(--paper); }
+
+  /* ============== COMPANY GROUP — Dozn becomes ONE extended card ============== */
+  .company-group {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    overflow: hidden;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  /* Inside the group, Dozn hero loses its own border/radius — becomes the header strip */
+  .company-group > .work-company {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding-bottom: 18px;
+  }
+  /* The tile grid sits flush below the header — no divider, no tinted bg */
+  .company-group > .work-grid {
+    padding: 0 22px 22px;
+    gap: 12px;
+  }
+
+  /* ============== WORK GRID — compact 2-col tiles + modal ============== */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .work-tile {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    padding: 22px 22px 20px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 220px;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .work-tile:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -16px rgba(37,99,235,.35);
+  }
+  .work-tile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+  .work-tile-index { white-space: nowrap; flex: 0 0 auto; }
+  .work-tile-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: var(--accent-soft);
+    padding: 4px 9px;
+    border-radius: 6px;
+  }
+  .work-tile-period {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+  .work-tile-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    flex: 1 0 auto;
+  }
+  .work-tile-highlight {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    font-weight: 500;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .work-tile-cta {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+  }
+  .work-tile-cta svg { transition: transform .15s; }
+  .work-tile:hover .work-tile-cta svg { transform: translateX(2px); }
+
+  /* Modal */
+  .work-modal {
+    position: fixed; inset: 0; z-index: 100;
+    display: none; align-items: center; justify-content: center;
+    padding: 32px 16px;
+  }
+  .work-modal[aria-hidden="false"] {
+    display: flex; animation: cm-fade .18s ease both;
+  }
+  .work-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(11,18,32,.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .work-modal-dialog {
+    position: relative;
+    width: min(720px, 100%);
+    max-height: calc(100vh - 64px);
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 30px 60px -20px rgba(11,18,32,.4);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    animation: cm-pop .22s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .work-modal-close {
+    position: absolute;
+    top: 18px; right: 18px;
+    z-index: 5;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    font-size: 18px;
+    color: var(--ink-2);
+    cursor: pointer;
+    display: grid; place-items: center;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .work-modal-close:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .work-modal-body {
+    overflow-y: auto;
+    padding: 0;
+  }
+  .work-modal-head {
+    padding: 28px 28px 22px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--accent-soft), var(--paper) 90%);
+  }
+  .work-modal-meta {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .work-modal-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: var(--paper);
+    border: 1px solid var(--accent-line);
+    padding: 4px 9px;
+    border-radius: 6px;
+  }
+  .work-modal-period {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .work-modal-title {
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    color: var(--ink);
+    padding-right: 40px;
+    text-wrap: balance;
+  }
+  .work-modal-summary {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .work-modal-highlight {
+    padding: 14px 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    border-bottom: 1px dashed var(--line);
+    background: var(--paper);
+  }
+  .work-modal-body .wc-body {
+    padding: 20px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .work-modal-foot {
+    padding: 14px 28px 18px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .work-modal-foot-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted-2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .work-grid { grid-template-columns: 1fr; }
+    .work-modal { padding: 16px 12px; }
+    .work-modal-head { padding: 22px 20px 18px; }
+    .work-modal-highlight { padding: 12px 20px; }
+    .work-modal-body .wc-body { padding: 16px 20px 20px; }
+    .work-modal-foot { padding: 12px 20px 14px; }
+  }
+
+  /* ============== Experience grouping — variant switcher (prototype) ============== */
+  .exp-style-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    margin: 0 0 24px;
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    background: var(--bg-soft);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .exp-style-switcher-label {
+    color: var(--muted-2);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-right: 4px;
+  }
+  .exp-style-switcher label {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .exp-style-switcher label:hover { color: var(--ink); border-color: var(--muted-2); }
+  .exp-style-switcher label input { appearance: none; -webkit-appearance: none; width: 0; height: 0; margin: 0; }
+  .exp-style-switcher label:has(input:checked) {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Shared — company-group container (no styling by default; variants extend) */
+  .company-group { position: relative; }
+  /* Always-hidden elements; each variant un-hides what it needs */
+  .company-badge { display: none; }
+  .company-divider { display: none; }
+
+  /* ===== A · Branch — vertical accent line + horizontal connectors ===== */
+  body.exp-style-branch .company-group .work-cards {
+    position: relative;
+    padding-left: 32px;
+    margin-left: 14px;
+  }
+  body.exp-style-branch .company-group .work-cards::before {
+    content: "";
+    position: absolute;
+    left: 0; top: -8px; bottom: 16px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-line) 30%, var(--accent-line) 100%);
+    border-radius: 2px;
+  }
+  body.exp-style-branch .work-cards .work-card::after {
+    content: "";
+    position: absolute;
+    left: -32px; top: 36px;
+    width: 22px; height: 2px;
+    background: var(--accent-line);
+  }
+  body.exp-style-branch .work-cards .work-card::before {
+    content: "";
+    position: absolute;
+    left: -38px; top: 30px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    z-index: 1;
+  }
+
+  /* ===== B · Frame — wrap company + cards in a soft enclosed container ===== */
+  body.exp-style-frame .company-group {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 22px;
+  }
+  body.exp-style-frame .company-group .work-company {
+    margin-bottom: 14px;
+  }
+  body.exp-style-frame .company-group .work-cards {
+    gap: 14px;
+  }
+
+  /* ===== C · Badge — small @ DOZN tag at the top-right of every work card ===== */
+  body.exp-style-badge .work-card .company-badge {
+    display: inline-flex;
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===== D · Divider — strong horizontal label between Dozn hero and cards ===== */
+  body.exp-style-divider .company-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 6px 0 20px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+  }
+  body.exp-style-divider .company-divider::before,
+  body.exp-style-divider .company-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
+  }
+  body.exp-style-divider .company-divider span { white-space: nowrap; }
+
+  /* Mobile — branch tightens */
+  @media (max-width: 760px) {
+    body.exp-style-branch .company-group .work-cards { padding-left: 22px; margin-left: 6px; }
+    body.exp-style-branch .work-cards .work-card::after { left: -22px; width: 12px; }
+    body.exp-style-branch .work-cards .work-card::before { left: -28px; }
+    body.exp-style-frame .company-group { padding: 10px; }
+    body.exp-style-rail .company-group { padding-left: 36px; }
+    body.exp-style-rail .company-group::before { font-size: 9px; left: 4px; }
+  }
+
+  /* ===== E · Prefix — "DOZN /" inline before each card's index ===== */
+  body.exp-style-prefix .company-group .wc-index::before {
+    content: "DOZN / ";
+    color: var(--muted);
+    font-weight: 500;
+  }
+  body.exp-style-prefix .company-group .wc-index {
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    color: var(--ink);
+  }
+
+  /* ===== F · Rail — vertical rotated brand label on the outer left margin ===== */
+  body.exp-style-rail .company-group {
+    position: relative;
+    padding-left: 52px;
+  }
+  body.exp-style-rail .company-group::before {
+    content: "DOZN — 5 KEY PROJECTS";
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 14px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--accent-soft), transparent 80%);
+    border-radius: 7px;
+  }
+
+  /* ===== G · Stripe — accent left-edge on every work card ===== */
+  body.exp-style-stripe .company-group .work-card {
+    border-left: 3px solid var(--accent);
+  }
+  body.exp-style-stripe .company-group .work-company {
+    border-left: 3px solid var(--accent);
+  }
+
+  /* ===== H · Tab — folder-tab label sticking out the top of each card ===== */
+  body.exp-style-tab .company-group .work-cards { gap: 28px; }
+  body.exp-style-tab .company-group .work-card { overflow: visible; }
+  body.exp-style-tab .work-card .company-badge {
+    display: inline-block;
+    position: absolute;
+    top: -14px;
+    left: 22px;
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--ink);
+    padding: 4px 12px 6px;
+    border-radius: 6px 6px 0 0;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  body.exp-style-tab .company-group .work-cards .work-card:first-child { margin-top: 8px; }
+
+
+  /* ============== WORK CARD — Accordion (expand/collapse body) ============== */
+  .wc-collapse {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .28s ease;
+  }
+  .wc-collapse-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .work-card.is-open .wc-collapse {
+    grid-template-rows: 1fr;
+  }
+  /* When closed: drop the dashed line under metrics so foot sits flush */
+  .work-card:not(.is-open) .wc-metrics,
+  .work-card:not(.is-open) .wc-highlight {
+    border-bottom: none;
+  }
+  /* When open: rely on .wc-highlight's existing dashed bottom as the only divider above body */
+  .work-card.is-open .wc-body {
+    border-top: none;
+  }
+  /* Toggle button — same mono/quiet visual as link-btn but tighter */
+  .wc-toggle {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .wc-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--paper);
+  }
+  .wc-toggle-icon {
+    transition: transform .25s ease;
+  }
+  .work-card.is-open .wc-toggle {
+    color: var(--accent);
+    border-color: var(--accent-line);
+    background: var(--accent-soft);
+  }
+  .work-card.is-open .wc-toggle-icon {
+    transform: rotate(180deg);
+  }
+  /* foot becomes flex with stack | toggle */
+  .wc-foot { justify-content: space-between; }
+
+
+  /* ============== PROJECTS ============== */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .project {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .project:hover { border-color: var(--accent-line); box-shadow: var(--shadow-md); }
+
+  .project-top {
+    padding: 24px 26px 20px;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .project-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .project-logo {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid; place-items: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+  }
+  .project h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+  }
+  .project .ko {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-left: 6px;
+  }
+  .project-summary {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+  .project-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .project-date {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .project-badges {
+    display: flex; gap: 5px; flex-wrap: wrap;
+  }
+
+  /* Project body — vertical stack */
+  .project-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .pb-cell {
+    padding: 18px 26px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pb-cell:last-child { border-bottom: none; }
+  .pb-cell ul {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 6px;
+  }
+  .pb-cell > ul > li {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    padding-left: 14px;
+    position: relative;
+  }
+  .pb-cell > ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 9px;
+    width: 5px; height: 5px;
+    border-radius: 1px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .pb-cell > ul > li b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* ===== Project body — Overview + grouped My Role (Notion-original structure) ===== */
+  .pb-overview {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.8;
+    text-wrap: pretty;
+  }
+  .pb-overview b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .pb-role-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pb-role-group > strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .pb-role-group > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .pb-role-group > ul > li {
+    position: relative;
+    padding-left: 13px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .pb-role-group > ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 9px;
+    width: 4px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .pb-role-group > ul > li b {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+
+  .project-foot {
+    padding: 14px 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .project-foot .stack {
+    display: flex; gap: 5px; flex-wrap: wrap; flex: 1; min-width: 0;
+  }
+  .project-foot .stack .tag { background: var(--paper); }
+
+  .links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink-2);
+    font-size: 12px;
     font-weight: 600;
     text-decoration: none;
-    transition: all .15s ease;
+    transition: all .15s;
+    font-family: var(--font-mono);
   }
-  a.btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); transform: translateY(-1px); }
-  a.btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
-  a.btn.primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+  .link-btn:hover {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .link-btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .link-btn.primary:hover {
+    background: var(--accent-600);
+    border-color: var(--accent-600);
+  }
+  .link-btn svg { width: 12px; height: 12px; }
+
+  /* ====== CASE STUDIES (Troubleshooting) ====== */
+  .case-row {
+    padding: 16px 26px 18px;
+    border-top: 1px dashed var(--line);
+    background: var(--bg-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .case-row-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .case-row-label::before {
+    content: ""; width: 5px; height: 5px; border-radius: 999px;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .case-list { display: flex; flex-direction: column; gap: 6px; }
+  .case-btn {
+    display: grid;
+    grid-template-columns: 28px 1fr 16px;
+    gap: 12px;
+    align-items: center;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+    font-family: inherit;
+    color: inherit;
+    width: 100%;
+  }
+  .case-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px -8px rgba(37,99,235,.3);
+  }
+  .case-icon { font-size: 18px; line-height: 1; text-align: center; }
+  .case-btn-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .case-title {
+    font-size: 13.5px; font-weight: 600; color: var(--ink);
+    letter-spacing: -0.01em; line-height: 1.4;
+  }
+  .case-sub {
+    font-family: var(--font-mono);
+    font-size: 10.5px; color: var(--muted);
+    line-height: 1.4;
+  }
+  .case-arrow {
+    color: var(--muted-2); font-weight: 600; font-size: 13px;
+    transition: color .15s, transform .15s;
+  }
+  .case-btn:hover .case-arrow { color: var(--accent); transform: translateX(2px); }
+  .case-btn.placeholder { background: var(--bg-soft); border-style: dashed; cursor: default; }
+  .case-btn.placeholder:hover { transform: none; box-shadow: none; border-color: var(--line); }
+  .case-btn.placeholder .case-title { color: var(--muted); font-weight: 500; }
+  .case-btn.placeholder .case-arrow { opacity: 0; }
+
+  /* Modal */
+  .case-modal {
+    position: fixed; inset: 0; z-index: 100;
+    display: none; align-items: center; justify-content: center;
+    padding: 28px 16px;
+  }
+  .case-modal[aria-hidden="false"] {
+    display: flex; animation: cm-fade .18s ease both;
+  }
+  .case-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(11,18,32,.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .case-dialog {
+    position: relative;
+    width: min(680px, 100%);
+    max-height: calc(100vh - 56px);
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 30px 60px -20px rgba(11,18,32,.4);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    animation: cm-pop .22s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes cm-fade { from { opacity: 0; } }
+  @keyframes cm-pop { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+  .case-head {
+    padding: 22px 26px 16px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .case-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10.5px; color: var(--accent);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .case-head h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  .case-close {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    font-size: 16px;
+    color: var(--ink-2);
+    cursor: pointer;
+    display: grid; place-items: center;
+    transition: all .15s;
+    flex-shrink: 0;
+  }
+  .case-close:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .case-body {
+    padding: 22px 26px 24px;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .case-section { display: flex; flex-direction: column; gap: 6px; }
+  .case-section .lbl {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .case-section .lbl .em {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    display: grid; place-items: center;
+    font-size: 12px; line-height: 1;
+  }
+  .case-section.problem .lbl { color: #b45309; }
+  .case-section.problem .lbl .em { background: #fef3c7; }
+  .case-section.solution .lbl { color: var(--accent); }
+  .case-section.thinking .lbl { color: var(--ink-2); }
+  .case-section.thinking .lbl .em { background: var(--line-2); }
+  .case-section .txt {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.78;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .case-section .txt p { margin: 0; }
+  .case-section .txt p + p { margin-top: 8px; }
+  .case-section .txt b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .case-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 13px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--bg-soft);
+    text-decoration: none;
+    color: var(--ink-2);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    align-self: flex-start;
+    transition: all .15s;
+  }
+  .case-link:hover { border-color: var(--accent); color: var(--accent); background: var(--paper); }
+
+  /* ===== Experience modal — extra section kinds reusing .case-section ===== */
+  .case-section.summary .lbl { color: var(--ink); }
+  .case-section.summary .lbl .em { background: var(--bg-soft); }
+  .case-section.role .lbl { color: var(--ink); }
+  .case-section.role .lbl .em { background: var(--accent-soft); }
+  .case-section.highlights .lbl { color: var(--ink); }
+  .case-section.context .lbl { color: var(--ink); }
+  .case-section.context .lbl .em { background: #fef3c7; }
+  .case-section.impl .lbl { color: var(--ink); }
+  .case-section.reflection .lbl { color: var(--ink); }
+  .case-section.reflection .lbl .em { background: var(--line-2); }
+  .case-section.stack .lbl { color: var(--ink); }
+  .case-section.stack .lbl .em { background: var(--bg-soft); }
+  .case-section.reflection .txt p {
+    /* unified with other section text — no italic / no accent border */
+  }
+  /* Implementation list inherits .wc-list styling but inside case body */
+  .case-body .wc-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 6px;
+  }
+  .case-body .wc-list li {
+    position: relative;
+    padding-left: 13px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .case-body .wc-list li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 10px;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+  .case-body .wc-list li b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  /* Stack tags in case-section.stack */
+  .case-section .stack-tags {
+    display: flex; flex-wrap: wrap; gap: 5px;
+  }
+  .case-section .stack-tags .tag {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-2);
+    background: var(--chip);
+    border: 1px solid var(--line-2);
+    padding: 4px 8px;
+    border-radius: 6px;
+    line-height: 1;
+  }
+
+
+  /* ============== TIMELINE (Edu / Career) ============== */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--line);
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 7px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 3px var(--paper);
+  }
+  .tl-item.muted::before { border-color: var(--muted-2); }
+  .tl-date {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .tl-body h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+  .tl-body p {
+    margin: 6px 0 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+  .tl-body .role {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tl-body .tl-bullets {
+    list-style: none;
+    margin: 12px 0;
+    padding: 0;
+    display: flex; flex-direction: column;
+    gap: 6px;
+  }
+  .tl-body .tl-bullets li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .tl-body .tl-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 9px;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+  .tl-body .tl-bullets li b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .tl-body .tl-stack {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    margin-top: 6px;
+  }
+
+  /* ============== CONTACT ============== */
+  .contact-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    background: linear-gradient(180deg, var(--accent-soft) 0%, var(--paper) 60%);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .contact-card h3 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .contact-card h3 .accent { color: var(--accent); }
+  .contact-card > div:first-child > p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper);
+    text-decoration: none;
+    color: var(--ink-2);
+    transition: all .15s;
+  }
+  .contact-link:hover {
+    border-color: var(--accent);
+    transform: translateX(2px);
+  }
+  .contact-link .ico {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .contact-link .ico svg { width: 15px; height: 15px; }
+  .contact-link .ttl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+  }
+  .contact-link .val {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ============== FOOTER ============== */
+  .footer {
+    margin-top: 48px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+
+  /* ============== LEGACY-CLASS BRIDGES (unified visual) ============== */
+  /* project body label */
+  .pb-label {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pb-emoji {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    display: grid; place-items: center;
+    font-size: 12px; line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* work card section head — same pattern */
+  .wc-section-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 0;
+  }
+  .wc-emoji {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    display: grid; place-items: center;
+    font-size: 12px; line-height: 1;
+    flex-shrink: 0;
+  }
+  .wc-section-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  /* work card bullet list — same diamond bullets */
+  .wc-list {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 6px;
+  }
+  .wc-list li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .wc-list li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 10px;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+  .wc-list li b {
+    color: var(--ink);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 760px) {
+    :root { --gutter: 28px; }
+    .page { box-shadow: none; }
+    .topbar { padding: 12px 28px; gap: 12px; flex-wrap: wrap; }
+    .nav { margin-left: 0; width: 100%; }
+    .hero { padding-top: 48px !important; padding-bottom: 36px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .profile-photo { max-width: 200px; }
+    .hero h1 { font-size: 32px; }
+    .hero-meta { grid-template-columns: 1fr; }
+    .skills { grid-template-columns: 1fr; }
+    .work-company-meta { grid-template-columns: 1fr; }
+    .wc-top { padding: 22px 22px 18px; }
+    .wc-metric { padding: 14px 22px; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .wc-metric-value { min-width: 0; max-width: none; font-size: 15px; }
+    .wc-highlight { padding: 12px 22px; gap: 6px 12px; }
+    .wc-body { padding: 18px 22px 4px; }
+    .wc-foot { padding: 12px 22px 14px; }
+    .work-company { padding: 20px 22px; }
+    .project-top, .pb-cell, .project-foot, .case-row { padding-left: 22px; padding-right: 22px; }
+    .contact-card { padding: 22px 22px; }
+  }
+
+  /* ============== PRINT (A4 portrait) ============== */
+  @page { size: A4; margin: 14mm 14mm; }
+  @media print {
+    html, body { background: #fff; }
+    body { font-size: 10.5pt; }
+    .page { max-width: none; box-shadow: none; border: none; }
+    .topbar {
+      position: static;
+      background: #fff;
+      backdrop-filter: none;
+      padding: 0 0 14px;
+      border-bottom: 1px solid var(--line);
+      page-break-after: avoid;
+    }
+    .nav { display: none; }
+    .content { padding: 0; }
+    .content > section { padding: 22px 0 4px; page-break-inside: avoid; break-inside: avoid; }
+    .hero { padding-top: 24px !important; padding-bottom: 18px; }
+    .hero h1 { font-size: 24pt; line-height: 1.1; }
+    .hero .lede { font-size: 10pt; }
+    .terminal { font-size: 8pt; box-shadow: none !important; border: 1px solid #1f2937; }
+    .term-body { padding: 10px 12px; }
+    .project, .work-card, .skill-card, .contact-card, .work-company {
+      box-shadow: none !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .footer { display: none; }
+    .link-btn:hover { transform: none; }
+  }
 </style>
 </head>
 <body>
-  <main class="card">
-    <div class="mark">IH</div>
-    <span class="tag">Under construction</span>
-    <h1>포트폴리오를 다듬고 있어요 ✏️</h1>
-    <p>곧 더 정리된 모습으로 찾아뵙겠습니다.<br/>그동안 GitHub과 이메일로 연락 주세요.</p>
-    <div class="links">
-      <a class="btn primary" href="mailto:hinyoung0215@gmail.com">Email</a>
-      <a class="btn" href="https://github.com/inyoung0215" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://velog.io/@nyoung215" target="_blank" rel="noopener">Blog</a>
+
+<div class="page">
+
+  <!-- =================== SIDEBAR =================== -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><img src="assets/profile.jpg" alt="황인영" /></div>
+      <div>
+        <div class="brand-name">황인영<span style="color:var(--muted-2); font-weight:500;"> · Inyoung</span></div>
+        <div class="brand-role">Backend Developer · 3y</div>
+      </div>
     </div>
+    <nav class="nav" id="nav">
+      <a href="#hero" data-target="hero" class="active"><span class="num">01</span>Intro</a>
+      <a href="#about" data-target="about"><span class="num">02</span>About</a>
+      <a href="#skills" data-target="skills"><span class="num">03</span>Skills</a>
+      <a href="#work" data-target="work"><span class="num">04</span>Experience</a>
+      <a href="#projects" data-target="projects"><span class="num">05</span>Projects</a>
+      <a href="#education" data-target="education"><span class="num">06</span>Education</a>
+      <a href="#contact" data-target="contact"><span class="num">07</span>Contact</a>
+    </nav>
+  </header>
+
+  <!-- =================== CONTENT =================== -->
+  <main class="content">
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow">$ ./introduce.sh</div>
+          <h1>
+            구조를 설계하고<br/>
+            <span class="accent">경험</span>을 구현하는<br/>
+            <span class="dim">백엔드 개발자.</span>
+          </h1>
+          <div class="meta-line">// Inyoung Hwang · 황인영 · backend developer · prev. UX/UI designer</div>
+          <p class="lede">
+            디자이너로 시작해, 지금은 서버를 구현합니다.<br/>
+            깔끔한 API와 단단한 아키텍처 뒤에는 언제나 <em style="color:var(--ink); font-style:normal; font-weight:600;">사용자</em>가 있다고 믿어요.<br/>
+            응답 속도 한 줄, 에러 메시지 한 마디까지 사용자의 시간을 헤아리려 합니다.
+          </p>
+          <dl class="hero-meta">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="/cdn-cgi/l/email-protection#cda5a4a3b4a2b8a3aafdfffcf88daaa0aca4a1e3aea2a0"><span class="__cf_email__" data-cfemail="234b4a4d5a4c564d441311121663444e424a4f0d404c4e">[email&#160;protected]</span></a></dd>
+            </div>
+            <div>
+              <dt>GitHub</dt>
+              <dd><a href="https://github.com/inyoung0215" target="_blank" rel="noopener">@inyoung0215</a></dd>
+            </div>
+            <div>
+              <dt>Blog</dt>
+              <dd><a href="https://velog.io/@nyoung215" target="_blank" rel="noopener">velog.io/@nyoung215</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-right">
+          <div class="terminal" aria-label="Portfolio.kt">
+            <div class="term-bar">
+              <span class="tdot" style="background:#ff5f57"></span>
+              <span class="tdot" style="background:#febc2e"></span>
+              <span class="tdot" style="background:#28c840"></span>
+              <span class="file">~ inyoung / Portfolio.kt</span>
+            </div>
+            <div class="term-body">
+              <div class="row"><span class="ln">1</span><span class="tcm">// 구조를 설계하고 경험을 구현하는 백엔드 개발자</span></div>
+              <div class="row"><span class="ln">2</span><span class="tk">data class </span><span class="tfn">Developer</span><span class="to">(</span></div>
+              <div class="row"><span class="ln">3</span>  <span class="tk">val </span><span class="tp">name</span><span class="to">: </span><span class="tfn">String</span> <span class="to">= </span><span class="ts">"황인영"</span><span class="to">,</span></div>
+              <div class="row"><span class="ln">4</span>  <span class="tk">val </span><span class="tp">role</span><span class="to">: </span><span class="tfn">String</span> <span class="to">= </span><span class="ts">"Backend Developer"</span><span class="to">,</span></div>
+              <div class="row"><span class="ln">5</span>  <span class="tk">val </span><span class="tp">years</span><span class="to">: </span><span class="tfn">Int</span> <span class="to">= </span><span class="tn">3</span><span class="to">,</span>  <span class="tcm">// in service</span></div>
+              <div class="row"><span class="ln">6</span>  <span class="tk">val </span><span class="tp">prev</span><span class="to">: </span><span class="tfn">String</span> <span class="to">= </span><span class="ts">"UX/UI Designer · 2.5y"</span><span class="to">,</span></div>
+              <div class="row"><span class="ln">7</span>  <span class="tk">val </span><span class="tp">stack</span><span class="to">: </span><span class="tfn">List</span><span class="to">&lt;</span><span class="tfn">String</span><span class="to">&gt; = </span><span class="tfn">listOf</span><span class="to">(</span><span class="ts">"Java"</span><span class="to">, </span><span class="ts">"Kotlin"</span><span class="to">, </span><span class="ts">"Spring"</span><span class="to">, </span><span class="ts">"AWS"</span><span class="to">),</span></div>
+              <div class="row"><span class="ln">8</span><span class="to">)</span></div>
+              <div class="row"><span class="ln">9</span></div>
+              <div class="row"><span class="ln">10</span><span class="tk">fun </span><span class="tfn">Developer</span><span class="to">.</span><span class="tfn">design</span><span class="to">() = </span><span class="ts">"structure"</span>   <span class="tcm">// 구조를 설계</span></div>
+              <div class="row"><span class="ln">11</span><span class="tk">fun </span><span class="tfn">Developer</span><span class="to">.</span><span class="tfn">implement</span><span class="to">() = </span><span class="ts">"experience"</span> <span class="tcm">// 경험을 구현</span></div>
+              <div class="row"><span class="ln">12</span></div>
+              <div class="row"><span class="ln">13</span><span class="tk">val </span><span class="tp">inyoung</span> <span class="to">= </span><span class="tfn">Developer</span><span class="to">()</span><span class="blink"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <header class="section-head">
+        <span class="idx">02</span>
+        <h2>About Me</h2>
+        <span class="kicker">Who I am</span>
+      </header>
+      <div class="about-grid">
+        <p>
+          IT 업계의 <strong>UX/UI Designer</strong>로 약 2년 5개월간 근무하며 다양한 프로젝트에 참여해 <strong>원활한 커뮤니케이션 능력</strong>을 키우고 사용자 중심 설계(UX)의 중요성을 배웠습니다. 화면 너머에서 데이터가 어떻게 흐르는지가 더 궁금해졌고, <strong>패스트캠퍼스 백엔드 부트캠프</strong> 수료 후 백엔드 개발자로 전향해 <strong>현재 키오스크 서비스 백엔드 개발자 3년차</strong>로 일하고 있습니다.
+        </p>
+        <p>
+          여러 직군의 팀원들과 협업한 <strong>MSA · DDD 기반 사이드 프로젝트</strong>들과 <strong>활발한 코드리뷰 문화</strong>를 통해 "왜 이렇게 짰는가"를 설명하는 습관을 들였고, 디자이너 시절 익힌 사용자 감수성을 서버 응답 속도, 에러 메시지, API 명세 설계까지 이어가려 노력합니다.
+        </p>
+        <div class="about-pills">
+          <span class="pill">사용자 중심 설계</span>
+          <span class="pill">코드리뷰 문화</span>
+          <span class="pill">MSA · DDD</span>
+          <span class="pill">다직군 협업</span>
+          <span class="pill">꾸준한 학습</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills">
+      <header class="section-head">
+        <span class="idx">03</span>
+        <h2>Skills</h2>
+        <span class="kicker">Tech Stack</span>
+      </header>
+
+      <div class="skills">
+        <div class="skill-card">
+          <div class="skill-head">
+            <div class="skill-ico">L</div>
+            <h3>Language</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="tag primary">Java</span>
+            <span class="tag primary">Kotlin</span>
+            <span class="tag muted">Flutter</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-head">
+            <div class="skill-ico">D</div>
+            <h3>RDBMS</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="tag primary">MySQL</span>
+            <span class="tag muted">MariaDB</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-head">
+            <div class="skill-ico">B</div>
+            <h3>Backend</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="tag primary">Spring</span>
+            <span class="tag primary">SpringBoot</span>
+            <span class="tag primary">SpringSecurity</span>
+            <span class="tag primary">Redisson</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-head">
+            <div class="skill-ico">O</div>
+            <h3>DevOps &amp; Tools</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="tag primary">AWS</span>
+            <span class="tag primary">Git</span>
+            <span class="tag primary">S3</span>
+            <span class="tag primary">Redis</span>
+            <span class="tag primary">RabbitMQ</span>
+            <span class="tag muted">Docker</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:14px; font-size:12px; color:var(--muted-2); font-family:'JetBrains Mono',monospace; letter-spacing:0.02em;">
+        ● Primary &nbsp;&nbsp; ○ Experienced
+      </p>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section id="work">
+      <header class="section-head">
+        <span class="idx">04</span>
+        <h2>Experience</h2>
+        <span class="kicker">백엔드 3년 · 디자이너 1년</span>
+      </header>
+
+      <div class="company-group" data-company="DOZN">
+      <!-- Company hero -->
+      <div class="work-company">
+        <div class="work-company-head">
+          <div class="work-company-mark">D</div>
+          <div class="work-company-titles">
+            <h3>더즌 / Dozn <span class="muted">· 키오스크개발팀</span></h3>
+          </div>
+        </div>
+        <div class="work-company-text">
+          <p>외화 환전·THE-Free 선불카드·Tax Refund·교통카드 충전/출금·가상계좌 등 24시간 무인 키오스크 금융 서비스를 운영하는 핀테크. GS25 등 편의점과 주요 관광지·지하철역에 환전 키오스크를 설치해 USD/JPY/EUR 등 15개국 외화 환전을 제공합니다.</p>
+        </div>
+        <dl class="work-company-meta">
+          <div><dt>Period</dt><dd>2024.02 — 현재</dd></div>
+          <div><dt>Role</dt><dd>Backend Developer</dd></div>
+          <div><dt>Stack</dt><dd>Kotlin · Java · Spring Boot · MySQL · Redis · Redisson · RabbitMQ</dd></div>
+          <div><dt>Domains</dt><dd>외화 환전 · 선불카드 · Tax Refund · 교통카드 · 가상계좌</dd></div>
+        </dl>
+      </div>
+
+      <div class="work-grid">
+        <button type="button" class="work-tile" data-work="0">
+          <div class="work-tile-head">
+            <span class="work-tile-index">01</span>
+          </div>
+          <h3 class="work-tile-title">THE-Free 온라인 환전 서비스 신규 개발</h3>
+          <p class="work-tile-highlight">Kotlin 신규 모듈  ·  단독 백엔드  ·  기한 내 런칭</p>
+          <span class="work-tile-cta">자세히 보기
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6h5M6 3.5l2.5 2.5L6 8.5"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="work-tile" data-work="1">
+          <div class="work-tile-head">
+            <span class="work-tile-index">02</span>
+          </div>
+          <h3 class="work-tile-title">Redisson 분산락으로 가상계좌 중복 발급 근본 해결</h3>
+          <p class="work-tile-highlight">근본 해결  ·  팀 내 첫 분산락  ·  패턴 문서화</p>
+          <span class="work-tile-cta">자세히 보기
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6h5M6 3.5l2.5 2.5L6 8.5"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="work-tile" data-work="2">
+          <div class="work-tile-head">
+            <span class="work-tile-index">03</span>
+          </div>
+          <h3 class="work-tile-title">Tax Refund 신규 도메인 설계 + External Gateway · Redis 첫 도입</h3>
+          <p class="work-tile-highlight">팀 내 첫 Redis 도입  ·  안정 운영중  ·  QA 프로세스 개선</p>
+          <span class="work-tile-cta">자세히 보기
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6h5M6 3.5l2.5 2.5L6 8.5"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="work-tile" data-work="3">
+          <div class="work-tile-head">
+            <span class="work-tile-index">04</span>
+          </div>
+          <h3 class="work-tile-title">RabbitMQ로 전사 알림 시스템 통합 (팀 첫 도입)</h3>
+          <p class="work-tile-highlight">팀 내 첫 메시징 큐  ·  공통 모듈 통합  ·  DLQ 재처리 체계</p>
+          <span class="work-tile-cta">자세히 보기
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6h5M6 3.5l2.5 2.5L6 8.5"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="work-tile" data-work="4">
+          <div class="work-tile-head">
+            <span class="work-tile-index">05</span>
+          </div>
+          <h3 class="work-tile-title">다종 카드 판매 — 상품 코드 기반 라우팅 구조 설계</h3>
+          <p class="work-tile-highlight">3종+ 카드 상품  ·  외부 API 모듈 분리  ·  무중단 확장</p>
+          <span class="work-tile-cta">자세히 보기
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6h5M6 3.5l2.5 2.5L6 8.5"/></svg>
+          </span>
+        </button>
+      </div>
+
+            <template id="work-tpl-0">
+        <header class="case-head">
+          <div>
+            <div class="case-eyebrow">Experience · DOZN · 2025.09 — 2025.10</div>
+            <h3>THE-Free 온라인 환전 서비스 신규 개발</h3>
+          </div>
+          <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+        </header>
+        <div class="case-body">
+          <div class="case-section summary">
+            <div class="lbl"><span class="em">📝</span>Summary</div>
+            <div class="txt"><p>기존 오프라인 즉시 환전만 가능하던 키오스크에 "사전 신청 후 출금" 온라인 환전 흐름을 추가. Java 레거시 대신 Kotlin 신규 모듈로 설계해 팀 내 모던 스택 적용 사례를 만들었습니다.</p>
+              <p>기존 환전 서비스는 키오스크 앞에서 외화를 즉시 환전하는 오프라인 방식만 지원했습니다. 사용자가 사전에 환전을 신청하고 원하는 시점에 키오스크에서 출금할 수 있는 <b>온라인 환전 서비스</b>가 신규 요구사항으로 도출되었고, 백엔드 단독 담당으로 합류했습니다.</p></div>
+          </div>
+          <div class="case-section role">
+            <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
+            <div class="txt"><p>백엔드 <b>단독 담당</b>. 앱 클라이언트·키오스크 클라이언트·QA와 협업하며 신청 → 출금 전체 플로우 설계·구현.</p></div>
+          </div>
+          <div class="case-section impl">
+            <div class="lbl"><span class="em">🛠️</span>Impl</div>
+            <div class="txt"><ul class="wc-list">
+                <li>신규 모듈을 Java 레거시 구조 대신 <b>Kotlin 기반으로 설계·구현</b>해 유지보수성과 확장성 확보</li>
+                <li>앱 측 환전 신청·조회·취소 API 개발 (가능 금액·시간 검증, 상태 업데이트, 예외 분기)</li>
+                <li>키오스크 측 신청 내역 조회 및 <b>출금 승인 → 대기 → 완료</b> 상태 변경 API 개발</li>
+                <li>앱·키오스크 클라이언트 개발자와 신청 → 출금까지 전체 플로우 연동 테스트, 상태 불일치·승인 지연·네트워크 타임아웃 등 이슈 빠르게 분석/수정</li>
+              </ul></div>
+          </div>
+          <div class="case-section reflection">
+            <div class="lbl"><span class="em">💡</span>Reflect</div>
+            <div class="txt"><p>신규 서비스를 신규 언어로 시작할 때, 작은 모듈일수록 기술 전환의 거점이 된다는 걸 체감했다. "한 번에 다 바꾸기" 대신 "이번 모듈만이라도 옳게"가 팀 단위 변화를 만든다.</p></div>
+          </div>
+          <div class="case-section stack">
+            <div class="lbl"><span class="em">⚙️</span>Stack</div>
+            <div class="txt stack-tags"><span class="tag">Kotlin</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Redisson</span></div>
+          </div>
+        </div>
+      </template>
+      <template id="work-tpl-1">
+        <header class="case-head">
+          <div>
+            <div class="case-eyebrow">Experience · DOZN · 2025.10</div>
+            <h3>Redisson 분산락으로 가상계좌 중복 발급 근본 해결</h3>
+          </div>
+          <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+        </header>
+        <div class="case-body">
+          <div class="case-section summary">
+            <div class="lbl"><span class="em">📝</span>Summary</div>
+            <div class="txt"><p>온라인 환전 운영 중 동일 사용자에게 가상계좌가 중복 발급되는 race condition을 진단하고, Redisson tryLock 기반 분산락으로 데이터 정합성을 근본적으로 회복시켰습니다.</p>
+              <p>온라인 환전 서비스 운영 중 내부 API의 동시 호출로 <b>동일 사용자에게 가상계좌가 중복 발급</b>되는 동시성 문제가 발생했습니다. 금전 거래의 데이터 정합성을 위협하는 심각한 이슈로, 근본적 해결이 필요했습니다.</p></div>
+          </div>
+          <div class="case-section role">
+            <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
+            <div class="txt"><p>온라인 환전 서비스 운영 중 가상계좌 <b>중복 발급 동시성 이슈 핫픽스</b> + 팀 내 분산락 컨벤션 수립·문서화.</p></div>
+          </div>
+          <div class="case-section impl">
+            <div class="lbl"><span class="em">🛠️</span>Impl</div>
+            <div class="txt"><ul class="wc-list">
+                <li>원인 분석: 특정 자원에 대한 동시 업데이트로 인한 <b>race condition</b> 확인</li>
+                <li><b>Redisson <code>tryLock(waitTime, leaseTime)</code></b> 기반 분산락 적용 — 자동 해제로 데드락 방지, <b>fail-fast</b> 예외 처리, 서비스별 Lock Key 규칙 통일</li>
+                <li>다중 스레드 동시 요청 시뮬레이션 테스트 코드로 동시성 시나리오를 직접 재현·검증</li>
+              </ul></div>
+          </div>
+          <div class="case-section reflection">
+            <div class="lbl"><span class="em">💡</span>Reflect</div>
+            <div class="txt"><p>분산락은 일회성 핫픽스가 아니라 팀 자산이 되어야 한다. Lock Key 설계·timeout·예외 처리 방식을 문서화해 다른 서비스에도 적용 가능한 패턴으로 남긴 것이 이번 작업의 가장 큰 결과물.</p></div>
+          </div>
+          <div class="case-section stack">
+            <div class="lbl"><span class="em">⚙️</span>Stack</div>
+            <div class="txt stack-tags"><span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Redisson</span>
+              <span class="tag">Redis</span></div>
+          </div>
+        </div>
+      </template>
+      <template id="work-tpl-2">
+        <header class="case-head">
+          <div>
+            <div class="case-eyebrow">Experience · DOZN · 2024.04 — 2024.12</div>
+            <h3>Tax Refund 신규 도메인 설계 + External Gateway · Redis 첫 도입</h3>
+          </div>
+          <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+        </header>
+        <div class="case-body">
+          <div class="case-section summary">
+            <div class="lbl"><span class="em">📝</span>Summary</div>
+            <div class="txt"><p>외국인 관광객 대상 세금 환급 신규 도메인을 설계하면서, 외부 환급사 통신을 전담하는 Gateway 모듈과 민감 데이터용 Redis 저장소를 팀 내 처음 도입했습니다.</p>
+              <p>키오스크 사용자 유입 확대를 위해 외국인 관광객 대상 Tax Refund 신규 도메인 런칭이 결정되었습니다. 기존 환전/상품 거래와는 다른 새로운 도메인이며, 외부 환급사들과의 통신 인프라 구축이 필요했습니다.</p></div>
+          </div>
+          <div class="case-section role">
+            <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
+            <div class="txt"><p>Tax Refund <b>신규 도메인 백엔드 설계·구현</b> + 운영 중 현금 방출 장애 핫픽스 + QA 프로세스 개선 주도.</p></div>
+          </div>
+          <div class="case-section impl">
+            <div class="lbl"><span class="em">🛠️</span>Impl</div>
+            <div class="txt"><ul class="wc-list">
+                <li>추후 환급사 확장을 고려한 <b>환급사 정보 테이블 / 키오스크 연계 테이블</b> 설계</li>
+                <li>환급사 외부 모듈과의 통신 전담을 위한 <b>External Gateway Service</b> 신규 설계</li>
+                <li>환급 전표·고객 정보 등 민감 데이터를 DB 대신 <b>Redis에 저장 + TTL</b> 적용으로 보안성·유연성 강화 (팀 내 첫 Redis 도입 사례)</li>
+                <li>Redis 연동 로직과 데이터 처리 흐름에 테스트 코드 작성, 데일리 스크럼으로 일정 관리</li>
+              </ul></div>
+          </div>
+          <div class="case-section reflection">
+            <div class="lbl"><span class="em">💡</span>Reflect</div>
+            <div class="txt"><p>운영 중 현금 방출 장애 후처리 오류가 발생했을 때 단순 핫픽스에서 멈추지 않고 <b>QA 프로세스 자체를 상세화</b>해 동일 유형 오류를 개발 단계에서 예방하는 체계로 환원시킨 경험. 장애 대응이 운영 자산으로 누적되도록 만드는 사이클을 체득했다.</p></div>
+          </div>
+          <div class="case-section stack">
+            <div class="lbl"><span class="em">⚙️</span>Stack</div>
+            <div class="txt stack-tags"><span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Redis</span>
+              <span class="tag">MySQL</span></div>
+          </div>
+        </div>
+      </template>
+      <template id="work-tpl-3">
+        <header class="case-head">
+          <div>
+            <div class="case-eyebrow">Experience · DOZN · 2024 하반기</div>
+            <h3>RabbitMQ로 전사 알림 시스템 통합 (팀 첫 도입)</h3>
+          </div>
+          <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+        </header>
+        <div class="case-body">
+          <div class="case-section summary">
+            <div class="lbl"><span class="em">📝</span>Summary</div>
+            <div class="txt"><p>프로젝트별로 분산 운영되던 알림 기능을 RabbitMQ Exchange + DLQ 기반 공통 모듈로 통합. 팀 내 첫 메시징 큐 도입 사례로 정착시켰습니다.</p>
+              <p>사내 모든 서비스가 프로젝트별로 알림 기능을 분산 운영하면서 중복 코드가 누적되고 유지보수가 어려운 상태였습니다. 전사 알림 시스템의 통합과 모듈화가 필요했습니다.</p></div>
+          </div>
+          <div class="case-section role">
+            <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
+            <div class="txt"><p>사내 분산되어 있던 알림 기능을 <b>RabbitMQ 기반 공통 모듈로 통합</b>. 팀 내 첫 메시지 큐 도입·운영 안착.</p></div>
+          </div>
+          <div class="case-section impl">
+            <div class="lbl"><span class="em">🛠️</span>Impl</div>
+            <div class="txt"><ul class="wc-list">
+                <li>팀에서 사용하지 않던 <b>RabbitMQ를 직접 도입</b>해 메시징 시스템 재구축</li>
+                <li><b>Exchange를 활용한 알림 유형별 메시지 분배 구조</b> 설계</li>
+                <li><b>Dead Letter Queue(DLQ)</b> 설정으로 실패 메시지 재처리 체계 구현</li>
+                <li>분산되어 있던 알림 기능을 <b>공통 모듈로 통합·표준화</b>해 모든 프로젝트에서 동일하게 사용 가능하도록 설계</li>
+              </ul></div>
+          </div>
+          <div class="case-section reflection">
+            <div class="lbl"><span class="em">💡</span>Reflect</div>
+            <div class="txt"><p>새로운 미들웨어를 들이는 일은 라이브러리 한 줄 추가가 아니라 팀의 운영 모델을 바꾸는 일이라는 걸 배웠다. Exchange 토폴로지·DLQ 운영 시나리오까지 같이 설계해야 도입 사례가 자산이 된다.</p></div>
+          </div>
+          <div class="case-section stack">
+            <div class="lbl"><span class="em">⚙️</span>Stack</div>
+            <div class="txt stack-tags"><span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">RabbitMQ</span></div>
+          </div>
+        </div>
+      </template>
+      <template id="work-tpl-4">
+        <header class="case-head">
+          <div>
+            <div class="case-eyebrow">Experience · DOZN · 2024.01 — 2024.06</div>
+            <h3>다종 카드 판매 — 상품 코드 기반 라우팅 구조 설계</h3>
+          </div>
+          <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+        </header>
+        <div class="case-body">
+          <div class="case-section summary">
+            <div class="lbl"><span class="em">📝</span>Summary</div>
+            <div class="txt"><p>K카드·비짓부산패스·레일플러스 등 성격이 다른 카드 상품을 단일 아키텍처로 수용. 향후 자사 카드 확장까지 고려해 외부 API 연동 모듈을 분리했습니다.</p>
+              <p>키오스크 사용자 유입 확대를 위해 다양한 카드 상품(K카드·비짓부산패스·레일플러스 등) 거래 서비스를 런칭해야 했습니다. 향후 추가 카드 상품 확장을 고려한 <b>확장 가능한 아키텍처</b>가 핵심 요구사항이었습니다.</p></div>
+          </div>
+          <div class="case-section role">
+            <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
+            <div class="txt"><p>K카드·비짓부산·레일플러스 등 카드 상품 거래 서비스 설계·런칭. <b>확장 가능한 상품 아키텍처</b> + 외부 API 모듈 분리 담당.</p></div>
+          </div>
+          <div class="case-section impl">
+            <div class="lbl"><span class="em">🛠️</span>Impl</div>
+            <div class="txt"><ul class="wc-list">
+                <li>카드를 포함한 <b>상품 아키텍처</b> 설계 및 기존 환전 거래 원장 수정으로 거래 유형 판별 구조 개선</li>
+                <li><b>상품 거래 상세 원장 신규 설계</b> — 상품 종류·거래 금액 등 백오피스 조회 가능 정보 추가</li>
+                <li><b>상품 코드 기반 외부 API 라우팅 구조</b> — 카드 거래 시 상품 코드에 따라 해당 제휴사 API 자동 연동</li>
+                <li>추후 자사 카드 거래 서비스 확장을 고려해 <b>외부 API 연동 모듈을 분리</b>, 정상·비정상 거래 케이스 모두 QA 검증</li>
+              </ul></div>
+          </div>
+          <div class="case-section reflection">
+            <div class="lbl"><span class="em">💡</span>Reflect</div>
+            <div class="txt"><p>"지금 한 종류만 붙이는 일"을 "다음 종류가 붙을 때 코드 변경 최소화"로 풀면, 같은 작업 시간이 미래의 비용을 줄여준다. 외부 의존성을 모듈로 떼는 결정이 가장 큰 레버리지였다.</p></div>
+          </div>
+          <div class="case-section stack">
+            <div class="lbl"><span class="em">⚙️</span>Stack</div>
+            <div class="txt stack-tags"><span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">MySQL</span></div>
+          </div>
+        </div>
+      </template>
+      </div>
+
+      <!-- Previous role -->
+      <div class="work-company prev">
+        <div class="work-company-head">
+          <div class="work-company-mark prev-mark">D</div>
+          <div class="work-company-titles">
+            <div class="work-company-tag prev-tag">○ Previous · 2020.10 — 2023.02 · 약 2년 5개월</div>
+            <h3>UX/UI Designer <span class="muted">· 글로와이드 · 싸이웍스 · 비퍼플</span></h3>
+          </div>
+        </div>
+        <div class="work-company-text">
+          <p>플랫폼·웹/앱 서비스 UX 리서치 · 와이어프레임 · 화면 설계 및 GUI 산출, 디자인 리딩과 스타일 가이드 수립까지. 화면 너머의 데이터 흐름에 대한 호기심이 백엔드 전향의 출발점이 되었고, 이때 익힌 <b>사용자 중심 설계 감각</b>과 <b>다양한 직군과의 협업 경험</b>은 현재 API 명세·에러 메시지·응답 구조 설계까지 이어집니다.</p>
+        </div>
+        <ul class="prev-list">
+          <li>
+            <div class="prev-li-period">2022.12 — 2023.02</div>
+            <div class="prev-li-body">
+              <h4>글로와이드(주) <span class="muted">· UX/UI 디자이너</span></h4>
+              <p>경력보유여성 온라인 홍보단 플랫폼 <b>on1016</b> UX/UI 디자인. 유튜브·인스타그램 채널 관리 및 콘텐츠 생성.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">2021.07 — 2022.07</div>
+            <div class="prev-li-body">
+              <h4>싸이웍스 <span class="muted">· UX/UI 디자이너</span></h4>
+              <p>웹/앱 서비스 UX/UI 디자인 및 디자인 리딩, 디자인 스타일 가이드 수립 및 레퍼런스 가이드 제작.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">2020.10 — 2021.03</div>
+            <div class="prev-li-body">
+              <h4>비퍼플</h4>
+              <p>인공지능 데이터 수집 · 라벨링 · 검수 작업.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects">
+      <header class="section-head">
+        <span class="idx">05</span>
+        <h2>Projects</h2>
+        <span class="kicker">부트캠프 · 팀 프로젝트</span>
+      </header>
+
+      <div class="projects">
+
+        <!-- ========= CATCHER ========= -->
+        <article class="project">
+          <div class="project-top">
+            <div>
+              <div class="project-title-row">
+                <div class="project-logo">C</div>
+                <h3>CATCHER<span class="ko">캐쳐</span></h3>
+              </div>
+              <p class="project-summary">맛집·영화·축제 등 커스텀 일정을 만들고 공유하는 웹 서비스. MSA/DDD 아키텍처 기반 3개 백엔드 서버로 구성된 팀 프로젝트.</p>
+            </div>
+            <div class="project-meta">
+              <div class="project-date">2023.10 — 2023.12</div>
+              <div class="project-badges">
+                <span class="badge">Team</span>
+                <span class="badge">MSA · DDD</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">📐</span>Overview</div>
+              <p class="pb-overview"><b>MSA/DDD 아키텍처</b> 기반의 팀 프로젝트로, 각 기능을 독립적으로 개발/배포할 수 있게 도메인 중심으로 코드를 구성해 유지보수성을 향상시켰습니다. <b>3개의 백엔드 서버(core · batch · catcher)</b>로 구성되어 각각 핵심 비즈니스 로직 · 아이템 데이터 적재 · 외부 이벤트 처리를 담당합니다.</p>
+            </div>
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">🙋‍♂️</span>My Role</div>
+              <div class="pb-role-list">
+              <div class="pb-role-group">
+                <strong>Batch Server — 외부 API 일정 아이템 데이터 적재</strong>
+                <ul>
+                  <li><b>OpenFeign</b>으로 외부 API 연동, <b>@Scheduled</b> 자동화로 총 <b>30,000건+</b> 데이터 적재</li>
+                  <li>테스트 코드 기반 <b>TDD</b> 수행</li>
+                  <li><b>전략 패턴</b>으로 동적 기능 확장, <b>Proxy 패턴</b>으로 외부 API 요청 시 헤더 정보 주입</li>
+                  <li>Hash 기반 중복검사 로직 구현</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>Catcher Server — 일정 만들기 CRUD 구현</strong>
+                <ul>
+                  <li>Postman Mock Server / Swagger로 프론트 개발자와 API 명세 공유</li>
+                  <li><b>QueryDSL</b>로 사용자 위치 기반 일정 아이템 조건 검색 구현</li>
+                  <li>테스트 코드로 로직·유효성 검증, <b>ValidEnum</b> 커스텀 어노테이션으로 enum validation</li>
+                  <li><b>JoinFetch</b>로 영속성 컨텍스트 N+1 문제 해결</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div><div class="case-row">
+            <div class="case-row-label">Case Studies</div>
+            <div class="case-list">
+              <button type="button" class="case-btn" data-case="catcher-webclient">
+                <span class="case-icon">⚡</span>
+                <div class="case-btn-text">
+                  <span class="case-title">WebClient × OpenFeign으로 대량 비동기 처리</span>
+                  <span class="case-sub">// RestTemplate → 비동기 전환 · 7,000건+ · 팀 발표</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+              <button type="button" class="case-btn" data-case="catcher-dedup">
+                <span class="case-icon">🗂️</span>
+                <div class="case-btn-text">
+                  <span class="case-title">외부 API 아이템 중복검사 — O(N) → O(1)</span>
+                  <span class="case-sub">// 2,000건 아이템 · Map + hashString</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+              <button type="button" class="case-btn" data-case="catcher-apidocs">
+                <span class="case-icon">📑</span>
+                <div class="case-btn-text">
+                  <span class="case-title">Postman Mock → Swagger로 API 명세 공유</span>
+                  <span class="case-sub">// 프론트·백 병렬 개발 워크플로우</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+              <button type="button" class="case-btn" data-case="catcher-n1">
+                <span class="case-icon">🔗</span>
+                <div class="case-btn-text">
+                  <span class="case-title">JoinFetch로 영속성 컨텍스트 N+1 해결</span>
+                  <span class="case-sub">// JPA + 영속성 컨텍스트 캐싱</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-foot">
+            <div class="stack">
+              <span class="tag">Java</span>
+              <span class="tag">SpringBoot</span>
+              <span class="tag">QueryDSL</span>
+              <span class="tag">OpenFeign</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">MSA</span>
+            </div>
+            <div class="links">
+              <a class="link-btn" href="https://github.com/Project-Catcher" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========= PETNURI ========= -->
+        <article class="project">
+          <div class="project-top">
+            <div>
+              <div class="project-title-row">
+                <div class="project-logo">P</div>
+                <h3>PETNURI<span class="ko">펫누리</span></h3>
+              </div>
+              <p class="project-summary">챌린지 기반 반려동물 커뮤니티 웹/앱. 매일의 산책·돌봄을 인증하며 함께 성장하는 보호자 네트워크.</p>
+            </div>
+            <div class="project-meta">
+              <div class="project-date">2023.08 — 2023.10</div>
+              <div class="project-badges">
+                <span class="badge">Team</span>
+                <span class="badge">Auth · Cache</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">📐</span>Overview</div>
+              <p class="pb-overview">챌린지 참여를 통한 다양한 <b>사용자 생성 콘텐츠(UGC)</b>로 기존 사용자 유지율 향상 + 신규 유입을 목표로 한 서비스. <b>Spring MVC</b> 기반으로, 사용자의 개인정보·데이터를 안전하게 관리하기 위해 <b>Kakao OAuth</b>를 통한 회원가입/로그인을 도입했습니다.</p>
+            </div>
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">🙋‍♂️</span>My Role</div>
+              <div class="pb-role-list">
+              <div class="pb-role-group">
+                <strong>Kakao OAuth 로그인 / 회원가입 구현</strong>
+                <ul>
+                  <li>RestTemplate으로 Kakao Token 발급</li>
+                  <li>Kakao에서 제공받은 email 정보로 회원가입 여부 로직 구현</li>
+                  <li>Refresh Token을 활용한 <b>자동 로그인</b> 구현</li>
+                  <li>JSON 객체 파싱을 위한 <b>JsonConverter</b> 클래스 구현으로 유지보수성 향상</li>
+                  <li>쿠키 처리를 위한 <b>CookieUtil</b> 클래스 구현</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>보안 및 인증 설정</strong>
+                <ul>
+                  <li>접근 권한을 위한 <b>JWT</b>, <b>Spring Security</b> 도입</li>
+                  <li><b>GlobalExceptionHandler</b>로 예외처리 핸들링</li>
+                  <li><b>Redis</b>에 Refresh / Access Token 관련 정보 저장·관리</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>홈 화면 · 마이페이지 CRUD 구현</strong>
+                <ul>
+                  <li><b>@PreAuthorize</b>로 회원·비회원 화면 구분</li>
+                  <li>Custom Valid 어노테이션 정의로 중복 유효성 검사 조건식 공통 처리</li>
+                  <li>회원가입 시 추천인 코드 확인 후 추천인·회원에게 포인트 혜택 부여 로직</li>
+                  <li><b>JPQL</b>로 최근 7일 동안 작성된 게시글을 인기순·생성일순으로 조회</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div><div class="case-row">
+            <div class="case-row-label">Case Studies</div>
+            <div class="case-list">
+              <button type="button" class="case-btn" data-case="petnuri-kakao">
+                <span class="case-icon">🤝</span>
+                <div class="case-btn-text">
+                  <span class="case-title">Kakao OAuth 구현 중 8시간 페어 트러블슈팅</span>
+                  <span class="case-sub">// URL 인코딩 → RestTemplate 리팩토링</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-foot">
+            <div class="stack">
+              <span class="tag">Java</span>
+              <span class="tag">SpringBoot</span>
+              <span class="tag">Spring Security</span>
+              <span class="tag">JWT</span>
+              <span class="tag">Redis</span>
+              <span class="tag">MySQL</span>
+            </div>
+            <div class="links">
+              <a class="link-btn" href="https://petnuri.netlify.app/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>
+                Live
+              </a>
+              <a class="link-btn" href="https://github.com/FINAL-TEAM4/itoxi-be" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========= FOODIE-LOG ========= -->
+        <article class="project">
+          <div class="project-top">
+            <div>
+              <div class="project-title-row">
+                <div class="project-logo">F</div>
+                <h3>FOODIE-LOG<span class="ko">푸디로그</span></h3>
+              </div>
+              <p class="project-summary">카카오 지도 기반 맛집 공유 SNS형 모바일 서비스. 위치·취향 기반 추천으로 “오늘 뭐 먹지”의 답을 함께 찾는 커뮤니티.</p>
+            </div>
+            <div class="project-meta">
+              <div class="project-date">2023.06 — 2023.10</div>
+              <div class="project-badges">
+                <span class="badge">Team</span>
+                <span class="badge">Infra · Map API</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">📐</span>Overview</div>
+              <p class="pb-overview"><b>Spring MVC</b> 기반의 프로젝트로, 카카오 지도 연동을 통해 정확한 맛집 정보를 제공합니다. 사용자 의존성을 최소화하고 개발·유지보수 효율을 높이기 위해 <b>Application 서버와 Admin 서버를 분리한 멀티 모듈 구조</b>로 진행했습니다.</p>
+            </div>
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">🙋‍♂️</span>My Role</div>
+              <div class="pb-role-list">
+              <div class="pb-role-group">
+                <strong>Kakao 검색 API 연동</strong>
+                <ul>
+                  <li>RestTemplate으로 특정 키워드에 대한 음식점 검색 요청 구현</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>프로젝트 셋팅 · EC2 / Redis / 로드밸런서 서버 배포</strong>
+                <ul>
+                  <li><b>멀티모듈</b> 구성을 위해 core · management · application 모듈의 Gradle 설정 통합</li>
+                  <li>GlobalExceptionHandler로 예외처리 핸들링</li>
+                  <li>운영 서버에 <b>Redis</b> 배포 및 설치</li>
+                  <li>EC2 인스턴스 비용 절감을 위한 <b>Docker</b> 배포</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>피드·맛집 REST API CRUD 구현</strong>
+                <ul>
+                  <li><b>S3</b> 연동 및 MultiPartFile 파일 업로드·삭제 로직 구현</li>
+                  <li><b>JPQL</b>로 특정 지역 필터링 후 좋아요 수 정렬 맛집 추천 로직</li>
+                  <li><b>JPQL</b>로 탈퇴 사용자 필터 검색 + 페이징 적용한 탈퇴 사용자 목록 구현</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>활발한 코드 리뷰 문화</strong>
+                <ul>
+                  <li>팀원들 간 코드리뷰를 적극적으로 수행하며 효과적인 협업을 위해 지속적으로 노력</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div><div class="case-row">
+            <div class="case-row-label">Case Studies</div>
+            <div class="case-list">
+              <button type="button" class="case-btn" data-case="foodie-multimodule">
+                <span class="case-icon">🧩</span>
+                <div class="case-btn-text">
+                  <span class="case-title">멀티모듈 build.gradle 통합</span>
+                  <span class="case-sub">// 중복 의존성 제거 · 루트 통합 관리</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+              <button type="button" class="case-btn" data-case="foodie-https">
+                <span class="case-icon">🔐</span>
+                <div class="case-btn-text">
+                  <span class="case-title">보안 강화를 위한 HTTPS 로드 밸런싱</span>
+                  <span class="case-sub">// AWS ELB · 443 → 80 redirect</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+              <button type="button" class="case-btn" data-case="foodie-s3">
+                <span class="case-icon">🪣</span>
+                <div class="case-btn-text">
+                  <span class="case-title">AWS S3 파일 업로드 — 확장자·용량 제어</span>
+                  <span class="case-sub">// 버킷 정책 + max-file-size 핸들링</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-foot">
+            <div class="stack">
+              <span class="tag">Java</span>
+              <span class="tag">SpringBoot</span>
+              <span class="tag">JPQL</span>
+              <span class="tag">AWS EC2</span>
+              <span class="tag">S3</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Redis</span>
+            </div>
+            <div class="links">
+              <a class="link-btn" href="https://foodie-log-client.vercel.app/accounts/login" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>
+                Live
+              </a>
+              <a class="link-btn" href="https://github.com/FoodieLog/foodie-log-server" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========= 당연하지 ========= -->
+        <article class="project">
+          <div class="project-top">
+            <div>
+              <div class="project-title-row">
+                <div class="project-logo">D</div>
+                <h3>당연하지<span class="ko">Of Course</span></h3>
+              </div>
+              <p class="project-summary">캘린더 기반 연차·당직 관리 사내 웹 서비스. 직원 신청 → 관리자 승인 → 캘린더 반영의 전체 흐름을 자동화.</p>
+            </div>
+            <div class="project-meta">
+              <div class="project-date">2023.07 — 2023.08</div>
+              <div class="project-badges">
+                <span class="badge">Team</span>
+                <span class="badge">Test · Doc</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">📐</span>Overview</div>
+              <p class="pb-overview">효율적인 휴가·당직 일정 관리를 위해 설계된 사내 웹 서비스. <b>직관적인 캘린더 시각화</b>로 사용자들이 손쉽게 일정을 확인·관리할 수 있게 설계했고, <b>TDD 기반 협업 프로젝트</b>로 테스트를 통해 예상치 못한 오류를 최소화하려 노력했습니다.</p>
+            </div>
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">🙋‍♂️</span>My Role</div>
+              <div class="pb-role-list">
+              <div class="pb-role-group">
+                <strong>연차 · 당직 CRUD 구현</strong>
+                <ul>
+                  <li>Setter 사용을 지양, 객체 접근 레벨을 <b>PRIVATE / PROTECTED</b>로 설정하여 객체 접근 제한</li>
+                  <li>페이지네이션을 활용한 목록 조회 API 구현</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>단위 테스트 · 통합 테스트 진행</strong>
+                <ul>
+                  <li>총 <b>92개의 테스트 코드</b>로 다양한 상황과 예외처리 핸들링 검증</li>
+                  <li>단위 테스트로 개별 모듈이 의도된 대로 작동하는지 검증</li>
+                  <li>통합 테스트로 모듈 간 상호작용과 전반적인 시스템 동작 확인</li>
+                  <li><b>Mock 객체</b>로 DB 조회·저장 작업을 가상화하고 예상 결과 검증</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>Swagger 3.0 적용</strong>
+                <ul>
+                  <li><b>SwaggerConfig</b> 클래스를 생성해 Swagger 설정 구현</li>
+                  <li>Front-end와의 협업을 위해 개발 단계에서 Swagger와 API 문서 공유</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div><div class="case-row">
+            <div class="case-row-label">Case Studies</div>
+            <div class="case-list">
+              <button type="button" class="case-btn" data-case="ofcourse-swagger">
+                <span class="case-icon">📘</span>
+                <div class="case-btn-text">
+                  <span class="case-title">Swagger 3.0 적용 오류 해결</span>
+                  <span class="case-sub">// matching-strategy · ant_path_matcher</span>
+                </div>
+                <span class="case-arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-foot">
+            <div class="stack">
+              <span class="tag">Java</span>
+              <span class="tag">SpringBoot</span>
+              <span class="tag">JUnit</span>
+              <span class="tag">Swagger 3.0</span>
+              <span class="tag">MySQL</span>
+            </div>
+            <div class="links">
+              <a class="link-btn" href="https://group5ofcourse.netlify.app/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>
+                Live
+              </a>
+              <a class="link-btn" href="https://github.com/FastCampus-Mini5/BE_server" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section id="education">
+      <header class="section-head">
+        <span class="idx">06</span>
+        <h2>Education</h2>
+        <span class="kicker">학력 · 교육</span>
+      </header>
+
+      <div class="work-company">
+        <div class="work-company-head">
+          <div class="work-company-mark">F</div>
+          <div class="work-company-titles">
+            <div class="work-company-tag">● Bootcamp · 2023.03 — 2023.10 · 수료</div>
+            <h3>패스트캠퍼스 <span class="muted">· 백엔드 엔지니어링 부트캠프</span></h3>
+          </div>
+        </div>
+        <div class="work-company-text">
+          <p>Git & GitHub부터 Java · Spring · CS까지 학습하며 개발자로서의 역량을 쌓았고, 강의 내용을 토대로 <b>RESTful API 설계와 데이터베이스 모델링</b>을 통해 서비스를 구축하고 최적화하는 경험을 쌓았습니다. 여러 협업 프로젝트를 통해 동료들과의 소통과 협업으로 팀워크·문제 해결 능력을 키웠고, <b>코드 리뷰 등 다양한 개발 문화</b>를 직접 경험했습니다.</p>
+        </div>
+        <ul class="prev-list">
+          <li>
+            <div class="prev-li-period">CS 스터디 팀장</div>
+            <div class="prev-li-body">
+              <h4>주 1회 CS 주제 정해 발표 진행</h4>
+              <p>알고리즘 · 운영체제 · 네트워크 · DB 등 주제별 학습 자료 정리 및 팀 내 공유.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">협업 프로젝트</div>
+            <div class="prev-li-body">
+              <h4>프론트엔드 개발자와 협업 · 다양한 배포 서비스 개발</h4>
+              <p>현 Projects 섹션의 4개 팀 프로젝트 — Catcher · Petnuri · Foodie-Log · 당연하지.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">멘토링</div>
+            <div class="prev-li-body">
+              <h4>코드 리뷰 · Java 프로그램 개발 실전 경험</h4>
+              <p>멘토링을 통해 실전 능력을 키우고 팀 협업 및 문제 해결 능력을 향상.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="work-company prev">
+        <div class="work-company-head">
+          <div class="work-company-mark prev-mark">C</div>
+          <div class="work-company-titles">
+            <div class="work-company-tag prev-tag">○ University · 2014.03 — 2019.08 · 졸업</div>
+            <h3>가톨릭대학교 <span class="muted">· 수학과 · 소비자주거학과 <span class="edu-badge">복수전공</span></span></h3>
+          </div>
+        </div>
+        <div class="work-company-text">
+          <p>수학적 사고와 사용자·생활 환경에 대한 관심을 함께 키운 시기로, 이후 디자이너·백엔드 양쪽 커리어의 토대가 되었습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact">
+      <header class="section-head">
+        <span class="idx">07</span>
+        <h2>Contact</h2>
+        <span class="kicker">Let's talk</span>
+      </header>
+
+      <div class="contact-card">
+        <div>
+          <h3>함께 일해보고 싶으시다면 <span class="accent">언제든지 연락 주세요.</span></h3>
+          <p>새로운 도메인, 새로운 팀, 새로운 코드리뷰를 늘 환영합니다. 이메일이 가장 빠릅니다.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="/cdn-cgi/l/email-protection#8de5e4e3f4e2f8e3eabdbfbcb8cdeae0ece4e1a3eee2e0">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+            <div><span class="ttl">Email</span><span class="val"><span class="__cf_email__" data-cfemail="9df5f4f3e4f2e8f3faadafaca8ddfaf0fcf4f1b3fef2f0">[email&#160;protected]</span></span></div>
+          </a>
+          <a class="contact-link" href="https://github.com/inyoung0215" target="_blank" rel="noopener">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></div>
+            <div><span class="ttl">GitHub</span><span class="val">@inyoung0215</span></div>
+          </a>
+          <a class="contact-link" href="https://velog.io/@nyoung215" target="_blank" rel="noopener">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4z"/><path d="M16 4v4h4"/><path d="M8 13h8M8 17h5"/></svg></div>
+            <div><span class="ttl">Tech Blog</span><span class="val">velog.io/@nyoung215</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 Inyoung Hwang</span>
+      <span>Built with HTML · CSS · a lot of coffee ☕</span>
+    </footer>
+
   </main>
+</div>
+
+<!-- ============ CASE STUDY MODAL ============ -->
+<div class="case-modal" id="caseModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="caseTitle">
+  <div class="case-backdrop" data-close></div>
+  <article class="case-dialog">
+    <header class="case-head">
+      <div>
+        <div class="case-eyebrow" id="caseEyebrow">Case Study</div>
+        <h3 id="caseTitle">Title</h3>
+      </div>
+      <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+    </header>
+    <div class="case-body" id="caseBody"></div>
+  </article>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ===== Case Study modal =====
+  const cases = {
+    'catcher-webclient': {
+      project: 'CATCHER · Batch Server',
+      title: 'WebClient × OpenFeign으로 대량 비동기 처리',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'기존 batch server에서 <b>RestTemplate</b>을 사용하여 외부 API 요청을 진행하고 있었다. 그런데 외부 API로 받아오는 데이터 중 <b>최대 7,000건이 넘는 대량 데이터</b>가 존재했고, 시간과 성능 면에서 효율적으로 처리하기 위해 기존과는 다른 <b>비동기 방식</b>을 고려해야 하는 상황이 발생했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'<p>다른 직군의 팀원들과도 의견을 공유해보고자 프로젝트의 <b>모든 팀원 14명</b>을 대상으로 <b>WebClient와 OpenFeign</b>에 대해 약 10분 동안 발표를 진행했다. 해당 발표를 통해 팀원들과 서로 지식을 나누고, 어떠한 방식이 우리 서비스에 적절한지에 대해 토론할 수 있었다.</p><p>결과적으로 매일 변동되어 <b>빠른 주기</b>로 데이터를 받아와야 하는 API는 <b>비동기 방식</b>을, 식당이나 쇼핑 정보와 같이 <b>느린 주기</b>의 API는 <b>동기 방식</b>을 사용하기로 결정되었다.</p>'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'<p>RestTemplate으로 처리했던 대량 데이터를 비동기 방식으로 다루어야 하는 상황에서 WebClient와 OpenFeign에 대한 이해와 사용법을 터득할 수 있었다. 데이터 처리에서 비동기 방식의 중요성과 성능 비교를 직접 경험했다.</p><p>모든 팀원 앞에서 발표하여 다양한 직군 간 지식 공유와 토론을 통해 서비스에 어떤 방식을 적용할지 이야기해본 경험을 했다. 이를 통해 <b>효율적인 데이터 처리</b>와 <b>팀 내 의사소통</b>의 중요성을 깨닫게 되었다.</p>'
+        }
+      ],
+      link: { label: '📎 WebClient · Feign Client 발표자료 (블로그)', href: 'https://velog.io/@nyoung215/Web-Client-Feign-Client' }
+    },
+    'catcher-dedup': {
+      project: 'CATCHER · Batch Server',
+      title: '외부 API 아이템 중복검사 — O(N) → O(1)',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'외부 API를 통해 응답받는 리스트의 각 아이템 고유값을 매번 DB에 조회하여 <b>중복 검사 및 콘텐츠 변경 여부</b>를 확인하는 로직에서 성능 저하와 높은 시간복잡도 문제가 발생했다. 요청 API 한 번에 응답받는 리스트에 <b>최대 2,000개의 아이템</b>이 존재했기 때문에 2,000번의 중복검사를 위해 매번 findBy()로 DB를 조회하면서 발생된 문제였다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'<p><b>Map</b>을 활용하여 한 번의 요청마다 한 번만 DB를 조회하도록 로직을 개선해 시간복잡도가 <b>O(N) → O(1)</b>로 감소했다. 중복 검사에는 고유값뿐 아니라 해당 아이템의 콘텐츠가 수정되었는지 확인하기 위해 <b>hashString</b>을 도입해 더욱 효율적인 중복 검사 로직을 구현했다.</p><p>리팩토링을 통해 시스템 성능을 향상시키고 중복 데이터 처리를 보다 효율적으로 수행할 수 있었다.</p>'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'성능 문제에 직면했을 때 단순히 반복문이 아니라 <b>효율적인 알고리즘</b>을 찾아 적용함으로써 성능 개선이 가능하다는 것을 체감했다. 특히 대용량 데이터 처리나 대규모 트래픽을 다루는 서비스에서 더욱 중요하게 작용된다는 점도 느꼈고, 지속적인 코드 개선이 시스템 성능과 안정성을 향상시킨다는 것을 깨달았다.'
+        }
+      ]
+    },
+    'catcher-apidocs': {
+      project: 'CATCHER · API 명세',
+      title: 'Postman Mock → Swagger 페이지로 API 명세 공유',
+      sections: [
+        { kind:'problem', emoji:'⏱️', label:'Context',
+          html:'프론트엔드-백엔드 개발을 <b>병렬적으로 진행</b>해야 했고, 서버 배포 전과 배포 후 모두에서 API 명세를 신뢰 가능한 형태로 공유할 방법이 필요했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'<p>서버 배포 전에는 <b>Postman Mock Server</b>를 구축해 프론트 개발자가 가짜 응답으로 화면 작업을 먼저 진행할 수 있도록 했다.</p><p>서버 배포 후에는 <b>Swagger 페이지로 문서화</b>하여 프론트엔드에 공유, 명세와 실제 동작이 어긋날 일이 없도록 했다.</p>'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'API 명세는 단순한 문서가 아니라 <b>커뮤니케이션 도구</b>임을 체감했다. 명세를 신뢰할 수 있어야 양 끝단이 비동기로 일할 수 있고, 그 신뢰가 곧 일정 단축으로 이어졌다.'
+        }
+      ],
+      link: { label: '📎 Postman API 문서', href: 'https://documenter.getpostman.com/view/28328517/2s9YeN1Tdy' }
+    },
+    'catcher-n1': {
+      project: 'CATCHER',
+      title: 'JoinFetch로 영속성 컨텍스트 N+1 해결',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'클라이언트가 상세일정을 수정 또는 삭제하기 위해 요청을 보낼 때, <b>해당 유저와 상세일정 작성자의 일치 여부</b>를 검증하는 로직을 개발하던 중, 상세일정의 작성자 정보를 얻기 위해 해당 상세일정이 속한 일정을 조회하고 이후 일정의 작성자를 다시 조회해야 하는 로직에서 <b>N+1 문제</b>가 발생했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'<b>JoinFetch</b>를 사용해 상세일정을 조회하면서 해당 상세일정이 속한 일정의 소유자 정보도 <b>JPA의 영속성 컨텍스트</b>를 활용해 영속화했다. 연관된 엔터티를 즉시 가져오면서 N+1 문제를 효과적으로 해결할 수 있었고, 중복된 데이터베이스 조회를 최소화해 성능 향상을 이뤘다.'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'JoinFetch를 활용하면서 <b>성능을 최적화하는 방법</b>에 대한 경험을 얻었다. 영속성 컨텍스트를 이용해 데이터베이스 조회 결과를 캐시하고 중복 조회를 방지하는 방법을 다시금 새길 수 있었다. 비효율적인 DB 조회로 인한 성능 저하를 최소화하는 감각을 길렀다.'
+        }
+      ]
+    },
+    'petnuri-kakao': {
+      project: 'PETNURI',
+      title: 'Kakao OAuth 구현 중 8시간 페어 트러블슈팅',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'카카오 로그인 시 프론트에서 백을 거치지 않고 카카오 token을 받아 회원가입을 진행하는 문제가 발생했다. 회원가입 진행 시 카카오 정보를 통해 회원 여부를 판별해 기존 회원은 로그인을 해주는데, 발생한 문제로 인해 <b>회원 여부를 판별할 수 없게 되어 로그인이 되지 않는 문제</b>가 순차적으로 발생했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'프론트엔드 팀원과 <b>8시간 동안 페어로 소통</b>하며 카카오 로그인 로직을 수정했다. 수정 과정에서 WebClient를 사용해 Kakao API를 호출하는 코드의 <b>URL 인코딩 문제</b>를 발견했고, <b>RestTemplate으로 리팩토링</b>을 진행했다. 기존 문제가 해결되어 카카오 로그인 버튼 하나로 로그인/회원가입을 코드 상에서 분리할 수 있게 되었다.'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'팀원 간의 원활한 소통과 협업이 프로젝트 진행에 중요한 역할을 한다는 것을 느꼈다. 카카오 로그인 과정에 대해 프론트엔드 팀원과 <b>서로 이해한 바가 달랐던 점</b>이 가장 큰 문제였다. 이해 차이를 극복하고 문제를 해결하기 위해 적극적으로 소통하고 의견을 나누는 노력이 중요하다는 것을 깨달았다.'
+        }
+      ]
+    },
+    'foodie-multimodule': {
+      project: 'FOODIE-LOG',
+      title: '멀티모듈 build.gradle 통합',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'application, management 모듈별 build.gradle이 각각 분리되어 있어서 매번 <b>중복되는 의존성</b>을 각 build.gradle에 똑같이 작성해주어야 했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'build.gradle을 <b>프로젝트 루트 위치로 옮겨서</b>, 중복되는 의존성과 중복되지 않는 의존성을 프로젝트로 분리하여 하나의 build.gradle 파일에서 관리하게 리팩토링했다.'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'항상 코드의 효율성을 개선하고 <b>중복을 최소화</b>하는 마음가짐이 중요하다는 것을 깨달았다. 코드 리팩토링은 단순히 로직에 국한되지 않고 <b>설정·구성과 관련된 부분에서도 수행</b>될 수 있음을 배웠다.'
+        }
+      ]
+    },
+    'foodie-https': {
+      project: 'FOODIE-LOG',
+      title: '보안 강화를 위한 HTTPS 로드 밸런싱 구성',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'백엔드에서 HTTP로 운영 중 프론트엔드에서 배포하면서 HTTPS 트래픽을 전송하게 되었다. 해당 요청으로 페이지에 접근이 불가하고 <b>Mixed Content 경고</b>가 발생했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'<b>AWS Elastic Load Balancer</b>를 설정해 프론트엔드에서 오는 HTTPS 트래픽을 받을 수 있도록 설정했다. 로드 밸런서에서 HTTP와 HTTPS 프로토콜을 각각 관리하여 포트 443으로 들어오는 트래픽을 포트 80으로 <b>리다이렉션</b>해주었고, 이를 통해 기존 백엔드 서버를 안전한 HTTPS로 통신하여 전체적인 보안성을 강화할 수 있었다.'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'로드 밸런서를 사용하여 HTTPS 트래픽을 안전하게 전달하고, HTTP에서 HTTPS로의 <b>리다이렉션</b>을 통해 기존 백엔드 서버의 통신을 안전한 환경으로 전환하는 방법을 배웠다.'
+        }
+      ]
+    },
+    'foodie-s3': {
+      project: 'FOODIE-LOG',
+      title: 'AWS S3 파일 업로드 — 확장자·용량 제어',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'원하지 않았던 파일의 확장자도 S3 버킷에 자동으로 업로드되고, 업로드할 파일의 용량 제한으로 <b>FileSizeLimitExceededException</b>이 발생했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'<p>S3 버킷 정책을 수정해 <b>특정 확장자를 제외한 파일은 허용하지 않도록</b> 규정하고, 버킷으로 넘어가기 전 로직에서 확장자를 구분해 제외시켜주는 로직을 추가했다.</p><p>파일 용량 제한 문제는 yml 파일에서 <b>max-file-size</b>를 수정하고 <b>@ExceptionHandler(MaxUploadSizeExceededException.class)</b>를 사용해 파일이 최대 용량을 넘을 때 해당 예외를 핸들링할 수 있도록 코드를 수정했다.</p>'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'S3 버킷 정책을 수정해 특정 확장자를 걸러내는 방법을 익혔고, 운영 중 발견한 이슈와 해결 과정을 <b>블로그에 정리해 다른 팀과 공유</b>하는 습관을 들였다.'
+        }
+      ],
+      link: { label: '📎 블로그 - [Spring] S3 이미지 업로드하기', href: 'https://velog.io/@nyoung215/Spring-S3-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0' }
+    },
+    'ofcourse-swagger': {
+      project: '당연하지',
+      title: 'Swagger 3.0 적용 오류 해결',
+      sections: [
+        { kind:'problem', emoji:'😡', label:'Problem',
+          html:'Swagger 라이브러리 구현 후, 적용이 되지 않고 오류가 뜨면서 <b>프로그램이 실행되지 않는 문제</b>가 발생했다.'
+        },
+        { kind:'solution', emoji:'🙂', label:'Solution',
+          html:'SpringBoot 버전과 맞는 <b>Swagger 3.0</b>으로 변경한 후, <b>matching-strategy</b> 속성을 사용해 Path 매칭 전략을 <b>ant_path_matcher</b>로 설정했다. 설정을 통해 Swagger가 올바르게 동작하고 API 문서를 생성해주었다.'
+        },
+        { kind:'thinking', emoji:'🤔', label:'Thinking',
+          html:'Swagger의 적용 방법과 커스텀 방법에 대해서 학습할 수 있었다. 버전 호환성 문제는 라이브러리 도입 시 자주 발생할 수 있는 이슈로, 다음 도입 시에는 <b>호환성 매트릭스를 먼저 확인</b>하는 습관을 들였다.'
+        }
+      ]
+    }
+  };
+
+  const modal     = document.getElementById('caseModal');
+  const titleEl   = document.getElementById('caseTitle');
+  const eyebrowEl = document.getElementById('caseEyebrow');
+  const bodyEl    = document.getElementById('caseBody');
+  let lastFocus = null;
+
+  function openCase(id) {
+    const data = cases[id];
+    if (!data) return;
+    lastFocus = document.activeElement;
+    eyebrowEl.textContent = 'Case Study · ' + data.project;
+    titleEl.textContent = data.title;
+    bodyEl.innerHTML = '';
+    data.sections.forEach(s => {
+      const sec = document.createElement('div');
+      sec.className = 'case-section ' + s.kind;
+      sec.innerHTML =
+        '<div class="lbl"><span class="em">' + s.emoji + '</span>' + s.label + '</div>' +
+        '<div class="txt">' + s.html + '</div>';
+      bodyEl.appendChild(sec);
+    });
+    if (data.link) {
+      const a = document.createElement('a');
+      a.className = 'case-link';
+      a.href = data.link.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = data.link.label + ' →';
+      bodyEl.appendChild(a);
+    }
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('.case-close').focus();
+  }
+  function closeCase() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('button.case-btn[data-case]').forEach(btn => {
+    btn.addEventListener('click', () => openCase(btn.dataset.case));
+  });
+  modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeCase));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeCase();
+  });
+</script>
+
+<script>
+  // ===== Active section sync (scroll-based) =====
+  const links = document.querySelectorAll('.nav a[data-target]');
+  const sections = [...links].map(a => document.getElementById(a.dataset.target)).filter(Boolean);
+
+  let currentActive = '';
+  const setActive = (id) => {
+    if (id === currentActive) return;
+    currentActive = id;
+    links.forEach(l => l.classList.toggle('active', l.dataset.target === id));
+  };
+
+  function updateActive() {
+    // Activate the last section whose top has scrolled past the topbar.
+    // Offset accounts for sticky topbar (~64px) + a small buffer so a section
+    // becomes active when its header sits just below the bar.
+    const topbar = document.querySelector('.topbar');
+    const offset = (topbar ? topbar.offsetHeight : 64) + 24;
+    const scrollY = window.scrollY;
+    let activeId = sections[0]?.id;
+    for (const s of sections) {
+      if (s.offsetTop - offset <= scrollY) activeId = s.id;
+    }
+    // Edge: when scrolled to absolute bottom, force last section active
+    if (Math.ceil(window.innerHeight + scrollY) >= document.documentElement.scrollHeight - 2) {
+      activeId = sections[sections.length - 1]?.id;
+    }
+    if (activeId) setActive(activeId);
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  window.addEventListener('resize', updateActive);
+  // Click sets active immediately (smooth scroll still triggers updateActive after)
+  links.forEach(l => l.addEventListener('click', () => setActive(l.dataset.target)));
+  updateActive();
+</script>
+
+
+
+
+<!-- ============ WORK DETAIL MODAL ============ -->
+<div class="case-modal" id="workModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="case-backdrop" data-close></div>
+  <article class="case-dialog">
+    <div class="case-body" id="workModalBody"></div>
+  </article>
+</div>
+
+<script>
+  // ===== Work detail modal =====
+  (function(){
+    var modal = document.getElementById('workModal');
+    var dialog = modal.querySelector('.case-dialog');
+    var lastFocus = null;
+    function openWork(idx) {
+      var tpl = document.getElementById('work-tpl-' + idx);
+      if (!tpl) return;
+      lastFocus = document.activeElement;
+      dialog.innerHTML = '';
+      dialog.appendChild(tpl.content.cloneNode(true));
+      dialog.scrollTop = 0;
+      // Wire new close buttons inside the freshly-cloned template
+      dialog.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', closeWork); });
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      var c = dialog.querySelector('.case-close');
+      if (c) c.focus();
+    }
+    function closeWork() {
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    document.querySelectorAll('.work-tile').forEach(function(t){
+      t.addEventListener('click', function(){ openWork(t.dataset.work); });
+    });
+    modal.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', closeWork); });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeWork();
+    });
+  })();
+</script>
+
+
+
 </body>
 </html>
