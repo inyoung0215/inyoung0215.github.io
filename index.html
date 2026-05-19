@@ -2340,7 +2340,6 @@
           <div class="skill-tags">
             <span class="tag primary">Java</span>
             <span class="tag primary">Kotlin</span>
-            <span class="tag muted">Flutter</span>
           </div>
         </div>
 
@@ -2351,7 +2350,6 @@
           </div>
           <div class="skill-tags">
             <span class="tag primary">MySQL</span>
-            <span class="tag muted">MariaDB</span>
           </div>
         </div>
 
@@ -2484,8 +2482,7 @@
         <div class="case-body">
           <div class="case-section summary">
             <div class="lbl"><span class="em">📝</span>Summary</div>
-            <div class="txt"><p>기존 오프라인 즉시 환전만 가능하던 키오스크에 "사전 신청 후 출금" 온라인 환전 흐름을 추가. Java 레거시 대신 Kotlin 신규 모듈로 설계해 팀 내 모던 스택 적용 사례를 만들었습니다.</p>
-              <p>기존 환전 서비스는 키오스크 앞에서 외화를 즉시 환전하는 오프라인 방식만 지원했습니다. 사용자가 사전에 환전을 신청하고 원하는 시점에 키오스크에서 출금할 수 있는 <b>온라인 환전 서비스</b>가 신규 요구사항으로 도출되었고, 백엔드 단독 담당으로 합류했습니다.</p></div>
+            <div class="txt"><p>기존 키오스크는 키오스크 앞에서 외화를 즉시 환전하는 오프라인 방식만 지원했습니다. 사용자가 사전에 환전을 신청하고 원하는 시점에 키오스크에서 출금할 수 있는 <b>온라인 환전 서비스</b>가 신규 요구사항으로 도출되었고, <b>백엔드 단독 담당</b>으로 합류해 Java 레거시 대신 Kotlin 신규 모듈로 설계하며 팀 내 모던 스택 적용 사례를 만들었습니다.</p></div>
           </div>
           <div class="case-section role">
             <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
@@ -2524,8 +2521,7 @@
         <div class="case-body">
           <div class="case-section summary">
             <div class="lbl"><span class="em">📝</span>Summary</div>
-            <div class="txt"><p>온라인 환전 운영 중 동일 사용자에게 가상계좌가 중복 발급되는 race condition을 진단하고, Redisson tryLock 기반 분산락으로 데이터 정합성을 근본적으로 회복시켰습니다.</p>
-              <p>온라인 환전 서비스 운영 중 내부 API의 동시 호출로 <b>동일 사용자에게 가상계좌가 중복 발급</b>되는 동시성 문제가 발생했습니다. 금전 거래의 데이터 정합성을 위협하는 심각한 이슈로, 근본적 해결이 필요했습니다.</p></div>
+            <div class="txt"><p>온라인 환전 서비스 운영 중 내부 API의 동시 호출로 <b>동일 사용자에게 가상계좌가 중복 발급</b>되는 race condition이 발생했습니다. 금전 거래의 데이터 정합성을 위협하는 심각한 이슈로, <b>Redisson tryLock 기반 분산락</b>으로 근본적인 해결과 함께 팀 내 분산락 패턴을 정착시켰습니다.</p></div>
           </div>
           <div class="case-section role">
             <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
@@ -2563,8 +2559,7 @@
         <div class="case-body">
           <div class="case-section summary">
             <div class="lbl"><span class="em">📝</span>Summary</div>
-            <div class="txt"><p>외국인 관광객 대상 세금 환급 신규 도메인을 설계하면서, 외부 환급사 통신을 전담하는 Gateway 모듈과 민감 데이터용 Redis 저장소를 팀 내 처음 도입했습니다.</p>
-              <p>키오스크 사용자 유입 확대를 위해 외국인 관광객 대상 Tax Refund 신규 도메인 런칭이 결정되었습니다. 기존 환전/상품 거래와는 다른 새로운 도메인이며, 외부 환급사들과의 통신 인프라 구축이 필요했습니다.</p></div>
+            <div class="txt"><p>키오스크 사용자 유입 확대를 위해 외국인 관광객 대상 <b>Tax Refund 신규 도메인</b> 런칭이 결정되었습니다. 외부 환급사들과의 통신 인프라가 필요한 새 도메인이라, 통신 전담 <b>External Gateway 모듈</b>을 신규 설계하고 민감 데이터용 <b>Redis 저장소를 팀 내 처음</b> 도입했습니다.</p></div>
           </div>
           <div class="case-section role">
             <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
@@ -2603,8 +2598,7 @@
         <div class="case-body">
           <div class="case-section summary">
             <div class="lbl"><span class="em">📝</span>Summary</div>
-            <div class="txt"><p>프로젝트별로 분산 운영되던 알림 기능을 RabbitMQ Exchange + DLQ 기반 공통 모듈로 통합. 팀 내 첫 메시징 큐 도입 사례로 정착시켰습니다.</p>
-              <p>사내 모든 서비스가 프로젝트별로 알림 기능을 분산 운영하면서 중복 코드가 누적되고 유지보수가 어려운 상태였습니다. 전사 알림 시스템의 통합과 모듈화가 필요했습니다.</p></div>
+            <div class="txt"><p>사내 모든 서비스가 프로젝트별로 알림 기능을 분산 운영하면서 중복 코드가 누적되고 유지보수가 어려운 상태였습니다. <b>RabbitMQ Exchange + DLQ 기반 공통 모듈</b>로 통합·표준화하면서 <b>팀 내 첫 메시징 큐 도입 사례</b>로 정착시켰습니다.</p></div>
           </div>
           <div class="case-section role">
             <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
@@ -2642,8 +2636,7 @@
         <div class="case-body">
           <div class="case-section summary">
             <div class="lbl"><span class="em">📝</span>Summary</div>
-            <div class="txt"><p>K카드·비짓부산패스·레일플러스 등 성격이 다른 카드 상품을 단일 아키텍처로 수용. 향후 자사 카드 확장까지 고려해 외부 API 연동 모듈을 분리했습니다.</p>
-              <p>키오스크 사용자 유입 확대를 위해 다양한 카드 상품(K카드·비짓부산패스·레일플러스 등) 거래 서비스를 런칭해야 했습니다. 향후 추가 카드 상품 확장을 고려한 <b>확장 가능한 아키텍처</b>가 핵심 요구사항이었습니다.</p></div>
+            <div class="txt"><p>키오스크 사용자 유입 확대를 위해 K카드·비짓부산패스·레일플러스 등 성격이 다른 카드 상품 거래 서비스를 런칭해야 했습니다. <b>확장 가능한 상품 아키텍처</b>를 핵심 요구사항으로, 상품 코드 기반 라우팅 구조와 외부 API 연동 모듈 분리를 적용해 신규 카드 추가 시 코드 변경을 최소화했습니다.</p></div>
           </div>
           <div class="case-section role">
             <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
@@ -2670,6 +2663,45 @@
           </div>
         </div>
       </template>
+      </div>
+
+      <!-- More Experience at DOZN -->
+      <div class="work-company" style="margin-top: 22px;">
+        <div class="work-company-head">
+          <div class="work-company-titles">
+            <div class="work-company-tag">● More at DOZN · 기타 주요 프로젝트</div>
+          </div>
+        </div>
+        <ul class="prev-list">
+          <li>
+            <div class="prev-li-period">2025.01 — 2025.07</div>
+            <div class="prev-li-body">
+              <h4>이즐(EZL) 교통카드 충전/출금 서비스 API</h4>
+              <p>키오스크 교통카드 충전·출금 신규 지원. <b>응답 일관성·정산 상태 보존·중복 방지</b> 등 금전 거래 핵심 안정성 로직을 주도 설계하고, 키오스크 클라이언트 개발자와 반복 테스트로 안정화. 7개월 단독 담당.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">2025 상반기</div>
+            <div class="prev-li-body">
+              <h4>RedisUniversalConverter — 팀 공통 Redis 직렬화 구조 개선</h4>
+              <p>본인 담당 업무가 아닌 팀 공통 인프라 영역에서, DTO 직렬화 시 패키지명·Map 구조·BigDecimal 타입 정보가 JSON에 그대로 노출되던 문제를 자발적으로 진단·해결. 기존 데이터 호환성 유지하며 운영 반영, <b>리더 평가 인정 사례</b>.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">2025 상반기</div>
+            <div class="prev-li-body">
+              <h4>시재 입고·환율 알림 발송 시스템</h4>
+              <p>홈페이지 알림 신청자에게 외화 입고·환율 변동을 실시간 통지. <b>약 100여 키오스크</b>에서 수집한 환율 데이터를 통화별 최저(우대) 환율로 가공해 API 제공. 외부 수정으로 인한 오발송 사례를 계기로 <b>핵심 발송 로직에 테스트 코드를 추가해 사전 검증 구조</b>를 정착.</p>
+            </div>
+          </li>
+          <li>
+            <div class="prev-li-period">2024.10 — 2024.12</div>
+            <div class="prev-li-body">
+              <h4>THE-Free 선불카드 서비스 신규 개발</h4>
+              <p>사내 신규 선불카드 브랜드의 구매·충전·출금 거래 API 설계. <b>외화 구매/충전을 위한 Redis 활용</b>과 웹·앱·키오스크 <b>세 채널 요청 구분 및 암호화 통신</b>을 구현하고, 시퀀스 다이어그램으로 데이터 흐름을 문서화.</p>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <!-- Previous role -->
@@ -2719,6 +2751,82 @@
       </header>
 
       <div class="projects">
+
+        <!-- ========= FANKIT (Side Project) ========= -->
+        <article class="project">
+          <div class="project-top">
+            <div>
+              <div class="project-title-row">
+                <div class="project-logo">F</div>
+                <h3>FanKit<span class="ko">팬킷</span></h3>
+              </div>
+              <p class="project-summary">K-POP 팬아트 크리에이터의 굿즈 등록·판매와 팬의 안전한 결제·구매를 다루는 <b>MSA 이커머스</b>. 실무에서 마주칠 결제·정산의 까다로운 케이스(분산 트랜잭션·멱등성·동시성·대량 배치)를 직접 풀어보기 위해 <b>Payment</b>와 <b>Settlement</b> 두 서비스에 집중해서 구축 중인 사이드 프로젝트.</p>
+            </div>
+            <div class="project-meta">
+              <div class="project-date">2026 — 진행 중</div>
+              <div class="project-badges">
+                <span class="badge">Solo</span>
+                <span class="badge">MSA · Hexagonal · DDD</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">📐</span>Overview</div>
+              <p class="pb-overview"><b>Hexagonal Architecture + DDD</b> 기반 Kotlin/Spring Boot 3.x MSA. 모든 서비스에 domain / application / infrastructure / api 레이어 분리를 적용하고, 서비스 간 통신은 <b>Kafka 이벤트 버스 + Transactional Outbox</b>로 일관성 보장. <b>Payment</b>와 <b>Settlement</b>를 면접 어필 축으로 깊이 있게 설계했습니다.</p>
+            </div>
+            <div class="pb-cell">
+              <div class="pb-label"><span class="pb-emoji">🙋‍♂️</span>My Role</div>
+              <div class="pb-role-list">
+              <div class="pb-role-group">
+                <strong>⭐ Payment Service — Saga · Idempotency · Circuit Breaker</strong>
+                <ul>
+                  <li><b>Saga(Orchestration)</b>: 결제 → 재고 차감 → 주문 확정 분산 트랜잭션 + 실패 시 보상 트랜잭션. <b>SagaLog</b> 테이블로 흐름 추적</li>
+                  <li><b>Idempotency Key</b>: DB unique key + Redis 캐시 이중 체크로 결제 API 중복 방지 (<code>X-Idempotency-Key</code> 헤더)</li>
+                  <li><b>비관적 락 + Redisson 분산락</b>: 단일 DB는 SELECT FOR UPDATE, 인기 굿즈 재고는 분산락으로 동시성 제어</li>
+                  <li><b>Circuit Breaker(Resilience4j)</b> + <b>Transactional Outbox</b>: PG사 장애 대응 + DB 커밋과 이벤트 발행 원자성</li>
+                  <li><b>Saga Happy Path · 보상 · Idempotency 통합 테스트</b> (Testcontainers)</li>
+                </ul>
+              </div>
+              <div class="pb-role-group">
+                <strong>⭐ Settlement Service — Spring Batch · Reconciliation</strong>
+                <ul>
+                  <li><b>Spring Batch</b>: ItemReader(전일 결제 조회) → ItemProcessor(수수료 10% 계산) → ItemWriter, <b>Chunk 100</b> 단위 대용량 처리</li>
+                  <li><b>Quartz</b>: 매일 새벽 2시 자동 트리거</li>
+                  <li><b>Reconciliation(대사)</b>: PG사 정산 데이터 vs 내부 결제 데이터 비교 검증으로 정합성 보장</li>
+                  <li>크리에이터 정산 내역 조회 API + CSV 다운로드</li>
+                  <li>Spring Batch Job 통합 테스트 (@StepScope · Reader 가시성 등 운영 버그 수정 포함)</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-foot">
+            <div class="stack">
+              <span class="tag">Kotlin</span>
+              <span class="tag">Spring Boot 3</span>
+              <span class="tag">Spring Cloud</span>
+              <span class="tag">Spring Batch</span>
+              <span class="tag">Kafka</span>
+              <span class="tag">Resilience4j</span>
+              <span class="tag">Redisson</span>
+              <span class="tag">Redis</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Elasticsearch</span>
+              <span class="tag">Testcontainers</span>
+              <span class="tag">Docker</span>
+            </div>
+            <div class="links">
+              <a class="link-btn" href="https://github.com/inyoung0215/fankit" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+        </article>
 
         <!-- ========= CATCHER ========= -->
         <article class="project">
