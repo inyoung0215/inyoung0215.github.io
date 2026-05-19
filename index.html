@@ -2210,6 +2210,81 @@
     .footer { display: none; }
     .link-btn:hover { transform: none; }
   }
+
+  /* ============== PROJECT DIAGRAMS — Architecture & ERD slots ============== */
+  .project-diagrams {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-2);
+  }
+  .diagrams-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .diagrams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+  }
+  .diagram-slot,
+  .diagram-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg-soft);
+    text-decoration: none;
+    color: var(--ink-2);
+    min-height: 130px;
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .diagram-slot {
+    background: #fff;
+    cursor: pointer;
+    padding: 10px;
+  }
+  .diagram-slot:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -8px rgba(15, 23, 42, 0.18);
+  }
+  .diagram-slot img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .diagram-placeholder {
+    border-style: dashed;
+    opacity: 0.72;
+  }
+  .diagram-emoji { font-size: 22px; margin-bottom: 6px; line-height: 1; }
+  .diagram-title { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+  .diagram-hint {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-2);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 640px) {
+    .diagrams-grid { grid-template-columns: repeat(2, 1fr); }
+    .diagram-slot img { height: 90px; }
+  }
 </style>
 </head>
 <body>
@@ -2868,6 +2943,27 @@
             </div>
           </div>
 
+          <div class="project-diagrams">
+            <div class="diagrams-label">📊 Architecture &amp; ERD</div>
+            <div class="diagrams-grid">
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🏗️</span>
+                <span class="diagram-title">MSA Architecture</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">💳</span>
+                <span class="diagram-title">Payment ERD</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">📅</span>
+                <span class="diagram-title">Settlement ERD</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+            </div>
+          </div>
+
           <div class="project-foot">
             <div class="stack">
               <span class="tag">Kotlin</span>
@@ -2978,6 +3074,22 @@
             </div>
           </div>
 
+          <div class="project-diagrams">
+            <div class="diagrams-label">📊 Architecture &amp; ERD</div>
+            <div class="diagrams-grid">
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🏗️</span>
+                <span class="diagram-title">MSA Architecture</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🗄️</span>
+                <span class="diagram-title">ERD</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+            </div>
+          </div>
+
           <div class="project-foot">
             <div class="stack">
               <span class="tag">Java</span>
@@ -3063,6 +3175,22 @@
                 </div>
                 <span class="case-arrow">→</span>
               </button>
+            </div>
+          </div>
+
+          <div class="project-diagrams">
+            <div class="diagrams-label">📊 Architecture &amp; ERD</div>
+            <div class="diagrams-grid">
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🗄️</span>
+                <span class="diagram-title">ERD</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🔐</span>
+                <span class="diagram-title">Auth Sequence</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
             </div>
           </div>
 
@@ -3176,6 +3304,22 @@
             </div>
           </div>
 
+          <div class="project-diagrams">
+            <div class="diagrams-label">📊 Architecture &amp; ERD</div>
+            <div class="diagrams-grid">
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">☁️</span>
+                <span class="diagram-title">AWS Infra Architecture</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🗄️</span>
+                <span class="diagram-title">ERD</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
+            </div>
+          </div>
+
           <div class="project-foot">
             <div class="stack">
               <span class="tag">Java</span>
@@ -3262,6 +3406,17 @@
                 </div>
                 <span class="case-arrow">→</span>
               </button>
+            </div>
+          </div>
+
+          <div class="project-diagrams">
+            <div class="diagrams-label">📊 Architecture &amp; ERD</div>
+            <div class="diagrams-grid">
+              <div class="diagram-placeholder">
+                <span class="diagram-emoji">🗄️</span>
+                <span class="diagram-title">ERD</span>
+                <span class="diagram-hint">추가 예정</span>
+              </div>
             </div>
           </div>
 
