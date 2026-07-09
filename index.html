@@ -1313,7 +1313,7 @@
     padding-left: 52px;
   }
   body.exp-style-rail .company-group::before {
-    content: "DOZN — 5 KEY PROJECTS";
+    content: "DOZN — 6 KEY PROJECTS";
     position: absolute;
     left: 14px;
     top: 0;
@@ -2560,9 +2560,20 @@
       </div>
 
       <div class="work-grid">
-        <button type="button" class="work-tile" data-work="0">
+        <button type="button" class="work-tile" data-work="5">
           <div class="work-tile-head">
             <span class="work-tile-index">01</span>
+          </div>
+          <h3 class="work-tile-title">체크인 서울 (Check-in Seoul) — 롯데카드 협업 선불카드 서비스</h3>
+          <p class="work-tile-highlight">캐시 가용성 설계  ·  이중 결제 방지  ·  외부 결제 연동 신뢰성</p>
+          <span class="work-tile-cta">자세히 보기
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6h5M6 3.5l2.5 2.5L6 8.5"/></svg>
+          </span>
+        </button>
+
+        <button type="button" class="work-tile" data-work="0">
+          <div class="work-tile-head">
+            <span class="work-tile-index">02</span>
           </div>
           <h3 class="work-tile-title">THE-Free 온라인 환전 서비스 신규 개발</h3>
           <p class="work-tile-highlight">Kotlin 신규 모듈  ·  단독 백엔드  ·  기한 내 런칭</p>
@@ -2573,7 +2584,7 @@
 
         <button type="button" class="work-tile" data-work="1">
           <div class="work-tile-head">
-            <span class="work-tile-index">02</span>
+            <span class="work-tile-index">03</span>
           </div>
           <h3 class="work-tile-title">Redisson 분산락으로 가상계좌 중복 발급 근본 해결</h3>
           <p class="work-tile-highlight">근본 해결  ·  팀 내 첫 분산락  ·  패턴 문서화</p>
@@ -2584,7 +2595,7 @@
 
         <button type="button" class="work-tile" data-work="2">
           <div class="work-tile-head">
-            <span class="work-tile-index">03</span>
+            <span class="work-tile-index">04</span>
           </div>
           <h3 class="work-tile-title">Tax Refund 신규 도메인 설계 + External Gateway · Redis 첫 도입</h3>
           <p class="work-tile-highlight">팀 내 첫 Redis 도입  ·  안정 운영중  ·  QA 프로세스 개선</p>
@@ -2595,7 +2606,7 @@
 
         <button type="button" class="work-tile" data-work="3">
           <div class="work-tile-head">
-            <span class="work-tile-index">04</span>
+            <span class="work-tile-index">05</span>
           </div>
           <h3 class="work-tile-title">RabbitMQ로 전사 알림 시스템 통합 (팀 첫 도입)</h3>
           <p class="work-tile-highlight">팀 내 첫 메시징 큐  ·  공통 모듈 통합  ·  DLQ 재처리 체계</p>
@@ -2606,7 +2617,7 @@
 
         <button type="button" class="work-tile" data-work="4">
           <div class="work-tile-head">
-            <span class="work-tile-index">05</span>
+            <span class="work-tile-index">06</span>
           </div>
           <h3 class="work-tile-title">다종 카드 판매 — 상품 코드 기반 라우팅 구조 설계</h3>
           <p class="work-tile-highlight">3종+ 카드 상품  ·  외부 API 모듈 분리  ·  무중단 확장</p>
@@ -2805,6 +2816,50 @@
             <div class="txt stack-tags"><span class="tag">Java</span>
               <span class="tag">Spring Boot</span>
               <span class="tag">MySQL</span></div>
+          </div>
+        </div>
+      </template>
+      <template id="work-tpl-5">
+        <header class="case-head">
+          <div>
+            <div class="case-eyebrow">Experience · DOZN · 2026.05 — 2026.06 · 26.09 오픈 예정</div>
+            <h3>체크인 서울 (Check-in Seoul) — 롯데카드 협업 선불카드 서비스</h3>
+          </div>
+          <button type="button" class="case-close" data-close aria-label="닫기">×</button>
+        </header>
+        <div class="case-body">
+          <div class="case-section summary">
+            <div class="lbl"><span class="em">📝</span>Summary</div>
+            <div class="txt"><p>서울시 방문 외국인 관광객을 위한 선불카드 서비스를 롯데카드와 협업해 신규 구축했습니다. 실제 현금이 오가는 키오스크 결제 환경이라, <b>결제 정합성(중복 결제·한도 초과 방지)과 외부 결제사 연동의 신뢰성</b>이 핵심 과제였습니다. 반복되는 캐시 처리, 상황별 동시성 제어, 외부 연동 재시도를 <b>재사용 가능한 공통 모듈로 설계</b>해 도메인 코드가 비즈니스 로직에만 집중하도록 만들었고, 개발·QA를 마치고 2026년 9월 오픈을 앞두고 있습니다.</p></div>
+          </div>
+          <div class="case-section role">
+            <div class="lbl"><span class="em">🙋‍♂️</span>Role</div>
+            <div class="txt"><p>선불카드 파트(발급·충전·인출·활성화) 백엔드 <b>설계·개발 담당</b>. 롯데카드와의 3주 QA 협업에서 <b>기술 이슈 조율 담당</b>.</p></div>
+          </div>
+          <div class="case-section impl">
+            <div class="lbl"><span class="em">🛠️</span>Impl</div>
+            <div class="txt"><ul class="wc-list">
+                <li>캐시 처리 공통 로직을 하나의 <b>공통 캐시 모듈(<code>DurableCache</code>)</b>로 묶어, 각 도메인은 최소 정보만 지정하면 나머지는 자동 처리되게 설계. Redis 이중화 이전의 대비책으로 캐시를 DB에도 함께 저장해 <b>Redis 장애 시에도 서비스가 멈추지 않게</b> 함</li>
+                <li>결제 정합성을 위한 <b>상황별 동시성 제어</b> — 이중 결제 방지와 일일 한도 정확한 차감을 서로 다른 방식으로 처리</li>
+                <li>외부 결제사 연동의 <b>재시도를 기능별 정책으로 분리한 공통 실행기(<code>RetryableCallExecutor</code>)</b> 설계, 외부 응답 단계적 검증</li>
+                <li>여권·QR·바코드 3종 발급 경로를 <b>단일 거래 흐름</b>으로 통합</li>
+                <li>개인정보 보호 — 여권·카드 번호를 암호화·익명화 처리 (<b>금융권 보안 규정 대응</b>)</li>
+                <li>핵심 결제 로직에 대한 <b>단위 테스트</b> 작성 (상태 전이·한도 검증·이벤트 발송·오류 매핑 커버)</li>
+              </ul></div>
+          </div>
+          <div class="case-section reflection">
+            <div class="lbl"><span class="em">💡</span>Reflect</div>
+            <div class="txt"><p>우리가 통제할 수 있는 부분(캐시·동시성·재시도)은 <b>재사용 가능한 공통 모듈</b>로 남겨 다음 프로젝트의 자산이 되게 하고, 우리가 통제할 수 없는 외부 결제사 규격은 <b>정확히 구현하고 빠짐없이 검증하는 것이 신뢰의 본질</b>이라는 점을 배웠다. 특히 인프라(Redis 이중화)가 아직 갖춰지지 않은 제약 안에서도 애플리케이션 레벨에서 장애에 대비할 차선책을 마련한 판단이 의미 있었다.</p></div>
+          </div>
+          <div class="case-section stack">
+            <div class="lbl"><span class="em">⚙️</span>Stack</div>
+            <div class="txt stack-tags"><span class="tag">Java 17</span>
+              <span class="tag">Spring Boot 3.x</span>
+              <span class="tag">JPA</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Redis</span>
+              <span class="tag">JUnit5</span>
+              <span class="tag">Mockito</span></div>
           </div>
         </div>
       </template>
