@@ -1577,7 +1577,7 @@
   .case-list { display: flex; flex-direction: column; gap: 6px; }
   .case-btn {
     display: grid;
-    grid-template-columns: 28px 1fr 16px;
+    grid-template-columns: 1fr 16px;
     gap: 12px;
     align-items: center;
     padding: 11px 14px;
@@ -2963,7 +2963,6 @@
             <div class="case-row-label">Case Studies</div>
             <div class="case-list">
               <button type="button" class="case-btn" data-case="catcher-webclient">
-                <span class="case-icon">⚡</span>
                 <div class="case-btn-text">
                   <span class="case-title">WebClient × OpenFeign으로 대량 비동기 처리</span>
                   <span class="case-sub">// RestTemplate → 비동기 전환 · 7,000건+ · 팀 발표</span>
@@ -2971,7 +2970,6 @@
                 <span class="case-arrow">→</span>
               </button>
               <button type="button" class="case-btn" data-case="catcher-dedup">
-                <span class="case-icon">🗂️</span>
                 <div class="case-btn-text">
                   <span class="case-title">외부 API 아이템 중복검사 — O(N) → O(1)</span>
                   <span class="case-sub">// 2,000건 아이템 · Map + hashString</span>
@@ -2979,7 +2977,6 @@
                 <span class="case-arrow">→</span>
               </button>
               <button type="button" class="case-btn" data-case="catcher-apidocs">
-                <span class="case-icon">📑</span>
                 <div class="case-btn-text">
                   <span class="case-title">Postman Mock → Swagger로 API 명세 공유</span>
                   <span class="case-sub">// 프론트·백 병렬 개발 워크플로우</span>
@@ -2987,7 +2984,6 @@
                 <span class="case-arrow">→</span>
               </button>
               <button type="button" class="case-btn" data-case="catcher-n1">
-                <span class="case-icon">🔗</span>
                 <div class="case-btn-text">
                   <span class="case-title">JoinFetch로 영속성 컨텍스트 N+1 해결</span>
                   <span class="case-sub">// JPA + 영속성 컨텍스트 캐싱</span>
@@ -3089,7 +3085,6 @@
             <div class="case-row-label">Case Studies</div>
             <div class="case-list">
               <button type="button" class="case-btn" data-case="petnuri-kakao">
-                <span class="case-icon">🤝</span>
                 <div class="case-btn-text">
                   <span class="case-title">Kakao OAuth 구현 중 8시간 페어 트러블슈팅</span>
                   <span class="case-sub">// URL 인코딩 → RestTemplate 리팩토링</span>
@@ -3193,7 +3188,6 @@
             <div class="case-row-label">Case Studies</div>
             <div class="case-list">
               <button type="button" class="case-btn" data-case="foodie-multimodule">
-                <span class="case-icon">🧩</span>
                 <div class="case-btn-text">
                   <span class="case-title">멀티모듈 build.gradle 통합</span>
                   <span class="case-sub">// 중복 의존성 제거 · 루트 통합 관리</span>
@@ -3208,7 +3202,6 @@
                 <span class="case-arrow">→</span>
               </button>
               <button type="button" class="case-btn" data-case="foodie-s3">
-                <span class="case-icon">🪣</span>
                 <div class="case-btn-text">
                   <span class="case-title">AWS S3 파일 업로드 — 확장자·용량 제어</span>
                   <span class="case-sub">// 버킷 정책 + max-file-size 핸들링</span>
@@ -3315,7 +3308,6 @@
             <div class="case-row-label">Case Studies</div>
             <div class="case-list">
               <button type="button" class="case-btn" data-case="ofcourse-swagger">
-                <span class="case-icon">📘</span>
                 <div class="case-btn-text">
                   <span class="case-title">Swagger 3.0 적용 오류 해결</span>
                   <span class="case-sub">// matching-strategy · ant_path_matcher</span>
