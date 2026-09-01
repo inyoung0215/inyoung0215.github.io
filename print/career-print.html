@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="omelette-print-source" content="portfolio v3.html@v1787793756446208" />
+<title>황인영 — 경력기술서 (PDF)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  doc-page:not(:defined){visibility:hidden}
+  :root{--ink:#0b1220;--ink-2:#2a3142;--muted:#4f5867;--muted-2:#7b8497;--line:#dfe4ee;--line-2:#eceff6;--accent:#1d4ed8;--accent-soft:#eef4ff;--bg-soft:#f6f8fc;--font-sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;--font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+  doc-page{font-family:var(--font-sans);color:var(--ink);font-size:9.4pt;line-height:1.52;letter-spacing:-.01em}
+  p,li,h1,h2,h3,h4,span{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+  a{color:var(--ink-2);text-decoration:none}
+  b{font-weight:700;color:var(--ink)}
+  /* masthead */
+  .mast{padding-bottom:9pt;border-bottom:1.4pt solid var(--ink)}
+  .mast .id-row{display:flex;align-items:center;gap:9pt;margin-bottom:8pt}
+  .mast .photo{width:42pt;height:42pt;flex-shrink:0;border-radius:50%;object-fit:cover;object-position:center 22%;box-shadow:0 0 0 .6pt var(--line)}
+  .mast .nm{font-size:10pt;font-weight:700;letter-spacing:-.025em}
+  .mast .nm .en{font-family:var(--font-mono);font-size:7.8pt;font-weight:500;color:var(--muted-2);margin-left:6pt;letter-spacing:.02em}
+  .mast .rl{margin-top:2.5pt;font-family:var(--font-mono);font-size:7.8pt;color:var(--muted);letter-spacing:.02em}
+  .mast h1{margin:0;font-size:17pt;font-weight:300;letter-spacing:-.035em;line-height:1.25}
+  .mast h1 .w-thin{font-weight:300;color:var(--ink-2)}
+  .mast h1 .w-fat{font-weight:700;font-size:18pt;color:var(--ink);letter-spacing:-.04em}
+  .mast h1 .hl{font-weight:700;color:var(--ink);border-bottom:3pt solid #dbe7ff;padding-bottom:.4pt}
+  .mast .tagline{margin:7pt 0 0;font-size:9pt;color:var(--muted);line-height:1.5;max-width:80%}
+  .mast .cts{margin-top:7pt;display:flex;flex-wrap:wrap;gap:3pt 8pt;font-family:var(--font-mono);font-size:7.8pt;color:var(--ink-2);letter-spacing:.01em}
+  .mast .cts .dot{color:var(--line)}
+  /* section head */
+  section{margin-top:8pt;break-inside:auto}
+  .sh{break-after:avoid;break-inside:avoid}
+  .about-lead{break-after:avoid}
+  .about p{orphans:3;widows:3}
+  .co-head,.co-lede{break-after:avoid}
+  .duty .lb{break-after:avoid}
+  .sh{margin-bottom:6pt}
+  .sh .over{display:flex;align-items:center;gap:6pt;margin-bottom:3pt}
+  .sh .over::before{content:"";width:9pt;height:1.6pt;background:var(--accent);border-radius:1pt;flex-shrink:0}
+  .sh .over .no{font-family:var(--font-mono);font-size:7pt;font-weight:700;color:var(--accent);letter-spacing:.08em}
+  .sh .over .kicker{font-family:var(--font-mono);font-size:7pt;color:var(--muted-2);text-transform:uppercase;letter-spacing:.16em;font-weight:500}
+  .sh .row{display:flex;align-items:baseline;gap:7pt}
+  .sh h2{margin:0;font-size:12pt;font-weight:800;letter-spacing:.05em;line-height:1.15;flex-shrink:0}
+  .sh .rule{flex:1;height:.6pt;background:var(--line-2)}
+  /* about */
+  .about-lead{margin:0 0 6pt;font-size:11pt;font-weight:700;letter-spacing:-.03em;line-height:1.42}
+  .about-lead .hl{border-bottom:2.4pt solid #dbe7ff;padding-bottom:.4pt}
+  .about p{margin:0 0 3pt;font-size:9pt;color:var(--muted);line-height:1.45}
+  .about p b{color:var(--ink-2)}
+  /* experience */
+  .co{display:grid;grid-template-columns:58pt 1fr;gap:12pt;break-inside:auto;padding-bottom:4pt}
+  .co+.co{margin-top:4pt;border-top:.6pt solid var(--line-2);padding-top:4pt}
+  .stamp{padding-top:2pt;align-self:start}
+  .stamp .yr{font-family:var(--font-mono);font-size:11pt;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.1}
+  .stamp .mo{font-family:var(--font-mono);font-size:7pt;color:var(--muted-2);margin-top:2pt;line-height:1.35;letter-spacing:.02em}
+  .stamp .now{margin-top:4pt;font-size:8pt;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:4pt;letter-spacing:-.01em}
+  .stamp .now::before{content:"";width:10pt;height:1.2pt;background:var(--accent);border-radius:1pt;flex-shrink:0}
+  .co-head{display:flex;align-items:baseline;gap:7pt;flex-wrap:wrap}
+  .co-head h3{margin:0;font-size:11pt;font-weight:800;letter-spacing:-.03em}
+  .co-head .team{font-size:8.6pt;color:var(--muted);font-weight:500}
+  .co-head .team::before{content:"";display:inline-block;width:.6pt;height:7pt;background:var(--line);margin-right:6pt;vertical-align:-.5pt}
+  .co-head .site{margin-left:auto;font-family:var(--font-mono);font-size:7.2pt;color:var(--muted-2);letter-spacing:.02em;white-space:nowrap}
+  .co-lede{margin:3pt 0 0;font-size:8.6pt;color:var(--muted);line-height:1.42}
+  .co-lede b{color:var(--ink-2)}
+  .duties{margin-top:4pt;display:flex;flex-direction:column;gap:3pt}
+  .duty{break-inside:avoid}
+  .duty .lb{font-size:8.8pt;font-weight:700;color:var(--ink-2);letter-spacing:-.015em;margin-bottom:2pt}
+  ul.hang{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:1.4pt}
+  ul.hang li{position:relative;padding-left:8pt;font-size:8.4pt;line-height:1.38;color:var(--ink-2);orphans:3;widows:3;break-inside:avoid}
+  ul.hang li::before{content:"";position:absolute;left:0;top:5.2pt;width:4pt;height:.6pt;background:var(--muted-2)}
+  /* projects */
+  .pjs{display:flex;flex-direction:column}
+  .pjs{gap:0}
+  .pj{--pj-indent:48pt;break-inside:avoid;padding:3.5pt 0}
+  .pj + .pj{border-top:.6pt solid var(--line-2)}
+  .pj .t{display:flex;align-items:baseline;gap:6pt;flex-wrap:wrap}
+  .pj .no{font-family:var(--font-mono);font-size:7pt;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .pj .org{font-family:var(--font-mono);font-size:6.4pt;font-weight:700;letter-spacing:.12em;padding:1.2pt 4pt;border-radius:2.5pt;color:var(--accent);background:var(--accent-soft)}
+  .pj .org.side{color:var(--muted);background:var(--bg-soft)}
+  .pj h4{margin:0;font-size:9.6pt;font-weight:700;letter-spacing:-.025em}
+  .pj .sub{font-size:8.2pt;color:var(--muted);font-weight:600}
+  .pj .per{margin-left:auto;font-family:var(--font-mono);font-size:7.2pt;color:var(--muted-2);white-space:nowrap}
+  .pj .svc{margin:2pt 0 0 var(--pj-indent);font-size:8.2pt;color:var(--muted);line-height:1.35}
+  .pj ul.roles{margin:3pt 0 0 var(--pj-indent);padding:0;list-style:none;display:flex;flex-direction:column;gap:1.4pt}
+  .pj ul.roles li{position:relative;padding-left:8pt;font-size:8.2pt;line-height:1.36;color:var(--ink-2)}
+  .pj ul.roles li::before{content:"";position:absolute;left:0;top:5pt;width:3.4pt;height:.6pt;background:var(--accent)}
+  .pj .foot{margin-left:var(--pj-indent);margin-top:4pt;padding-top:4pt;border-top:.5pt dotted var(--line);display:flex;align-items:baseline;gap:4pt 8pt;flex-wrap:wrap;font-family:var(--font-mono);font-size:7.2pt;color:var(--muted-2);letter-spacing:.03em}
+  .pj .foot .st{color:var(--ink-2)}
+  .pj .foot .url{margin-left:auto;color:var(--muted-2)}
+  /* skills */
+  .skills{display:flex;flex-direction:column;gap:4pt}
+  .skill-row{display:grid;grid-template-columns:62pt 1fr;gap:9pt;align-items:baseline;break-inside:avoid}
+  .skill-label{font-family:var(--font-mono);font-size:7pt;color:var(--muted-2);letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:3pt}
+  .skill-tags .sk{font-size:8.4pt;color:var(--muted);padding:1.4pt 2pt}
+  .skill-tags .sk.key{background:var(--accent-soft);color:var(--accent);font-weight:700;padding:1.4pt 6pt;border-radius:3pt}
+  /* education */
+  .edu{display:flex;flex-direction:column;gap:0}
+  .edu-card{padding:4pt 0;break-inside:avoid}
+  .edu-card + .edu-card{border-top:.6pt solid var(--line-2)}
+  .edu-card .top{display:flex;align-items:baseline;gap:7pt;flex-wrap:wrap}
+  .edu-card .nm{font-size:9.4pt;font-weight:700;letter-spacing:-.025em}
+  .edu-card .mj{font-size:8.4pt;color:var(--muted)}
+  .edu-card .per{margin-left:auto;font-family:var(--font-mono);font-size:7.4pt;color:var(--muted-2);white-space:nowrap}
+  .edu-card .body{margin-top:4pt;padding-top:4pt;border-top:.6pt solid var(--line)}
+  .kstat{font-family:var(--font-sans);font-weight:700;color:var(--accent)}
+  .kmono{font-family:var(--font-sans)}
+</style>
+</head>
+<body>
+<doc-page size="a4" margin="0.5in">
+
+  <header class="mast">
+    <div class="id-row">
+      <img class="photo" src="../assets/profile.jpg" alt="황인영" />
+      <div>
+        <div class="nm">황인영<span class="en">Inyoung Hwang</span></div>
+        <div class="rl">Backend Developer</div>
+      </div>
+    </div>
+    <h1><span class="w-thin">무인 금융 서비스의</span> <span class="hl">거래 정합성</span><span class="w-thin">을 지키는</span> <span class="w-fat">백엔드 개발자.</span></h1>
+    <p class="tagline">무인 금융 환경에서 백엔드의 역할은 단순한 API 구현을 넘어 사용자·앱·키오스크·외부 기관이 얽힌 복잡한 흐름 속에서 데이터의 정합성을 지키는 일입니다. 지난 3년간 재시도·상태 전이·보상 처리 및 동시성 제어를 통해, 어떤 예외 상황에서도 거래 신뢰성이 흔들리지 않는 구조를 지속적으로 설계해 왔습니다.</p>
+    <div class="cts"><span>hinyoung0215@gmail.com</span><span class="dot">·</span><span>github.com/inyoung0215</span><span class="dot">·</span><span>velog.io/@nyoung215</span></div>
+  </header>
+
+  <section>
+    <header class="sh"><div class="over"><span class="no">01</span><span class="kicker">About</span></div><div class="row"><h2>소개</h2><span class="rule"></span></div></header>
+    <div class="about">
+      <p>15개 통화 환전, 선불카드 발급·충전·인출, Tax Refund, 교통카드 충전·출금, OTA 예약 카드 수령 등 <b>외국인 관광객 대상 무인 금융 서비스</b>를 개발·운영해 왔습니다.</p>
+      <p>신규 서비스의 <b>ERD·API 설계부터 카드사·환급사·OTA 연동, 키오스크·앱 연계, QA와 운영까지</b> 전 과정에 참여했습니다. 중복 결제·중복 할당·한도 차감·외부 응답 실패를 다루며 동시성 제어와 상태 관리, 재시도·검증 구조를 설계했습니다.</p>
+      <p>반복되는 캐시·외부 통신·메시징 로직은 <b>공통 모듈</b>로 만들고, 운영 중 발견한 문제는 테스트와 QA 절차에 반영해 <b>팀의 자산</b>으로 남기고 있습니다. UX/UI 디자이너 경험을 바탕으로 사용자와 운영자의 전체 흐름을 함께 고려하며 개발합니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <header class="sh"><div class="over"><span class="no">02</span><span class="kicker">Experience</span></div><div class="row"><h2>경력</h2><span class="rule"></span></div></header>
+    <div class="co">
+      <div class="stamp"><div class="yr">2024</div><div class="mo">02 —</div><div class="now">재직 중</div></div>
+      <div class="co-body">
+      <div class="co-head"><h3>주식회사 더즌</h3><span class="team">키오스크 개발팀 · 서비스 백엔드 개발자 (초기 멤버)</span><span class="site">www.dozn.co.kr</span></div>
+      <p class="co-lede">전국 <b>100대 이상</b> 무인 키오스크에서 운영되는 <b>외화 환전 · 선불카드(THE-Free) · Tax Refund · 교통카드 충전/출금 · 가상계좌</b> 서비스의 백엔드를 개발·운영하고 있습니다.</p>
+      <div class="duties">
+        <div class="duty"><div class="lb">결제·거래 도메인 백엔드 개발·운영</div><ul class="hang"><li>15개 통화 <b>외화 환전</b>, 선불카드 <b>발급·충전·인출·활성화</b>, Tax Refund, 교통카드 충전·출금, 가상계좌, OTA 예약 카드 수령</li><li>실제 기기에서 현금이 입출금되는 환경의 <b>거래 상태·시재(현금 잔액) 관리</b></li></ul></div>
+        <div class="duty"><div class="lb">신규 도메인 ERD·API 설계</div><ul class="hang"><li>신규 서비스의 <b>테이블 설계와 API 명세</b>를 직접 작성, 확장을 고려한 원장·상세 원장 구조 설계</li><li>상품 코드 기반 <b>라우팅 구조</b>로 다종 카드 상품을 단일 거래 흐름에서 처리</li></ul></div>
+        <div class="duty"><div class="lb">외부 시스템 S2S 연동</div><ul class="hang"><li>카드사·환급사·OTA 파트너사·교통카드사와 <b>스펙 조율부터 연동 구현</b>까지 담당</li><li>외부 응답 지연·실패에 대비한 <b>재시도·검증·보상 처리</b> 구조 구성</li></ul></div>
+        <div class="duty"><div class="lb">동시성 제어와 거래 정합성</div><ul class="hang"><li>Redisson 분산락으로 <b>중복 결제·중복 할당·중복 수령</b> 방지, 락 키·타임아웃 규칙을 팀 컨벤션으로 문서화</li><li>거래 상태 전이와 일일 한도 차감 처리, 동시성 시나리오를 <b>테스트 코드로 재현·검증</b></li></ul></div>
+        <div class="duty"><div class="lb">팀 공통 모듈 설계</div><ul class="hang"><li>캐시(Redis)·외부 통신·재시도·메시징(RabbitMQ) 로직을 <b>재사용 가능한 공통 모듈</b>로 표준화</li><li>팀 내 <b>Redis·RabbitMQ 첫 도입</b>을 주도하고 운영 시나리오까지 함께 정착</li></ul></div>
+        <div class="duty"><div class="lb">담당 외 팀 공통 인프라 개선</div><ul class="hang"><li>담당 영역이 아닌 팀 공통 Redis 직렬화 구조(RedisUniversalConverter)의 <b>패키지명·Map 구조·BigDecimal 타입이 JSON에 노출되는 문제</b>를 직접 진단·개선</li><li><b>기존 데이터와의 호환성</b>을 유지하며 운영 반영, 이후 팀 내 Redis 도입 프로젝트가 그대로 재사용</li></ul></div>
+        <div class="duty"><div class="lb">관측(Observability) 스택 도입 · 구축</div><ul class="hang"><li>팀 내 <b>모니터링 시스템 부재</b>(로그 개별 조회만 가능)를 개선하기 위해 관측 스택 도입 제안 및 신규 구축 — <b>Grafana + Prometheus + Loki + Alloy</b> 통합</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계, 팀원이 별도 config 수정 없이 신규 서비스 확장 가능</li><li>필요 정보 중심 <b>3개 대시보드 커스텀 구성</b>(Overview · Application Runtime · Application Logs), STACK_CONFIG_VERSION 버전 suffix로 무중단 config 갱신 패턴 정립</li></ul></div>
+        <div class="duty"><div class="lb">운영·장애 대응과 QA 프로세스 개선</div><ul class="hang"><li>운영 장애를 핫픽스에서 끝내지 않고 <b>QA 절차와 테스트 코드로 환원</b>해 재발 방지</li><li>빌드 시 테스트 통과를 성공 조건으로 강제해 운영 반영 전 회귀 차단</li></ul></div>
+        <div class="duty"><div class="lb">다직군 협업과 통합 QA</div><ul class="hang"><li>기획·앱·키오스크 클라이언트·QA와 전체 흐름을 검증, 카드사 담당자와 <b>통합 QA</b> 진행</li><li>응답 코드 매핑·규제 요건 반영 방식 조율, 데일리 스크럼으로 일정 관리</li></ul></div>
+      </div>
+      </div>
+    </div>
+    <div class="co">
+      <div class="stamp"><div class="yr">2022</div><div class="mo">12 — 2023.02</div></div>
+      <div class="co-body">
+      <div class="co-head"><h3>글로와이드</h3><span class="team">UX/UI 디자이너</span></div>
+      <p class="co-lede">경력보유여성의 사회 복귀를 지원하는 온라인 홍보단 플랫폼을 운영하는 소셜벤처.</p>
+      <div class="duties"><div class="duty"><div class="lb">플랫폼 UX/UI 디자인</div><ul class="hang"><li>경력보유여성 온라인 홍보단 플랫폼 <b>on1016</b> UX/UI 디자인</li><li>유튜브·인스타그램 채널 관리 및 콘텐츠 제작</li></ul></div></div>
+      </div>
+    </div>
+    <div class="co">
+      <div class="stamp"><div class="yr">2021</div><div class="mo">07 — 2022.07</div></div>
+      <div class="co-body">
+      <div class="co-head"><h3>싸이웍스</h3><span class="team">UX/UI 디자이너</span></div>
+      <p class="co-lede">웹·앱 서비스 기획과 개발을 수행하는 IT 서비스 기업.</p>
+      <div class="duties"><div class="duty"><div class="lb">서비스 UX/UI 디자인 및 리딩</div><ul class="hang"><li>웹/앱 서비스 UX/UI 디자인 및 <b>디자인 리딩</b></li><li>디자인 <b>스타일 가이드 수립</b> 및 레퍼런스 가이드 제작</li><li>기획·개발 직군과 협업하며 화면 설계 및 GUI 산출</li></ul></div></div>
+      </div>
+    </div>
+    <div class="co">
+      <div class="stamp"><div class="yr">2020</div><div class="mo">10 — 2021.03</div></div>
+      <div class="co-body">
+      <div class="co-head"><h3>비퍼플</h3><span class="team">데이터 라벨링</span></div>
+      <p class="co-lede">인공지능 학습 데이터 구축 사업을 수행하는 기업.</p>
+      <div class="duties"><div class="duty"><div class="lb">AI 학습 데이터 구축</div><ul class="hang"><li>인공지능 데이터 수집 · 라벨링 · 검수 작업</li></ul></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <header class="sh"><div class="over"><span class="no">03</span><span class="kicker">Projects</span></div><div class="row"><h2>프로젝트</h2><span class="rule"></span></div></header>
+    <div class="pjs">
+      <div class="pj">
+        <div class="t"><span class="no">01</span><span class="org">DOZN</span><h4>그라파나 관측 스택 도입 · 신규 구축</h4><span class="sub">로그만 있던 환경에 통합 모니터링 도입</span><span class="per">2026.08—</span></div>
+        <p class="svc">팀 내 모니터링 시스템 부재로 로그 개별 조회만 가능했던 환경에 <b>관측 스택 도입을 제안하고 신규 구축</b></p>
+        <ul class="roles"><li>팀 내 <b>모니터링 시스템 부재</b> → Grafana + Prometheus + Loki 통합 스택 도입 제안·구축</li><li><b>Alloy 단일 수집 에이전트</b>로 node-exporter·cAdvisor·promtail·Prometheus Agent 대체, 컨테이너·설정 단순화</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계 (팀원이 관측 스택 무수정으로 신규 서비스 등록)</li><li>초안 5개를 <b>3개 대시보드로 압축</b>(Overview · Application Runtime · Application Logs), 저트래픽 지표 정합성 통일</li><li><code>STACK_CONFIG_VERSION</code> 버전 suffix로 <b>무중단 config 갱신</b> 패턴 정립 · 이슈 분석 5~10분 → 1~2분</li></ul>
+        <div class="foot"><span class="st">Docker Swarm · Grafana · Prometheus · Loki · Alloy</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">02</span><span class="org">DOZN</span><h4>롯데카드 협업 체크인서울 선불카드 서비스 구축</h4><span class="sub">외부 카드사 연동과 정산 대사 정합성</span><span class="per">2026.05—07</span></div>
+        <p class="svc">카드사 규격 준수와 정산 대사 정합성이 요구사항의 핵심인 외국인 관광객 대상 선불카드 백엔드 신규 구축</p>
+        <ul class="roles"><li>선불카드 <b>발급·충전·인출·활성화</b> 전 흐름의 백엔드 도메인 설계·구현 (API 29개·<b>테스트 156케이스</b>)</li><li><b>정산 대사 정합성 체계 정립</b> — 결과코드 51종 + D999 폴백 + <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code>로 트랜잭션 분리해 종료 코드 누락 원천 차단</li><li>외부 통신 재시도 표준화(<b>통신 오류 2종만 재시도</b>·차수 전송) + <b>DurableCache 캐시 폴백 모듈</b>(제네릭 추상·3도메인 재사용)</li><li>Redis 장애 대응 · 민감정보 컬럼 암호화 + TTL 임시 저장소로 보안 규약 준수 · 롯데카드 통합 QA 대응</li></ul>
+        <div class="foot"><span class="st">Java 17 · Spring Boot 3 · JPA · MySQL · Redis · JUnit5</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">03</span><span class="org">DOZN</span><h4>OTA 연동 카드 수령 서비스 구축</h4><span class="sub">롤백 불가능한 물리 방출의 중복 방지</span><span class="per">2026.01—02</span></div>
+        <p class="svc">하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
+        <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>2-Phase 방출 프로토콜</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 모델링</b>(계약 단가·수수료·정가 분리)</li></ul>
+        <div class="foot"><span class="st">Kotlin · Spring Boot · MySQL · Redis · Redisson · JPA · JUnit5 · Swagger</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">04</span><span class="org">DOZN</span><h4>THE-Free 온라인 환전 서비스 구축</h4><span class="sub">앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span><span class="per">2025.09—10</span></div>
+        <p class="svc">신청-수령 분리 흐름의 <b>백엔드 서비스 2개</b> 설계·구현 및 다중 인스턴스 가상계좌 동시성 장애 해결</p>
+        <ul class="roles"><li><b>백엔드 서비스 2개 분리</b>(대외 API + 환전 코어) · 상태 기계 정의 + 기한 2단계 + 환율 스냅샷 & 30자리 합성 키 정책 수립</li><li><b>실물 재고 3중 검증</b>(신청 시·입금 직전·출금 시) + RabbitMQ 보상 트랜잭션으로 &ldquo;돈은 들어왔는데 물건이 없는&rdquo; 위험 차단</li><li><b>개인정보 3중 보호</b>(SEED-CBC + 컬럼 암호화 + 로그 마스킹) + 주민번호 파생 식별키로 사람 기준 한도 누적</li><li>가상계좌 중복 발급 장애 해결 — <b>Redisson 분산락 + 트랜잭션 순서 통제 프록시</b>(락 → 신규 트랜잭션 → 커밋 → 락 해제) · 팀 컨벤션 문서화</li></ul>
+        <div class="foot"><span class="st">Kotlin · Spring Boot 3 · JPA/QueryDSL · MySQL · Redis · Redisson · RabbitMQ · JUnit5</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">05</span><span class="org">DOZN</span><h4>이즐(eZL) 교통카드 충전·출금</h4><span class="sub">되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span><span class="per">2025.01—07</span></div>
+        <p class="svc">IC칩 상호 인증 프로토콜 중계 구조에서 <b>되돌릴 수 없는 물리 기록</b>에 대한 거래 정합성 보장</p>
+        <ul class="roles"><li>교통카드 충전·출금 거래 API 설계·개발 (sign1→sign2→sign3 프로토콜 중계) · API 11개·<b>테스트 49케이스</b></li><li><b>&ldquo;물리 상태 우선&rdquo; 원칙 정립</b> — 카드에 기록됐으면 통신 실패해도 거래 승인 확정 (고객 금전 손실 원천 제거)</li><li><b>3-state 상태 모델</b>(승인·실패·불확정) + 사후 검증 큐로 클라이언트 임의 판단 지점 제거</li><li><b>중복 충전 3중 방어</b>(DB CAS · 이즐 응답 소급 정정 · 원장 복제 체이닝) + 전자화폐 규격 원장화(SAM 일련번호·서명)</li></ul>
+        <div class="foot"><span class="st">Kotlin · Spring Boot 3 · JPA/QueryDSL · MySQL · JUnit5</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">06</span><span class="org">DOZN</span><h4>Tax Refund</h4><span class="sub">현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</span><span class="per">2024.04—12</span></div>
+        <p class="svc">현금 물리 방출 불가역성과 여권 등 민감정보 보관 최소화가 요구되는 신규 도메인 설계·구현</p>
+        <ul class="roles"><li>Tax Refund 신규 도메인 설계 + <b>예외 3종 타입 분리</b>(재처리·알림·무시)로 &ldquo;예외 타입 = 운영 정책&rdquo; 구조화</li><li><b>운영자 수동 복구 API 2종</b> 상비 + <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 오알림 원천 차단</li><li>환급사 연동 <b>3계층 분리</b>(전송·규격변환·도메인) + 엔드포인트 15종 설정 외부화 + 응답 코드 40여 개 매핑 계층</li><li><b>팀 내 첫 Redis 도입</b> + 민감정보 <b>6중 방어</b>(TTL·해시·JPA 컨버터·SEED·마스킹·MRZ 체크디짓) · 컨벤션 문서화로 3도메인 재사용</li></ul>
+        <div class="foot"><span class="st">Java 17 · Spring Boot 3 · JPA · MySQL · Redis · RabbitMQ · JUnit5</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">07</span><span class="org">DOZN</span><h4>알림 발송 서비스 통합</h4><span class="sub">흩어진 발송 로직의 단일화와 유실 없는 발송 체계 구축</span><span class="per">2024 <span class="kmono">하반기</span></span></div>
+        <p class="svc">환전·선불카드·Tax Refund 등 흩어진 발송 로직을 단일 서비스로 통합 · 채널·템플릿·재시도 정책 표준화</p>
+        <ul class="roles"><li><b>Transactional Outbox 패턴</b> 도입 — MQ 직접 발행의 원자성 한계를 근거로 &ldquo;유실 없는 발송 보장&rdquo; 트레이드오프 명시 선택</li><li>전략 패턴 + Spring DI 기반 채널 확장 구조 + <b>알림톡 → LMS 자동 대체 발송</b>(대체 템플릿 1급 속성)</li><li>건별 트랜잭션 격리 + 실패 횟수 자동 차단 + <b>Spring Event → RabbitMQ → Slack 실시간 통보</b> 파이프라인</li><li><b>Handlebars 템플릿 외부화</b> — 무배포 즉시 반영(CRUD API + 캐시 갱신) + 콜드스타트 제거</li></ul>
+        <div class="foot"><span class="st">Kotlin · Spring Boot 3 · JPA · MySQL · Handlebars · RabbitMQ · JUnit5</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">08</span><span class="org side">SIDE</span><h4>FanKit</h4><span class="sub">K-POP 굿즈 결제 MSA</span><span class="per">2026—</span></div>
+        <p class="svc">결제 도메인의 분산 트랜잭션·정합성을 처음부터 설계해 본 사이드 프로젝트</p>
+        <ul class="roles"><li>7개 서비스(User·Goods·Order·Payment 등) <b>MSA 전체 설계·구현</b></li><li><b>Saga 오케스트레이션</b>으로 결제→재고 차감→주문 확정 흐름과 보상 처리 구성</li><li>DB 고유 키 + Redis 이중 체크 <b>멱등성 키</b>로 중복 결제 차단</li><li>DB 저장·이벤트 발행을 한 트랜잭션으로 묶고 PG 장애 격리, 통합 테스트로 검증</li></ul>
+        <div class="foot"><span class="st">Kotlin · Kafka · MSA</span><span class="url">github.com/inyoung0215/fankit</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">09</span><span class="org side">TEAM</span><h4>CATCHER</h4><span class="sub">일정 공유 서비스</span><span class="per">2023.10—12</span></div>
+        <p class="svc">3개 백엔드 서버로 구성, 외부 API 대량 적재와 검색 성능이 과제</p>
+        <ul class="roles"><li>3개 백엔드 서버 중 <b>배치·검색 서버 담당</b></li><li>OpenFeign·스케줄러로 외부 API <b>3만 건 이상 적재</b></li><li>대량 아이템 중복검사를 매 요청 DB 조회에서 <b>O(N)→O(1)</b>로 개선</li><li>QueryDSL 위치 기반 검색·JoinFetch로 N+1 문제 해소</li></ul>
+        <div class="foot"><span class="st">Java · QueryDSL</span><span class="url">github.com/Project-Catcher</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">10</span><span class="org side">TEAM</span><h4>PETNURI</h4><span class="sub">반려동물 커뮤니티</span><span class="per">2023.08—10</span></div>
+        <p class="svc">웹·앱 클라이언트가 공유하는 인증 서버가 필요했던 팀 프로젝트</p>
+        <ul class="roles"><li><b>Kakao OAuth</b> 로그인·회원가입 구현</li><li>JWT·Spring Security 기반 <b>인증·인가 구성</b></li><li>Redis 기반 <b>Refresh/Access Token 관리</b> 및 재발급 흐름 구현</li></ul>
+        <div class="foot"><span class="st">Spring Security · Redis</span><span class="url">github.com/FINAL-TEAM4/itoxi-be</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">11</span><span class="org side">TEAM</span><h4>당연하지</h4><span class="sub">연차·당직 관리</span><span class="per">2023.07—08</span></div>
+        <p class="svc">신청→승인→캘린더 반영까지 자동화한 사내 도구</p>
+        <ul class="roles"><li>연차·당직 <b>CRUD 및 승인 흐름</b> 구현</li><li>단위·통합 <b>테스트 코드 92건</b> 작성으로 회귀 방지</li><li>Swagger 3.0으로 API 문서화</li></ul>
+        <div class="foot"><span class="st">JUnit5 · Swagger</span><span class="url">github.com/FastCampus-Mini5/BE_server</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">12</span><span class="org side">TEAM</span><h4>FOODIE-LOG</h4><span class="sub">맛집 공유 SNS</span><span class="per">2023.06—10</span></div>
+        <p class="svc">멀티모듈 구조와 배포 파이프라인 구축이 과제</p>
+        <ul class="roles"><li><b>멀티모듈 구조 설계</b>로 App/Admin 분리</li><li>Docker 기반 <b>배포 환경 구성</b></li><li>AWS S3 파일 업로드 및 카카오 지도 검색 API 연동</li></ul>
+        <div class="foot"><span class="st">Docker · AWS S3</span><span class="url">github.com/FoodieLog/foodie-log-server</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <header class="sh"><div class="over"><span class="no">04</span><span class="kicker">Tech Stack</span></div><div class="row"><h2>기술 스택</h2><span class="rule"></span></div></header>
+    <div class="skills">
+      <div class="skill-row"><span class="skill-label">Language</span><span class="skill-tags"><span class="sk key">Java</span><span class="sk key">Kotlin</span></span></div>
+      <div class="skill-row"><span class="skill-label">Framework</span><span class="skill-tags"><span class="sk key">Spring Boot</span><span class="sk key">Spring Data JPA</span><span class="sk">QueryDSL</span><span class="sk">JUnit5</span></span></div>
+      <div class="skill-row"><span class="skill-label">DB / Cache</span><span class="skill-tags"><span class="sk key">MySQL</span><span class="sk key">Redis</span><span class="sk">Redisson</span><span class="sk">RDBMS 설계·모델링</span></span></div>
+      <div class="skill-row"><span class="skill-label">Infra / Msg</span><span class="skill-tags"><span class="sk key">Linux</span><span class="sk key">RabbitMQ</span><span class="sk">Docker</span><span class="sk">Batch/Scheduler</span></span></div>
+    </div>
+  </section>
+
+  <section>
+    <header class="sh"><div class="over"><span class="no">05</span><span class="kicker">Education</span></div><div class="row"><h2>학력</h2><span class="rule"></span></div></header>
+    <div class="edu">
+      <div class="edu-card">
+        <div class="top"><span class="nm">한국방송통신대학교</span><span class="mj">컴퓨터과학과 · 편입</span><span class="per">2026.03 — <span class="kstat">재학 중</span></span></div>
+        <div class="body"><ul class="hang"><li>실무에서 부딪힌 <b>운영체제 · 네트워크 · 데이터베이스</b> 개념을 이론으로 다시 정리하며 업무와 병행하고 있습니다.</li></ul></div>
+      </div>
+      <div class="edu-card">
+        <div class="top"><span class="nm">가톨릭대학교</span><span class="mj">수학과 · 복수전공 소비자주거학과</span><span class="per">2014.03 — 2019.08 <span class="kmono">졸업</span></span></div>
+        <div class="body"><ul class="hang"><li>수학 전공으로 <b>논리적 문제 분해</b>를, 복수전공으로 <b>사용자 관점</b>을 함께 익혔습니다.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <header class="sh"><div class="over"><span class="no">06</span><span class="kicker">Activities</span></div><div class="row"><h2>활동</h2><span class="rule"></span></div></header>
+    <div class="edu">
+      <div class="edu-card">
+        <div class="top"><span class="nm">패스트캠퍼스 커널아카데미</span><span class="mj">백엔드 개발 부트캠프 · 멘토</span><span class="per">2025.03 — 2025.06</span></div>
+        <div class="body"><ul class="hang"><li><b>프로젝트 실시간 멘토링</b> — 설계·구현 과정에서 막힌 지점을 함께 진단하고 방향 제시</li><li><b>과제 멘토링</b> — 제출 코드 리뷰와 개선 피드백, 과제 채점 및 학습 진행 점검</li></ul></div>
+      </div>
+      <div class="edu-card">
+        <div class="top"><span class="nm">패스트캠퍼스</span><span class="mj">백엔드 엔지니어링 부트캠프 · 수료</span><span class="per">2023.03 — 2023.10</span></div>
+        <div class="body"><ul class="hang"><li>Java · Spring · CS 기초부터 <b>RESTful API 설계와 데이터베이스 모델링</b>까지 학습</li><li><b>CS 스터디 팀장</b>으로 주 1회 발표, 협업 프로젝트 4건 수행</li><li>코드 리뷰와 Git 기반 협업 문화를 처음 경험</li></ul></div>
+      </div>
+    </div>
+  </section>
+</doc-page>
+<script src="../doc-page.js"></script>
+<script>
+  const remeasure = () => document.querySelectorAll("doc-page").forEach(d => d._measure && d._measure());
+  window.addEventListener("load", () => setTimeout(remeasure, 30));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => setTimeout(remeasure, 60));
+  setTimeout(remeasure, 400);
+  window.addEventListener("beforeprint", remeasure);
+</script>
+<script>
+  if (new URLSearchParams(location.search).has("print")) {
+    const fire = () => setTimeout(() => window.print(), 500);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fire); else window.addEventListener("load", fire);
+  }
+</script>
+</body>
+</html>
