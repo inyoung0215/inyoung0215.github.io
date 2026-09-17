@@ -19,10 +19,10 @@
   .doc-head{padding-bottom:10pt;border-bottom:1.4pt solid var(--ink)}
   .doc-head .kicker{font-family:var(--font-mono);font-size:7pt;color:var(--accent);letter-spacing:.16em;text-transform:uppercase;font-weight:600}
   .doc-head h1{margin:4pt 0 0;font-size:16pt;font-weight:800;letter-spacing:-.035em;line-height:1.15}
-  .q{margin:9pt 0 0;padding-left:9pt;border-left:1.6pt solid var(--accent);break-inside:avoid}
+  .q{margin:9pt 0 0;padding-left:9pt;border-left:1.6pt solid var(--accent)}
   .q .qt{margin:0;font-size:10.5pt;font-weight:700;letter-spacing:-.025em;line-height:1.4}
   .q .qa{margin:4pt 0 0;font-size:8.8pt;color:var(--ink-2);line-height:1.55}
-  .pts{margin:9pt 0 0;display:grid;grid-template-columns:1fr 1fr;gap:5pt 14pt;break-inside:avoid}
+  .pts{margin:9pt 0 0;display:grid;grid-template-columns:1fr 1fr;gap:5pt 14pt}
   .pts .it .t{font-size:8.8pt;font-weight:700;letter-spacing:-.02em;margin-bottom:1pt}
   .pts .it .d{font-size:8pt;color:var(--muted);line-height:1.4}
   .co-foot{margin:9pt 0 0;padding-top:7pt;border-top:.6pt solid var(--line-2);display:flex;align-items:baseline;gap:6pt;flex-wrap:wrap;font-size:8.8pt;color:var(--ink-2)}
@@ -32,25 +32,25 @@
   .kstat{font-family:var(--font-sans);font-weight:700;color:var(--accent)}
   .kmono{font-family:var(--font-sans);color:var(--muted-2);font-weight:600}
   /* case */
-  .pj{padding-top:11pt;break-inside:auto}
-  .pj-t,.ctx{break-after:avoid}
-  .doc-head{break-after:avoid}
-  .metrics{break-inside:auto}
+  .pj{padding-top:11pt}
+
+
+
   .pj+.pj{margin-top:9pt;border-top:.6pt solid var(--line-2)}
-  .pj-t{display:flex;align-items:baseline;gap:6pt;flex-wrap:wrap;break-after:avoid}
+  .pj-t{display:flex;align-items:baseline;gap:6pt;flex-wrap:wrap}
   .pj-t .no{font-family:var(--font-mono);font-size:8pt;color:var(--accent);font-weight:700;letter-spacing:.08em;flex-basis:100%;line-height:1;margin-bottom:-1pt}
   .pj-t h3{margin:0;font-size:12pt;font-weight:800;letter-spacing:-.03em;line-height:1.28}
   .pj-t h3 .sol{font-weight:500;color:var(--muted)}
   .pj-per{margin-left:auto;font-family:var(--font-mono);font-size:7.4pt;color:var(--muted-2);white-space:nowrap}
   .ctx{margin:5pt 0 0;font-size:8.8pt;line-height:1.55;color:var(--muted)}
-  .sec-lb{font-size:9pt;font-weight:700;color:var(--ink);letter-spacing:-.015em;margin:8pt 0 3.5pt;display:flex;align-items:center;gap:5pt;break-after:avoid}
+  .sec-lb{font-size:9pt;font-weight:700;color:var(--ink);letter-spacing:-.015em;margin:8pt 0 3.5pt;display:flex;align-items:center;gap:5pt}
   .sec-lb::before{content:"";width:2pt;height:8pt;background:var(--accent);border-radius:1pt;flex-shrink:0}
   ul.hang{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2.4pt}
-  ul.hang li{position:relative;padding-left:8pt;font-size:8.6pt;line-height:1.5;color:var(--ink-2);orphans:3;widows:3;break-inside:avoid}
+  ul.hang li{position:relative;padding-left:8pt;font-size:8.6pt;line-height:1.5;color:var(--ink-2);orphans:3;widows:3}
   ul.hang li::before{content:"";position:absolute;left:0;top:5.4pt;width:4pt;height:.6pt;background:var(--muted-2)}
   /* steps — 번호 매김 해결 과정 */
   ol.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5pt;counter-reset:step}
-  ol.steps>li{position:relative;padding-left:18pt;color:var(--ink);font-weight:700;font-size:8.8pt;line-height:1.42;counter-increment:step;break-inside:avoid}
+  ol.steps>li{position:relative;padding-left:18pt;color:var(--ink);font-weight:700;font-size:8.8pt;line-height:1.42;counter-increment:step}
   ol.steps>li::before{content:counter(step) ")";position:absolute;left:0;top:0;color:var(--accent);font-weight:700;font-family:var(--font-mono);font-size:7.4pt}
   ol.steps>li>.st-title{color:var(--ink);font-weight:700}
   ol.steps .sub{margin:2.5pt 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:1.4pt}
@@ -59,17 +59,17 @@
   ol.steps .sub li b{color:var(--ink-2);font-weight:600}
   ol.steps .sub li code{font-size:7.4pt}
   .metrics{margin-top:4pt;display:grid;grid-template-columns:1fr 1fr;gap:4pt}
-  .m{border:.6pt solid var(--line);border-radius:3.5pt;padding:5pt 7pt;break-inside:avoid}
+  .m{border:.6pt solid var(--line);border-radius:3.5pt;padding:5pt 7pt}
   .m .mk{font-size:7.6pt;color:var(--muted);font-weight:600;margin-bottom:2.5pt;letter-spacing:-.01em}
   .m .mv{display:block;line-height:1.4}
   .m .before{display:block;margin-bottom:2.5pt;font-size:8pt;color:var(--muted-2);font-weight:500}
   .m .ar{font-size:7.4pt;color:var(--accent);margin-right:3pt}
   .m .after{font-size:8.6pt;font-weight:800;color:var(--accent);letter-spacing:-.02em}
-  .sum{margin-top:7pt;border-top:.6pt solid var(--line);padding-top:6pt;display:flex;flex-direction:column;gap:5pt;break-inside:auto}
+  .sum{margin-top:7pt;border-top:.6pt solid var(--line);padding-top:6pt;display:flex;flex-direction:column;gap:5pt}
   .sum .k{font-size:7.4pt;font-weight:600;color:var(--muted-2);display:block;margin-bottom:2pt}
-  .sum>div{break-inside:avoid}
-  .cline{break-inside:avoid}
-  .st{break-inside:avoid}
+
+
+
   .sum .role{font-size:8.6pt;color:var(--ink-2);line-height:1.5}
   .cline{display:flex;align-items:baseline;gap:6pt}
   .cline .lbl{font-size:8.6pt;font-weight:700;letter-spacing:-.015em}
