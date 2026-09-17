@@ -65,7 +65,8 @@
   .co-lede{margin:3pt 0 0;font-size:8.6pt;color:var(--muted);line-height:1.42}
   .co-lede b{color:var(--ink-2)}
   .duties{margin-top:4pt;display:flex;flex-direction:column;gap:3pt}
-  .duty{break-inside:avoid}
+  .duty{break-inside:auto}
+  .duty ul.hang li{break-inside:avoid}
   .duty .lb{font-size:8.8pt;font-weight:700;color:var(--ink-2);letter-spacing:-.015em;margin-bottom:2pt}
   ul.hang{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:1.4pt}
   ul.hang li{position:relative;padding-left:8pt;font-size:8.4pt;line-height:1.38;color:var(--ink-2);orphans:3;widows:3;break-inside:avoid}
@@ -73,7 +74,11 @@
   /* projects */
   .pjs{display:flex;flex-direction:column}
   .pjs{gap:0}
-  .pj{--pj-indent:48pt;break-inside:avoid;padding:3.5pt 0}
+  .pj{--pj-indent:48pt;break-inside:auto;padding:3.5pt 0}
+  .pj .t{break-after:avoid}
+  .pj .svc{break-after:avoid}
+  .pj ul.roles li{break-inside:avoid}
+  .pj .foot{break-inside:avoid}
   .pj + .pj{border-top:.6pt solid var(--line-2)}
   .pj .t{display:flex;align-items:baseline;gap:6pt;flex-wrap:wrap}
   .pj .no{font-family:var(--font-mono);font-size:7pt;font-weight:700;color:var(--accent);letter-spacing:.06em}
@@ -98,7 +103,9 @@
   .skill-tags .sk.key{background:var(--accent-soft);color:var(--accent);font-weight:700;padding:1.4pt 6pt;border-radius:3pt}
   /* education */
   .edu{display:flex;flex-direction:column;gap:0}
-  .edu-card{padding:4pt 0;break-inside:avoid}
+  .edu-card{padding:4pt 0;break-inside:auto}
+  .edu-card .top{break-after:avoid}
+  .edu-card ul.hang li{break-inside:avoid}
   .edu-card + .edu-card{border-top:.6pt solid var(--line-2)}
   .edu-card .top{display:flex;align-items:baseline;gap:7pt;flex-wrap:wrap}
   .edu-card .nm{font-size:9.4pt;font-weight:700;letter-spacing:-.025em}
