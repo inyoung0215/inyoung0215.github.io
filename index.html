@@ -149,12 +149,22 @@
     .edu-card .per{margin-left:0}
     .cards{grid-template-columns:1fr}
   }
+  @media print {
+    body { background: white !important; }
+    .page { box-shadow: none !important; max-width: 100% !important; padding: 20px !important; min-height: auto !important; }
+    .doc-actions, .pdf-btn { display: none !important; }
+    .content { padding: 20px 30px !important; }
+    .co-row, .card, section, .edu-card, .duty { page-break-inside: avoid; }
+    .content > section { padding-top: 20px; scroll-margin-top: 0; }
+    a { color: inherit !important; text-decoration: none !important; }
+    .hero { padding-bottom: 24px !important; }
+  }
 </style>
 </head>
 <body>
 <div class="page">
   <main class="content">
-    <div class="doc-actions"><a class="pdf-btn" href="print/career-print.html?print" target="_blank" rel="noopener">PDF로 저장 <span class="ic">↓</span></a></div>
+    <div class="doc-actions"><a class="pdf-btn" href="javascript:void(0)" onclick="window.print()">PDF로 저장 <span class="ic">↓</span></a></div>
     <!-- ============ HERO ============ -->
     <section id="hero" class="hero" data-screen-label="Intro">
       <div class="id-row">
@@ -165,13 +175,13 @@
         </div>
       </div>
       <h1>
-        <span class="w-thin">무인 금융 서비스의</span>
-        <mark class="hl">거래 정합성</mark><span class="w-thin">을 지키는</span><br/>
+        <span class="w-thin">결제 승인 흐름과 외부 기관 연동에서</span>
+        <mark class="hl">데이터 정합성</mark><span class="w-thin">을 지키는</span><br/>
         <span class="w-fat">백엔드 개발자.</span>
       </h1>
       <p class="lede">
-        무인 금융 환경에서 백엔드의 역할은 단순한 API 구현을 넘어 <em>사용자·앱·키오스크·외부 기관</em>이 얽힌 복잡한 흐름 속에서 데이터의 정합성을 지키는 일입니다.<br/>
-        지난 3년간 <em>재시도·상태 전이·보상 처리 및 동시성 제어</em>를 통해, 어떤 예외 상황에서도 거래 신뢰성이 흔들리지 않는 구조를 지속적으로 설계해 왔습니다.
+        카드사·전자화폐사·환급사 등 <em>외부 승인 연동</em>에서 발생하는 종료 코드 누락·재시도 시 중복 승인 문제를, 정산 대사가 성립하도록 트랜잭션 분리·재시도 대상 선별·응답 코드 체계 표준화로 해결해 왔습니다.<br/>
+        입사 이후 <em>신규 도메인 단독 설계와 운영자 복구 API·QA 프로세스 자산화</em>를 통해, 팀의 반복 작업을 줄이고 정합성이 흔들리지 않는 구조를 만드는 데 집중해 왔습니다.
       </p>
       <div class="hero-links">
         <a href="mailto:hinyoung0215@gmail.com">hinyoung0215@gmail.com</a>
@@ -189,9 +199,10 @@
         <div class="row"><h2>소개</h2><span class="rule"></span></div>
       </header>
       <div class="about">
-        <p>15개 통화 환전, 선불카드 발급·충전·인출, Tax Refund, 교통카드 충전·출금, OTA 예약 카드 수령 등 <b>외국인 관광객 대상 무인 금융 서비스</b>를 개발·운영해 왔습니다.</p>
-        <p>신규 서비스의 <b>ERD·API 설계부터 카드사·환급사·OTA 연동, 키오스크·앱 연계, QA와 운영까지</b> 전 과정에 참여했습니다. 중복 결제·중복 할당·한도 차감·외부 응답 실패를 다루며 동시성 제어와 상태 관리, 재시도·검증 구조를 설계했습니다.</p>
-        <p>반복되는 캐시·외부 통신·메시징 로직은 <b>공통 모듈</b>로 만들고, 운영 중 발견한 문제는 테스트와 QA 절차에 반영해 <b>팀의 자산</b>으로 남기고 있습니다. UX/UI 디자이너 경험을 바탕으로 사용자와 운영자의 전체 흐름을 함께 고려하며 개발합니다.</p>
+        <p>선불카드 발급·충전·인출, 15개 통화 환전, Tax Refund, 교통카드 충전·출금, OTA 예약 카드 수령 등 <b>결제·정산 도메인</b>을 개발·운영해 왔습니다.</p>
+        <p>신규 서비스의 <b>ERD·API 설계부터 카드사·환급사·OTA 연동, QA와 운영까지</b> 전 과정에 참여했습니다. 종료 코드 누락·중복 승인·상태 불일치·외부 응답 실패를 다루며 <b>트랜잭션 분리·재시도 대상 선별·응답 코드 체계 표준화</b>로 정산 대사가 성립하는 결제 도메인을 설계했습니다.</p>
+        <p><b>초당 요청량 자체는 크지 않았습니다.</b> 다만 요청 한 건이 실물 현금과 직결되어 재시도도 사후 보정도 불가능한 조건에서 정합성을 설계해야 했습니다. 온라인 결제는 취소 전문을 보내면 되돌릴 수 있지만, <b>현금이 방출된 뒤에는 그 경로가 없습니다.</b></p>
+        <p>반복되는 캐시·외부 통신·메시징 로직은 <b>공통 모듈</b>로 만들어 3개 도메인이 재사용하고 있으며, 운영 중 발견한 문제는 테스트와 QA 절차에 반영해 <b>팀의 자산</b>으로 남기고 있습니다.</p>
       </div>
     </section>
 
@@ -206,16 +217,13 @@
         <div class="stamp"><div class="yr">2024</div><div class="mo">02 —</div><div class="now">재직 중</div></div>
         <div class="co-body">
           <div class="co-head"><h3>주식회사 더즌</h3><span class="team">키오스크 개발팀 · 서비스 백엔드 개발자 (초기 멤버)</span><a class="co-link" href="https://www.dozn.co.kr/" target="_blank" rel="noopener">www.dozn.co.kr ↗</a></div>
-          <p class="co-lede">전국 <b>100대 이상</b> 무인 키오스크에서 운영되는 <b>외화 환전 · 선불카드(THE-Free) · Tax Refund · 교통카드 충전/출금 · 가상계좌</b> 서비스의 백엔드를 개발·운영하고 있습니다.</p>
+          <p class="co-lede"><span style="color:var(--muted-2);font-size:11px;font-style:italic">외국인 관광객 대상 무인 금융 키오스크 · 전국 100대 운영</span><br/>전국 <b>100대 이상</b> 무인 키오스크에서 운영되는 <b>외화 환전 · 선불카드(THE-Free) · Tax Refund · 교통카드 충전/출금 · 가상계좌</b> 서비스의 백엔드를 개발·운영하고 있습니다.</p>
           <div class="duties">
-        <div class="duty"><div class="lb ko-only">결제·거래 도메인 백엔드 개발·운영</div><ul class="hang"><li>15개 통화 <b>외화 환전</b>, 선불카드 <b>발급·충전·인출·활성화</b>, Tax Refund, 교통카드 충전·출금, 가상계좌, OTA 예약 카드 수령</li><li>실제 기기에서 현금이 입출금되는 환경의 <b>거래 상태·시재(현금 잔액) 관리</b></li></ul></div>
-        <div class="duty"><div class="lb ko-only">신규 도메인 ERD·API 설계</div><ul class="hang"><li>신규 서비스의 <b>테이블 설계와 API 명세</b>를 직접 작성, 확장을 고려한 원장·상세 원장 구조 설계</li><li>상품 코드 기반 <b>라우팅 구조</b>로 다종 카드 상품을 단일 거래 흐름에서 처리</li></ul></div>
-        <div class="duty"><div class="lb ko-only">외부 시스템 S2S 연동</div><ul class="hang"><li>카드사·환급사·OTA 파트너사·교통카드사와 <b>스펙 조율부터 연동 구현</b>까지 담당</li><li>외부 응답 지연·실패에 대비한 <b>재시도·검증·보상 처리</b> 구조 구성</li></ul></div>
-        <div class="duty"><div class="lb ko-only">동시성 제어와 거래 정합성</div><ul class="hang"><li>Redisson 분산락으로 <b>중복 결제·중복 할당·중복 수령</b> 방지, 락 키·타임아웃 규칙을 팀 컨벤션으로 문서화</li><li>거래 상태 전이와 일일 한도 차감 처리, 동시성 시나리오를 <b>테스트 코드로 재현·검증</b></li></ul></div>
-        <div class="duty"><div class="lb ko-only">팀 공통 모듈 설계 및 인프라 개선</div><ul class="hang"><li>캐시(Redis)·외부 통신·재시도·메시징(RabbitMQ) 로직을 <b>재사용 가능한 공통 모듈</b>로 표준화</li><li>팀 내 <b>Redis·RabbitMQ 첫 도입</b>을 주도하고 운영 시나리오까지 함께 정착</li></ul></div>
-        <div class="duty"><div class="lb ko-only">그라파나 관측 스택 도입 · 구축</div><ul class="hang"><li>팀 내 <b>모니터링 시스템 부재</b> 개선을 위한 관측 스택 도입 제안 및 신규 구축 — <b>Grafana + Prometheus + Loki + Alloy</b> 통합</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계, 별도 config 수정 없이 신규 서비스 확장 가능</li></ul></div>
-        <div class="duty"><div class="lb ko-only">운영·장애 대응과 QA 프로세스 개선</div><ul class="hang"><li>운영 장애를 핫픽스에서 끝내지 않고 <b>QA 절차와 테스트 코드로 환원</b>해 재발 방지</li><li>빌드 시 테스트 통과를 성공 조건으로 강제해 운영 반영 전 회귀 차단</li></ul></div>
-        <div class="duty"><div class="lb ko-only">다직군 협업과 통합 QA</div><ul class="hang"><li>기획·앱·키오스크 클라이언트·QA와 전체 흐름을 검증, 카드사 담당자와 <b>통합 QA</b> 진행</li><li>응답 코드 매핑·규제 요건 반영 방식 조율, 데일리 스크럼으로 일정 관리</li></ul></div>
+        <div class="duty"><div class="lb ko-only">결제·거래 도메인 백엔드 설계·개발·운영</div><ul class="hang"><li>15개 통화 <b>외화 환전</b>, 선불카드 <b>발급·충전·인출·활성화</b>, Tax Refund, 교통카드 충전·출금, 가상계좌, OTA 예약 카드 수령</li><li>신규 서비스의 <b>ERD·API 단독 설계</b>, 확장을 고려한 원장·상세 원장 구조 설계, 상품 코드 라우팅으로 다종 카드 상품을 단일 흐름에서 처리</li></ul></div>
+        <div class="duty"><div class="lb ko-only">외부 기관 S2S 연동 및 응답 통보 체계 설계</div><ul class="hang"><li>카드사·전자화폐사·환급사·OTA·교통카드사 등 <b>외부 기관 5개 이상</b>과 스펙 조율부터 연동 구현까지 담당</li><li>정산 대사가 성립하도록 응답 코드 체계 표준화·트랜잭션 분리 설계, <b>재시도 대상 선별</b>(통신 오류 2종만·차수 전달)로 중복 승인 원천 차단</li></ul></div>
+        <div class="duty"><div class="lb ko-only">동시성 제어와 거래 정합성</div><ul class="hang"><li>Redisson 분산락·상태 전이로 <b>중복 결제·중복 할당·중복 수령</b> 방지, 락 키·타임아웃·트랜잭션 순서 규칙을 팀 컨벤션으로 문서화</li><li>거래 상태 전이·일일 한도 차감 처리, 동시성 시나리오를 <b>테스트 코드로 재현·검증</b></li></ul></div>
+        <div class="duty"><div class="lb ko-only">팀 공통 모듈·인프라 도입 주도</div><ul class="hang"><li>캐시(Redis)·외부 통신 재시도·메시징(RabbitMQ) 로직을 <b>재사용 가능한 공통 모듈</b>로 표준화 (DurableCache 3개 도메인 재사용)</li><li>팀 내 <b>Redis·RabbitMQ 첫 도입</b>을 주도하고, Grafana + Prometheus + Loki + Alloy 관측 스택 신규 구축</li></ul></div>
+        <div class="duty"><div class="lb ko-only">운영·장애 대응 및 다직군 협업</div><ul class="hang"><li>운영 장애를 핫픽스로 끝내지 않고 <b>QA 절차·테스트 코드로 환원</b>해 재발 방지, 빌드 시 테스트 통과 강제</li><li>기획·키오스크 클라이언트 개발자·자체 QA와 통합 검증(프로젝트 성격에 따라 앱 개발자 포함), 카드사 담당자와 <b>통합 QA</b> 진행 및 응답 코드 매핑·폴백 규격 협의</li></ul></div>
           </div>
         </div>
       </div>
@@ -262,43 +270,25 @@
         <div class="row"><h2>프로젝트</h2><span class="rule"></span></div>
       </header>
       <div class="cards">
-        <a class="card" href="career-detail.html#grafana">
-          <div class="t"><span class="no">01</span><span class="org dozn">DOZN</span><span class="p">2026.08—</span></div>
-          <h4>그라파나 관측 스택 도입 · 신규 구축</h4>
-          <div class="sub">로그만 있던 환경에 통합 모니터링 도입</div>
-          <p class="svc">팀 내 모니터링 시스템 부재로 로그 개별 조회만 가능했던 환경에 <b>관측 스택 도입을 제안하고 신규 구축</b></p>
-          <ul class="roles"><li>팀 내 <b>모니터링 시스템 부재</b> → Grafana + Prometheus + Loki 통합 스택 도입 제안·구축</li><li><b>Alloy 단일 수집 에이전트</b>로 node-exporter·cAdvisor·promtail·Prometheus Agent 대체, 컨테이너·설정 단순화</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계 (팀원이 관측 스택 무수정으로 신규 서비스 등록)</li><li>초안 5개를 <b>3개 대시보드로 압축</b>(Overview · Application Runtime · Application Logs), 저트래픽 지표 정합성 통일</li><li><code>STACK_CONFIG_VERSION</code> 버전 suffix로 <b>무중단 config 갱신</b> 패턴 정립 · 이슈 분석 5~10분 → 1~2분</li></ul>
-          <div class="st"><span class="tag">Docker Swarm</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Loki</span></div>
-          <span class="more">상세 보기 <span class="ar">→</span></span>
-        </a>
         <a class="card" href="career-detail.html#checkin">
-          <div class="t"><span class="no">02</span><span class="org dozn">DOZN</span><span class="p">2026.05—07</span></div>
+          <div class="t"><span class="no">01</span><span class="org dozn">DOZN</span><span class="p">2026.05—07</span></div>
           <h4>롯데카드 협업 체크인서울 선불카드 서비스 구축</h4>
-          <div class="sub">외부 카드사 연동과 정산 대사 정합성</div>
-          <p class="svc">카드사 규격 준수와 정산 대사 정합성이 요구사항의 핵심인 외국인 관광객 대상 선불카드 백엔드 신규 구축</p>
+          <div class="sub">외부 카드사 연동과 응답 통보 체계 설계</div>
+          <p class="svc"><span class="kstat">응답 코드 51종 표준화</span> · <span class="kstat">테스트 156케이스</span> — 카드사 규격 준수와 정산 대사가 성립하는 응답 통보 체계 설계가 요구사항의 핵심인 선불카드 백엔드 신규 구축</p>
         <ul class="roles">
     <li>선불카드 <b>발급·충전·인출·활성화</b> 전 흐름의 백엔드 도메인 설계·구현 (API 29개·<b>테스트 156케이스</b>)</li>
-    <li><b>정산 대사 정합성 체계 정립</b> — 결과코드 51종 + D999 폴백 + <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code>로 트랜잭션 분리해 종료 코드 누락 원천 차단</li>
+    <li><b>정산 대사가 성립하는 응답 통보 체계 설계</b> — 결과코드 51종 + D999 폴백 + <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code>로 트랜잭션 분리해 종료 코드 누락 원천 차단</li>
     <li>외부 통신 재시도 표준화(<b>통신 오류 2종만 재시도</b>·차수 전송) + <b>DurableCache 캐시 폴백 모듈</b>(제네릭 추상·3도메인 재사용)</li>
-    <li>Redis 장애 대응 · 민감정보 컬럼 암호화 + TTL 임시 저장소로 보안 규약 준수 · 롯데카드 통합 QA 대응</li>
+    <li>Redis 장애 대응 · 민감정보 컬럼 암호화 + TTL 임시 저장소로 보안 규약 준수 · 카드사 통합 QA 대응</li>
   </ul>
           <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot 3</span><span class="tag">Redis</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
-        <a class="card" href="career-detail.html#ota">
-          <div class="t"><span class="no">03</span><span class="org dozn">DOZN</span><span class="p">2026.01—02</span></div>
-          <h4>OTA 연동 카드 수령 서비스 구축</h4>
-          <div class="sub">롤백 불가능한 물리 방출의 중복 방지</div>
-          <p class="svc">하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
-          <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>2-Phase 방출 프로토콜</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 모델링</b>(계약 단가·수수료·정가 분리)</li></ul>
-          <div class="st"><span class="tag">Kotlin</span><span class="tag">Redisson</span><span class="tag">MySQL</span></div>
-          <span class="more">상세 보기 <span class="ar">→</span></span>
-        </a>
 <a class="card" href="career-detail.html#thefree">
-  <div class="t"><span class="no">04</span><span class="org dozn">DOZN</span><span class="p">2025.09—10</span></div>
+  <div class="t"><span class="no">02</span><span class="org dozn">DOZN</span><span class="p">2025.09—10</span></div>
   <h4>THE-Free 온라인 환전 서비스 구축</h4>
   <div class="sub">앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</div>
-  <p class="svc">신청-수령 분리 흐름의 <b>백엔드 서비스 2개</b> 설계·구현 및 다중 인스턴스 가상계좌 동시성 장애 해결</p>
+  <p class="svc"><span class="kstat">가상계좌 중복 발급 월 12건 → 0건</span> · <span class="kstat">서비스 2개 분리</span> — 신청-수령 분리 흐름의 백엔드 서비스 2개 설계·구현 및 다중 인스턴스 가상계좌 동시성 장애 해결</p>
   <ul class="roles">
     <li><b>백엔드 서비스 2개 분리</b>(대외 API + 환전 코어) · 상태 기계 정의 + 기한 2단계 + 환율 스냅샷 & 30자리 합성 키 정책 수립</li>
     <li><b>실물 재고 3중 검증</b>(신청 시·입금 직전·출금 시) + RabbitMQ 보상 트랜잭션으로 &ldquo;돈은 들어왔는데 물건이 없는&rdquo; 위험 차단</li>
@@ -309,43 +299,52 @@
   <span class="more">상세 보기 <span class="ar">→</span></span>
 </a>
         <a class="card" href="career-detail.html#ezl">
-          <div class="t"><span class="no">05</span><span class="org dozn">DOZN</span><span class="p">2025.01—07</span></div>
+          <div class="t"><span class="no">03</span><span class="org dozn">DOZN</span><span class="p">2025.01—07</span></div>
           <h4>이즐(eZL) 교통카드 충전·출금</h4>
           <div class="sub">되돌릴 수 없는 물리 기록과 서버 상태의 정합성</div>
-          <p class="svc">IC칩 상호 인증 프로토콜 중계 구조에서 <b>되돌릴 수 없는 물리 기록</b>에 대한 거래 정합성 보장</p>
+          <p class="svc"><span class="kstat">고객 금전 손실 경로 0</span> · <span class="kstat">테스트 49케이스</span> — IC칩 상호 인증 프로토콜 중계 구조에서 되돌릴 수 없는 물리 기록에 대한 거래 정합성 보장</p>
           <ul class="roles"><li>교통카드 충전·출금 거래 API 설계·개발 (sign1→sign2→sign3 프로토콜 중계) · API 11개·<b>테스트 49케이스</b></li><li><b>&ldquo;물리 상태 우선&rdquo; 원칙 정립</b> — 카드에 기록됐으면 통신 실패해도 거래 승인 확정 (고객 금전 손실 원천 제거)</li><li><b>3-state 상태 모델</b>(승인·실패·불확정) + 사후 검증 큐로 클라이언트 임의 판단 지점 제거</li><li><b>중복 충전 3중 방어</b>(DB CAS · 이즐 응답 소급 정정 · 원장 복제 체이닝) + 전자화폐 규격 원장화(SAM 일련번호·서명)</li></ul>
           <div class="st"><span class="tag">Kotlin</span><span class="tag">Spring Boot 3</span><span class="tag">MySQL</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
+        <a class="card" href="career-detail.html#ota">
+          <div class="t"><span class="no">04</span><span class="org dozn">DOZN</span><span class="p">2026.01—02</span></div>
+          <h4>OTA 연동 카드 수령 서비스 구축</h4>
+          <div class="sub">롤백 불가능한 물리 방출의 중복 방지</div>
+          <p class="svc"><span class="kstat">중복 방출 0건</span> · <span class="kstat">B2B 정산 원장 스키마 설계</span> — 하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
+          <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>2-Phase 방출 프로토콜</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
+          <div class="st"><span class="tag">Kotlin</span><span class="tag">Redisson</span><span class="tag">MySQL</span></div>
+          <span class="more">상세 보기 <span class="ar">→</span></span>
+        </a>
         <a class="card" href="career-detail.html#tax">
-          <div class="t"><span class="no">06</span><span class="org dozn">DOZN</span><span class="p">2024.04—12</span></div>
+          <div class="t"><span class="no">05</span><span class="org dozn">DOZN</span><span class="p">2024.04—12</span></div>
           <h4>Tax Refund</h4>
           <div class="sub">현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</div>
-          <p class="svc">현금 물리 방출 불가역성과 여권 등 민감정보 보관 최소화가 요구되는 신규 도메인 설계·구현</p>
+          <p class="svc"><span class="kstat">예외 3종 타입 분리</span> · <span class="kstat">3도메인 재사용 컨벤션</span> — 현금 물리 방출 불가역성과 여권 등 민감정보 보관 최소화가 요구되는 신규 도메인 설계·구현</p>
           <ul class="roles"><li>Tax Refund 신규 도메인 설계 + <b>예외 3종 타입 분리</b>(재처리·알림·무시)로 &ldquo;예외 타입 = 운영 정책&rdquo; 구조화</li><li><b>운영자 수동 복구 API 2종</b> 상비 + <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 오알림 원천 차단</li><li>환급사 연동 <b>3계층 분리</b>(전송·규격변환·도메인) + 엔드포인트 15종 설정 외부화 + 응답 코드 40여 개 매핑 계층</li><li><b>팀 내 첫 Redis 도입</b> + 민감정보 <b>6중 방어</b>(TTL·해시·JPA 컨버터·SEED·마스킹·MRZ 체크디짓) · 컨벤션 문서화로 3도메인 재사용</li></ul>
           <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot 3</span><span class="tag">Redis</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
         <a class="card" href="career-detail.html#mq">
-          <div class="t"><span class="no">07</span><span class="org dozn">DOZN</span><span class="p">2024 <span class="kmono">하반기</span></span></div>
+          <div class="t"><span class="no">06</span><span class="org dozn">DOZN</span><span class="p">2024 <span class="kmono">하반기</span></span></div>
           <h4>알림 발송 서비스 통합</h4>
           <div class="sub">흩어진 발송 로직의 단일화와 유실 없는 발송 체계 구축</div>
-          <p class="svc">환전·선불카드·Tax Refund 등 흩어진 발송 로직을 단일 서비스로 통합 · 채널·템플릿·재시도 정책 표준화</p>
+          <p class="svc"><span class="kstat">Transactional Outbox 도입</span> · <span class="kstat">유실 없는 발송 보장</span> — 환전·선불카드·Tax Refund 등 흩어진 발송 로직을 단일 서비스로 통합 · 채널·템플릿·재시도 정책 표준화</p>
           <ul class="roles"><li><b>Transactional Outbox 패턴</b> 도입 — MQ 직접 발행의 원자성 한계를 근거로 &ldquo;유실 없는 발송 보장&rdquo; 트레이드오프 명시 선택</li><li>전략 패턴 + Spring DI 기반 채널 확장 구조 + <b>알림톡 → LMS 자동 대체 발송</b>(대체 템플릿 1급 속성)</li><li>건별 트랜잭션 격리 + 실패 횟수 자동 차단 + <b>Spring Event → RabbitMQ → Slack 실시간 통보</b> 파이프라인</li><li><b>Handlebars 템플릿 외부화</b> — 무배포 즉시 반영(CRUD API + 캐시 갱신) + 콜드스타트 제거</li></ul>
           <div class="st"><span class="tag">RabbitMQ</span><span class="tag">Handlebars</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
+        <a class="card" href="career-detail.html#grafana">
+          <div class="t"><span class="no">07</span><span class="org dozn">DOZN</span><span class="p">2026.08—</span></div>
+          <h4>그라파나 관측 스택 도입 · 신규 구축</h4>
+          <div class="sub">로그만 있던 환경에 통합 모니터링 도입</div>
+          <p class="svc"><span class="kstat">이슈 분석 5~10분 → 1~2분</span> — 팀 내 모니터링 시스템 부재로 로그 개별 조회만 가능했던 환경에 관측 스택 도입을 제안하고 신규 구축</p>
+          <ul class="roles"><li>팀 내 <b>모니터링 시스템 부재</b> → Grafana + Prometheus + Loki 통합 스택 도입 제안·구축</li><li><b>Alloy 단일 수집 에이전트</b>로 node-exporter·cAdvisor·promtail·Prometheus Agent 대체, 컨테이너·설정 단순화</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계 (팀원이 관측 스택 무수정으로 신규 서비스 등록)</li><li>초안 5개를 <b>3개 대시보드로 압축</b>(Overview · Application Runtime · Application Logs), 저트래픽 지표 정합성 통일</li><li><code>STACK_CONFIG_VERSION</code> 버전 suffix로 <b>무중단 config 갱신</b> 패턴 정립</li></ul>
+          <div class="st"><span class="tag">Docker Swarm</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Loki</span></div>
+          <span class="more">상세 보기 <span class="ar">→</span></span>
+        </a>
         <div class="card nolink">
-          <div class="t"><span class="no">08</span><span class="org personal">SIDE</span><span class="p">2026—</span></div>
-          <h4>FanKit</h4>
-          <div class="sub">K-POP 굿즈 결제 MSA</div>
-          <p class="svc">결제 도메인의 분산 트랜잭션·정합성을 처음부터 설계해 본 사이드 프로젝트</p>
-          <ul class="roles"><li>7개 서비스(User·Goods·Order·Payment 등) <b>MSA 전체 설계·구현</b></li><li><b>Saga 오케스트레이션</b>으로 결제→재고 차감→주문 확정 흐름과 보상 처리 구성</li><li>DB 고유 키 + Redis 이중 체크 <b>멱등성 키</b>로 중복 결제 차단</li><li>DB 저장·이벤트 발행을 한 트랜잭션으로 묶고 PG 장애 격리, 통합 테스트로 검증</li></ul>
-          <div class="st"><span class="tag">Kotlin</span><span class="tag">Kafka</span><span class="tag">MSA</span></div>
-          <div class="links"><a href="https://github.com/inyoung0215/fankit" target="_blank" rel="noopener">GitHub ↗</a></div>
-        </div>
-        <div class="card nolink">
-          <div class="t"><span class="no">09</span><span class="org team">TEAM</span><span class="p">2023.10—12</span></div>
+          <div class="t"><span class="no">08</span><span class="org team">TEAM</span><span class="p">2023.10—12</span></div>
           <h4>CATCHER</h4>
           <div class="sub">일정 공유 서비스</div>
           <p class="svc">3개 백엔드 서버로 구성, 외부 API 대량 적재와 검색 성능이 과제</p>
@@ -354,7 +353,7 @@
           <div class="links"><a href="https://github.com/Project-Catcher" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
         <div class="card nolink">
-          <div class="t"><span class="no">10</span><span class="org team">TEAM</span><span class="p">2023.08—10</span></div>
+          <div class="t"><span class="no">09</span><span class="org team">TEAM</span><span class="p">2023.08—10</span></div>
           <h4>PETNURI</h4>
           <div class="sub">반려동물 커뮤니티</div>
           <p class="svc">웹·앱 클라이언트가 공유하는 인증 서버가 필요했던 팀 프로젝트</p>
@@ -363,7 +362,7 @@
           <div class="links"><a href="https://github.com/FINAL-TEAM4/itoxi-be" target="_blank" rel="noopener">GitHub ↗</a><a href="https://petnuri.netlify.app/" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
         <div class="card nolink">
-          <div class="t"><span class="no">11</span><span class="org team">TEAM</span><span class="p">2023.07—08</span></div>
+          <div class="t"><span class="no">10</span><span class="org team">TEAM</span><span class="p">2023.07—08</span></div>
           <h4>당연하지</h4>
           <div class="sub">연차·당직 관리</div>
           <p class="svc">신청→승인→캘린더 반영까지 자동화한 사내 도구</p>
@@ -372,13 +371,22 @@
           <div class="links"><a href="https://github.com/FastCampus-Mini5/BE_server" target="_blank" rel="noopener">GitHub ↗</a><a href="https://group5ofcourse.netlify.app/" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
         <div class="card nolink">
-          <div class="t"><span class="no">12</span><span class="org team">TEAM</span><span class="p">2023.06—10</span></div>
+          <div class="t"><span class="no">11</span><span class="org team">TEAM</span><span class="p">2023.06—10</span></div>
           <h4>FOODIE-LOG</h4>
           <div class="sub">맛집 공유 SNS</div>
           <p class="svc">멀티모듈 구조와 배포 파이프라인 구축이 과제</p>
           <ul class="roles"><li><b>멀티모듈 구조 설계</b>로 App/Admin 분리</li><li>Docker 기반 <b>배포 환경 구성</b></li><li>AWS S3 파일 업로드 및 카카오 지도 검색 API 연동</li></ul>
           <div class="st"><span class="tag">Docker</span><span class="tag">AWS S3</span></div>
           <div class="links"><a href="https://github.com/FoodieLog/foodie-log-server" target="_blank" rel="noopener">GitHub ↗</a><a href="https://foodie-log-client.vercel.app/accounts/login" target="_blank" rel="noopener">Live ↗</a></div>
+        </div>
+        <div class="card nolink">
+          <div class="t"><span class="no">12</span><span class="org personal">SIDE</span><span class="p">2026—</span></div>
+          <h4>FanKit <span style="font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--muted-2);letter-spacing:.02em;margin-left:6px">학습 프로젝트</span></h4>
+          <div class="sub">결제 도메인 Saga · Outbox · Spring Batch 학습</div>
+          <p class="svc">결제 도메인의 분산 트랜잭션·정합성 패턴을 <b>직접 구현하며 학습 중</b>인 사이드 프로젝트</p>
+          <ul class="roles"><li><b>Payment/Settlement 중심 구현</b> — Saga 오케스트레이션과 멱등성 처리 우선 구현</li><li>DB 고유 키 + Redis 이중 체크 <b>멱등성 키</b>로 중복 결제 차단</li><li><b>Transactional Outbox 패턴</b>으로 DB 저장과 이벤트 발행 원자성 확보</li><li><b>Spring Batch</b> 기반 정산 배치 학습 + Testcontainers 통합 테스트</li></ul>
+          <div class="st"><span class="tag">Kotlin</span><span class="tag">Kafka</span><span class="tag">Spring Batch</span></div>
+          <div class="links"><a href="https://github.com/inyoung0215/fankit" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
       </div>
       <a class="doc-wide" href="career-detail.html">

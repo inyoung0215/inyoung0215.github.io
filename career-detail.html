@@ -88,12 +88,22 @@
     .pts,.metrics{grid-template-columns:1fr}
     .co-foot .per,.pj-per{margin-left:0}
   }
+  @media print {
+    body { background: white !important; margin: 0 !important; }
+    .page { box-shadow: none !important; max-width: 100% !important; padding: 20px 30px !important; min-height: auto !important; }
+    .doc-actions, .pdf-btn { display: none !important; }
+    .pj, .metrics, .steps > li, .m { page-break-inside: avoid; }
+    .pj + .pj { page-break-inside: avoid; margin-top: 20px; }
+    a { color: inherit !important; text-decoration: none !important; }
+    .top { display: none !important; }
+    code { background: none !important; padding: 0 !important; color: inherit !important; }
+  }
 </style>
 </head>
 <body>
 <div class="page">
-  <div class="doc-actions"><a class="pdf-btn" href="print/career-detail-print.html?print" target="_blank" rel="noopener">PDF로 저장 <span class="ic">↓</span></a></div>
-  <a class="back" href="index.html">← 이력서로</a>
+  <div class="doc-actions"><a class="pdf-btn" href="javascript:void(0)" onclick="window.print()">PDF로 저장 <span class="ic">↓</span></a></div>
+  <a class="back" href="career.html">← 경력기술서</a>
   <header class="doc-head">
     <div class="kicker">Career Description</div>
     <h1>상세 경력기술서</h1>
@@ -112,7 +122,7 @@
 
   <div class="cases-start">
     <section id="grafana" class="pj" data-screen-label="그라파나 관측 스택 신규 구축">
-      <div class="pj-t"><span class="no">01</span><h3>그라파나 관측 스택 도입 · 신규 구축 <span class="sol">— 로그만 있던 환경에 통합 모니터링 도입</span></h3><span class="pj-per">2026.08—</span></div>
+      <div class="pj-t"><span class="no">07</span><h3>그라파나 관측 스택 도입 · 신규 구축 <span class="sol">— 로그만 있던 환경에 통합 모니터링 도입</span></h3><span class="pj-per">2026.08—</span></div>
       <p class="ctx">팀 내 서비스 클러스터에 <b>통합 모니터링 시스템이 부재</b>하여, 오류 발생 시 각 컨테이너의 로그를 개별적으로 확인해야만 상태를 파악할 수 있었습니다. 늘어나는 서비스 환경에서 <b>운영 비효율을 해결</b>하고자 <b>관측(Observability) 스택 도입을 제안하고 구축</b>하였습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li>팀 내에 <b>통합 모니터링 시스템 부재</b> → 로그 조회 외 서비스 상태 파악 불가</li><li>서비스 오류 발생 시 각 컨테이너 로그를 <b>개별 확인</b>해야 해 재현·진단 시간 과다</li><li>JVM 힙·CPU·스레드·DB Pool 등 <b>실시간 지표 확인 수단 부재</b></li><li>팀 리드가 fleet 전체 상태를 한눈에 볼 수 있는 <b>통합 화면 부재</b></li></ul>
@@ -161,15 +171,17 @@
       </div>
     </section>
     <section id="checkin" class="pj" data-screen-label="롯데카드 협업 선불카드">
-      <div class="pj-t"><span class="no">02</span><h3>롯데카드 협업 체크인서울 선불카드 서비스 구축 <span class="sol">— 외부 카드사 연동과 정산 대사 정합성</span></h3><span class="pj-per">2026.05—07</span></div>
-      <p class="ctx">롯데카드와 공동으로 <b>외국인 관광객 대상 선불카드 서비스</b>를 신규 구축했습니다. 선불카드(발급·충전·인출·활성화) 전 흐름의 백엔드를 담당했으며, <b>카드사 규격 준수와 정산 대사 정합성</b>이 요구사항의 핵심이었습니다. <b>API 29개 · 카드사 결과코드 51종 · 도메인 에러코드 65종 · 테스트 156케이스(4,400여 줄)</b> 규모의 백엔드를 설계·구현·테스트했습니다.</p>
+      <div class="pj-t"><span class="no">01</span><h3>롯데카드 협업 체크인서울 선불카드 서비스 구축 <span class="sol">— 외부 카드사 연동과 응답 통보 체계 설계</span></h3><span class="pj-per">2026.05—07</span></div>
+      <p class="ctx">롯데카드와 공동으로 <b>외국인 관광객 대상 선불카드 서비스</b>를 신규 구축했습니다. 선불카드(발급·충전·인출·활성화) 전 흐름의 백엔드를 담당했으며, <b>카드사 규격 준수와 정산 대사가 성립하는 응답 통보 체계</b>가 요구사항의 핵심이었습니다. (정산 대사 로직 자체는 카드사·별도 시스템 소유) <b>API 29개 · 카드사 결과코드 51종 · 도메인 에러코드 65종 · 테스트 156케이스(4,400여 줄)</b> 규모의 백엔드를 설계·구현·테스트했습니다.</p>
       <div class="sec-lb">문제 상황</div>
-      <ul class="hang"><li><b>정산 대사 불일치</b>: 키오스크는 고객이 언제든 이탈할 수 있는데, 카드사 정산 대사는 거래 시작과 종료 코드가 1:1로 맞아야 성립 → 이탈 1건이 곧 <b>불일치로 직결</b></li><li><b>Redis 장애 리스크</b>: 보안 규약상 민감한 여권·회원 정보를 RDB에 영구 저장할 수 없어 Redis 의존도가 높으나, 장애 시 <b>거래 세션이 유실</b>되는 구조</li><li><b>중복 충전 위험</b>: 카드사 API 통신 오류 대응 로직이 호출 지점마다 흩어져 있어 <b>비즈니스 오류까지 재시도될 위험</b> 상존</li></ul>
+      <ul class="hang"><li><b>정산 대사 성립 조건 미충족 위험</b>: 키오스크는 고객이 언제든 이탈할 수 있는데, 카드사 정산 대사는 거래 시작과 종료 코드가 1:1로 맞아야 성립 → 이탈 1건이 곧 <b>대사 시스템에서 불일치로 표시</b></li><li><b>Redis 장애 리스크</b>: 보안 규약상 민감한 여권·회원 정보를 RDB에 영구 저장할 수 없어 Redis 의존도가 높으나, 장애 시 <b>거래 세션이 유실</b>되는 구조</li><li><b>중복 충전 위험</b>: 카드사 API 통신 오류 대응 로직이 호출 지점마다 흩어져 있어 <b>비즈니스 오류까지 재시도될 위험</b> 상존</li></ul>
       <div class="sec-lb">원인 분석</div>
       <ul class="hang"><li>예외 발생 시 거래 트랜잭션과 함께 종료 코드 전송까지 롤백되어 <b>카드사에는 시작만 남는 현상</b> 발생</li><li>화면 단위의 이탈·타임아웃 지점이 제각각인데 이를 <b>카드사 코드 체계로 매핑하는 표준 부재</b></li><li><b>재시도 대상을 선별하지 않아</b> 통신 장애 외에 비즈니스 예외까지 재전송되어 중복 충전 유발</li><li>Redis를 세션 저장소로 쓰면서 하드웨어/네트워크 장애 시 <b>대체 경로 부재</b></li></ul>
+      <div class="sec-lb">대안 검토</div>
+      <ul class="hang"><li><b>모든 통신 실패에 대해 재시도</b>하는 단순 방식 — 재시도 대상을 선별하지 않으면 비즈니스 예외까지 재전송되어 <b>재시도가 곧 중복 승인</b>이 됨 → 통신 오류 2종만 허용하고 차수 정보를 전달해 상대 기관이 중복을 식별할 수 있도록 하는 방향으로 재설계</li><li><b>단일 트랜잭션으로 거래·통보를 함께 처리</b>하는 방식 — 내부 예외로 트랜잭션이 롤백되면 종료 코드 전송까지 롤백되어 대사 불일치 유발 → <code>AFTER_COMPLETION + REQUIRES_NEW</code>로 트랜잭션을 분리하는 방향으로 결정</li></ul>
       <div class="sec-lb">해결 과정</div>
       <ol class="steps">
-        <li><span class="st-title">정산 대사 정합성 확보 — &ldquo;어떤 경우에도 종료 코드는 전송된다&rdquo;</span>
+        <li><span class="st-title">응답 통보 보장 설계 — &ldquo;어떤 경우에도 종료 코드는 전송된다&rdquo;</span>
           <ul class="sub">
             <li>화면 단위 이탈 지점을 <b>전수 조사</b>해 거래중단 코드 <b>14종</b>을 정의하고, 하드웨어 장애·한도 초과 등을 포함한 <b>결과코드 51종</b> 체계 정립</li>
             <li>내부 에러코드 ↔ 카드사 결과코드 <b>양방향 매핑 테이블</b>을 구성하고, 미분류 예외는 <b>D999로 폴백</b>시켜 종료 코드 누락 경로 원천 차단</li>
@@ -194,17 +206,17 @@
         </li>
       </ol>
       <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">정산 대사 누락 경로</div><div class="mv"><span class="before">이탈·타임아웃 매핑 표준 부재 · 트랜잭션 롤백 시 종료 코드도 롤백</span><span class="ar">→</span><span class="after">결과코드 51종 + D999 폴백 + 트랜잭션 분리로 종료 코드 누락 경로 완전 제거</span></div></div><div class="m"><div class="mk">중복 충전 리스크</div><div class="mv"><span class="before">통신 오류·비즈니스 오류 모두 재시도</span><span class="ar">→</span><span class="after">재시도 대상을 통신 오류 2종으로 한정 + 차수 전송으로 카드사 측 중복 식별 체계 마련</span></div></div><div class="m"><div class="mk">Redis 장애 대응</div><div class="mv"><span class="before">Redis 실패 시 거래 세션 유실</span><span class="ar">→</span><span class="after">DurableCache DB 자동 폴백 + 캐시 재적재로 거래 세션 지속</span></div></div><div class="m"><div class="mk">민감정보 규약 준수</div><div class="mv"><span class="before">RDB 저장 불가 · 대체 수단 부재</span><span class="ar">→</span><span class="after">컬럼 암호화 + TTL 만료 임시 저장소 직접 설계로 보안 감사 기준 충족</span></div></div><div class="m"><div class="mk">공통 모듈 자산화</div><div class="mv"><span class="before">각 도메인 개별 처리</span><span class="ar">→</span><span class="after">캐시·재시도 모듈 3개 도메인 재사용 (체크인서울 외 환율·본인인증)</span></div></div><div class="m"><div class="mk">롯데카드 통합 QA</div><div class="mv"><span class="after">156케이스 검증 · 기한 내 완료 · 2026.09 오픈 예정</span></div></div></div>
+      <div class="metrics"><div class="m"><div class="mk">종료 코드 누락 경로</div><div class="mv"><span class="before">이탈·타임아웃 매핑 표준 부재 · 트랜잭션 롤백 시 종료 코드도 롤백</span><span class="ar">→</span><span class="after">결과코드 51종 + D999 폴백 + 트랜잭션 분리로 종료 코드 누락 경로 완전 제거 (대사 시스템에서 매칭 가능)</span></div></div><div class="m"><div class="mk">중복 충전 리스크</div><div class="mv"><span class="before">통신 오류·비즈니스 오류 모두 재시도</span><span class="ar">→</span><span class="after">재시도 대상을 통신 오류 2종으로 한정 + 차수 전송으로 카드사 측 중복 식별 체계 마련</span></div></div><div class="m"><div class="mk">Redis 장애 대응</div><div class="mv"><span class="before">Redis 실패 시 거래 세션 유실</span><span class="ar">→</span><span class="after">DurableCache DB 자동 폴백 + 캐시 재적재로 거래 세션 지속</span></div></div><div class="m"><div class="mk">민감정보 규약 준수</div><div class="mv"><span class="before">RDB 저장 불가 · 대체 수단 부재</span><span class="ar">→</span><span class="after">컬럼 암호화 + TTL 만료 임시 저장소 직접 설계로 보안 감사 기준 충족</span></div></div><div class="m"><div class="mk">공통 모듈 자산화</div><div class="mv"><span class="before">각 도메인 개별 처리</span><span class="ar">→</span><span class="after">캐시·재시도 모듈 3개 도메인 재사용 (체크인서울 외 환율·본인인증)</span></div></div><div class="m"><div class="mk">롯데카드 통합 QA</div><div class="mv"><span class="after">156케이스 검증 · 기한 내 완료 · 2026.09 오픈 · 안정 운영 중</span></div></div></div>
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">정합성이 중요한 도메인에서는 데이터가 지나는 경로마다 <b>실패 시나리오를 함께 설계</b>해야 합니다. 이 프로젝트에서 안정성을 가른 것도 정상 흐름이 아니라 <b>이탈·타임아웃 같은 예외 경로를 얼마나 빠짐없이 코드 체계로 고정했는가</b>였습니다. 특히 <b>&ldquo;무엇을 재시도하면 안 되는가&rdquo;를 정의하는 일이 재시도 로직 자체보다 중요하다</b>는 것을 배웠습니다. 통신 오류와 비즈니스 오류를 구분하지 않았다면 재시도가 곧 중복 충전이 되었을 것입니다. 또한 <b>외부에 알려야 할 사실은 거래 트랜잭션과 생명주기를 분리해야 한다</b>는 것도 이번에 체감했습니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">선불카드 백엔드 도메인 설계·구현, 정산 대사 정합성 체계 정립(결과코드 51종·에러코드 65종·D999 폴백), <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code> 트랜잭션 분리, 외부 통신 재시도 표준화(<code>RetryableCallExecutor</code>/<code>RetryExecutor</code>), <b>DurableCache</b> 캐시 폴백 모듈 설계(제네릭 추상·3도메인 재사용), 시나리오 그룹 31개·<b>테스트 156케이스(4,400줄)</b> 작성, 롯데카드 통합 QA 대응.</div></div>
+        <div><span class="k">담당 범위</span><div class="role">선불카드 백엔드 도메인 설계·구현, <b>정산 대사가 성립하는 응답 통보 체계 설계</b>(결과코드 51종·에러코드 65종·D999 폴백 · 정산 대사 로직 자체는 카드사/별도 시스템 소유), <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code> 트랜잭션 분리, 외부 통신 재시도 표준화(<code>RetryableCallExecutor</code>/<code>RetryExecutor</code>), <b>DurableCache</b> 캐시 폴백 모듈 설계(제네릭 추상·3도메인 재사용), 기획 시나리오 그룹 31개 검토 및 <b>테스트 코드 156케이스(4,400줄) 작성</b>, 롯데카드 통합 QA 대응.</div></div>
         <div class="cline"><span class="lbl">기여도</span><span class="n">40%</span></div>
         <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">JUnit5</span></div>
       </div>
     </section>
     <section id="ota" class="pj" data-screen-label="OTA 연동 카드 수령">
-      <div class="pj-t"><span class="no">03</span><h3>OTA 연동 카드 수령 서비스 구축 <span class="sol">— 롤백 불가능한 물리 방출의 중복 방지</span></h3><span class="pj-per">2026.01—02</span></div>
+      <div class="pj-t"><span class="no">04</span><h3>OTA 연동 카드 수령 서비스 구축 <span class="sol">— 롤백 불가능한 물리 방출의 중복 방지</span></h3><span class="pj-per">2026.01—02</span></div>
       <p class="ctx">해외 <b>OTA(온라인 여행사)</b>가 사전 발행한 교통·선불카드를 국내 무인 키오스크에서 <b>QR로 수령</b>하는 신규 서비스입니다. 카드 방출은 <b>하드웨어 제어라 소프트웨어적 롤백이 불가능</b>하므로, 중복 수령 1건이 곧 <b>실물 자산 손실과 정산 오류로 직결</b>되는 높은 도메인 정합성이 요구되었습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>중복 수령 위험</b>: 수령 흐름이 &lsquo;수령 가능 판별 → 수령 확정 → 카드 방출&rsquo; <b>3단계</b>로 분리되어, 방출 지연 중 사용자가 재시도하면 동일 QR이 <b>두 번 방출</b>될 수 있는 구조</li><li><b>정산 불일치</b>: 방출기·네트워크 장애로 방출 결과가 서버에 도달하지 않으면 거래가 미확정 상태로 영구 잔류 → <b>실물은 나갔으나 원장은 없는</b> 불일치 발생</li><li><b>B2B 정산 한계</b>: 파트너별 계약 단가와 수수료가 달라, 기존 <b>B2C 판매 원장 모델로는 정산 표현이 불가능</b></li></ul>
@@ -235,7 +247,7 @@
             <li>통신 단절 건을 위한 <b>장애 후처리 전용 API</b> 제공 → <code>releaseId</code> 기준으로 거래를 복구하고, 원장에 정상/장애 거래를 플래그로 분기 기록하여 <b>운영자 DB 직접 수정 없이 복구 가능</b>한 체계 정립</li>
           </ul>
         </li>
-        <li><span class="st-title">이벤트 발행 안정화 및 B2B 정산 원장 모델링</span>
+        <li><span class="st-title">이벤트 발행 안정화 및 B2B 정산 원장 스키마 설계</span>
           <ul class="sub">
             <li>슬랙·정산 알림을 <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 전환하여, <b>롤백된 거래가 알림으로 새어나가는 문제 원천 차단</b></li>
             <li>투입금 0원 거래에 <b>계약 단가·판매 수수료·카드 정가를 분리 기록</b>하여 파트너별 복합 정산이 가능한 원장 구조 설계</li>
@@ -247,19 +259,21 @@
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">여러 단계로 이어지는 흐름에서 중복을 막는 열쇠는 <b>락 자체가 아니라 어느 범위를 하나의 단위로 묶을 것인가</b>였습니다. 처음에는 전 구간에 락을 거는 방안을 검토했지만, 락 점유 시간이 길어져 처리량이 떨어졌습니다. 대신 상태가 실제로 전이되는 지점 한 곳에만 락을 걸고 나머지는 플래그·스냅샷·DB 제약으로 계층화하자 <b>성능과 안전성을 동시에 확보</b>할 수 있었습니다. 또한 <b>롤백이 불가능한 외부 동작 앞에서는 상태를 미리 확정하지 않는 것이 어떤 보상 로직보다 안전하다</b>는 것을 배웠습니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">신규 도메인 단독 설계(테이블 4개·기존 2개 확장), <b>4계층 중복 방어 체계 설계·구현</b>, <b>2-Phase 방출 프로토콜</b> 정립, B2B 정산 원장 모델링, <code>@TransactionalEventListener(AFTER_COMPLETION)</code> 이벤트 안정화, 예외 분기 중심 <b>단위 테스트 16개 케이스·4개 시나리오 그룹</b> 작성.</div></div>
+        <div><span class="k">담당 범위</span><div class="role">신규 도메인 단독 설계(테이블 4개·기존 2개 확장), <b>4계층 중복 방어 체계 설계·구현</b>, <b>2-Phase 방출 프로토콜</b> 정립, <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직 자체는 별도 시스템 소유), <code>@TransactionalEventListener(AFTER_COMPLETION)</code> 이벤트 안정화, 예외 분기 중심 <b>단위 테스트 16개 케이스·4개 시나리오 그룹</b> 작성.</div></div>
         <div class="cline"><span class="lbl">기여도</span><span class="n">100%</span></div>
         <div class="st"><span class="tag">Kotlin</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Redisson</span><span class="tag">JPA</span><span class="tag">JUnit5</span><span class="tag">Swagger</span></div>
       </div>
     </section>
     <section id="thefree" class="pj" data-screen-label="THE-Free 온라인 환전">
       <span id="lock" aria-hidden="true"></span>
-      <div class="pj-t"><span class="no">04</span><h3>THE-Free 온라인 환전 서비스 구축 <span class="sol">— 앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span></h3><span class="pj-per">2025.09—10</span></div>
+      <div class="pj-t"><span class="no">02</span><h3>THE-Free 온라인 환전 서비스 구축 <span class="sol">— 앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span></h3><span class="pj-per">2025.09—10</span></div>
       <p class="ctx">오프라인 키오스크에서만 가능하던 외화 환전을, <b>앱에서 미리 신청하고 가상계좌로 입금한 뒤 전국 100대 이상 키오스크 중 원하는 곳에서 현금을 수령</b>하는 형태로 확장한 신규 서비스입니다. 앱·키오스크 클라이언트 개발자와 QA를 포함한 <b>5인 프로젝트에서 백엔드 서비스 2개(앱 대외 API·환전 코어)의 설계와 구현</b>을 담당했고, 오픈 이후 발생한 <b>가상계좌 중복 발급 장애의 원인 분석과 해결</b>까지 맡았습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>시점과 공간의 분리</b>: 기존 환전은 &ldquo;결제와 수령이 같은 순간, 같은 장소&rdquo;라는 전제였으나, 앱 신청 → 가상계좌 입금 → 키오스크 수령으로 시점이 쪼개지며 <b>환율·재고·기한 정책이 모두 미정의 상태</b>로 대두</li><li><b>실물 재고 불일치</b>: 수령 대상이 키오스크 안의 실물 지폐라, 신청 시점에 있던 권종이 수령 시점에는 소진되거나 <b>현금 수송으로 방출함 통화 자체가 교체될 수 있는 위험</b> 상존</li><li><b>일정 압박</b>: 사외 앱 개발사와 연동해야 하므로 <b>서버가 확정한 계약이 곧 앱 일정</b> · 스펙 확정이 개발보다 선행되어야 하는 제약</li><li><b>가상계좌 중복 발급 장애</b>: 오픈 후 동일 사용자에게 가상계좌가 중복 발급되는 장애 접수 (<b>월 12건 CS</b>) · 실제 입금이 연결되는 계좌라 정산 정합성 직접 위협</li></ul>
       <div class="sec-lb">원인 분석</div>
       <ul class="hang"><li>기존 환전 로직은 <b>키오스크 단일 채널</b> 전제 → 신청·수령 시점이 분리된 흐름을 담을 상태 모델 부재</li><li>환율은 실시간 변동인데 신청·수령 사이 시간차 발생 → <b>어느 시점 환율을 보장할지 정책 부재</b></li><li>레거시 Java 모듈에 기능 추가 시 <b>기존 거래 코드와 결합도 상승</b> → 유지보수 비용 증가</li><li>가상계좌 발급이 조회 후 생성하는 <b>check-then-act 구조</b> → 짧은 간격의 동시 요청이 모두 &ldquo;미발급&rdquo;으로 판단해 각각 신규 계좌 생성</li><li>발급 이력이 <b>히스토리 성격의 테이블</b>로 관리되어 요청 시점에 잠글 만한 고정 키 부재, 단일 서버 <code>synchronized</code>로는 <b>다중 인스턴스</b> 환경 방어 불가</li></ul>
+      <div class="sec-lb">대안 검토</div>
+      <ul class="hang"><li><b>자원(가상계좌 자체)에 락을 거는 방식</b> — 아직 발급되지 않은 자원이라 잠글 대상이 없음 → <b>요청 주체(사용자 식별키)로 락 대상을 옮기는</b> 방향으로 재설계</li><li><b>단일 서버 <code>synchronized</code>로 방어</b>하는 방식 — 다중 인스턴스 환경에서 인스턴스 간 상호 배제가 성립하지 않아 무력 → Redisson 분산락으로 확장</li><li><b>기존 환전 서비스에 신청-수령 흐름을 추가</b>하는 방식 — 기존 거래 코드와의 결합도 상승·상태 모델 오염 → <b>원장 소유 기준으로 서비스 2개 분리</b>(대외 API + 환전 코어)로 결정</li></ul>
       <div class="sec-lb">해결 과정</div>
       <ol class="steps">
         <li><span class="st-title">서비스 분리와 상태·기한 정책 수립</span>
@@ -305,12 +319,14 @@
       </div>
     </section>
     <section id="ezl" class="pj" data-screen-label="이즐 교통카드 충전·출금">
-      <div class="pj-t"><span class="no">05</span><h3>이즐(eZL) 교통카드 충전·출금 <span class="sol">— 되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span></h3><span class="pj-per">2025.01—07</span></div>
+      <div class="pj-t"><span class="no">03</span><h3>이즐(eZL) 교통카드 충전·출금 <span class="sol">— 되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span></h3><span class="pj-per">2025.01—07</span></div>
       <p class="ctx">키오스크에서 <b>교통카드 충전과 잔액 출금</b>을 지원하기 위해 이즐(eZL) 시스템과 연동한 프로젝트입니다. 서버가 <b>IC칩의 상호 인증 프로토콜(sign1 → sign2 → sign3)을 중계</b>하는 구조로, <b>카드에 금액이 기록되는 순간 서버는 그것을 되돌릴 수 없다</b>는 점이 모든 설계의 출발점이었습니다. <b>API 11개 · 신규 테이블 3개 · EZL 연동 API 6종 · 테스트 49케이스(14 시나리오 그룹)</b> 규모의 백엔드를 설계·구현·테스트했습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>물리 기록 후 통신 단절</b>: 충전은 서버 요청 → 이즐 승인(sign2) → 키오스크의 실물 카드 기록 → 결과 통보(sign3) 순서인데, 카드 기록 이후 단계에서 통신이 끊기면 <b>카드에는 금액이 충전되었으나 서버·이즐은 미확정 상태로 남는 불일치</b> 발생</li><li><b>상태 판정 불가</b>: 키오스크가 카드 잔액 변동 여부 자체를 확인하지 못하는 예외 케이스 존재 (성공도 실패도 아닌 상태)</li><li><b>중복 충전 위험</b>: 재시도 시 이전 요청이 이즐 측에서 이미 성공했을 수 있어 동일 요청 재전송 시 중복 충전 위험 상존</li></ul>
       <div class="sec-lb">원인 분석</div>
       <ul class="hang"><li>물리 기록은 소프트웨어적 롤백이 불가능한데, 단순 통신 결과만으로 거래 성패를 판정하면 <b>고객이 투입한 현금을 잃는 방향으로 실패</b> 유발</li><li>성공·실패 2단 모델로는 &ldquo;잔액 확인 불가&rdquo; 상태를 표현할 수 없어 <b>클라이언트가 결과를 임의로 판단</b>하게 되는 구조</li><li>재시도가 서버 상태 확인 없이 반복되면 이즐 측의 <b>기존 성공 건과 충돌</b> 발생</li></ul>
+      <div class="sec-lb">대안 검토</div>
+      <ul class="hang"><li><b>통신 결과로 성공·실패를 판정</b>하는 방식 — 카드에는 이미 금액이 기록됐는데 서버는 실패로 처리 → <b>고객이 카드 잔액과 투입 현금을 모두 잃는 경로</b>가 생겨 기각. 진실을 서버의 통신 결과가 아닌 <b>카드에 기록된 잔액</b>으로 재정의하는 방향이 필요했음</li></ul>
       <div class="sec-lb">해결 과정</div>
       <ol class="steps">
         <li><span class="st-title">물리 상태 우선 원칙 — &ldquo;카드에 기록됐으면 거래는 성공이다&rdquo;</span>
@@ -356,7 +372,7 @@
       </div>
     </section>
     <section id="tax" class="pj" data-screen-label="Tax Refund">
-      <div class="pj-t"><span class="no">06</span><h3>Tax Refund <span class="sol">— 현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</span></h3><span class="pj-per">2024.04—12</span></div>
+      <div class="pj-t"><span class="no">05</span><h3>Tax Refund <span class="sol">— 현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</span></h3><span class="pj-per">2024.04—12</span></div>
       <p class="ctx">외국인 관광객이 키오스크에서 <b>부가세를 즉시 환급</b>받는 신규 서비스의 도메인과 환급사 연동 구조를 설계·개발했습니다. <b>현금이 물리적으로 방출된 뒤에는 롤백이 불가능</b>하고, <b>여권 등 민감정보를 다뤄 보관 최소화</b>가 요구되는 환경이었습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>선례 없는 도메인 설계</b>: 팀 내 첫 Tax Refund 도메인 구축으로 참고할 선례 없이 거래·환급 상태 모델을 처음부터 설계해야 하는 상황</li><li><b>확장성 부재</b>: 환급사 추가가 예정되어 있었으나, 환급사별 정책·계정·연동 규격을 담을 구조가 전무</li><li><b>보안 규약 충돌</b>: 여권 정보를 DB에 상시 보관할 수 없는 엄격한 보안 요구사항</li><li><b>정합성 불일치</b>: 운영 중 현금 방출 완료 후 환급사 승인 통보가 실패할 경우, 고객은 현금을 수령했으나 환급사에는 미승인으로 누락되는 <b>치명적 데이터 불일치</b> 발생</li></ul>
@@ -404,7 +420,7 @@
       </div>
     </section>
     <section id="mq" class="pj" data-screen-label="전사 알림 시스템 통합">
-      <div class="pj-t"><span class="no">07</span><h3>알림 발송 서비스 통합 <span class="sol">— 흩어진 발송 로직의 단일화와 유실 없는 발송 체계 구축</span></h3><span class="pj-per">2024 <span class="kstat" style="color:var(--muted-2);font-weight:600">하반기</span></span></div>
+      <div class="pj-t"><span class="no">06</span><h3>알림 발송 서비스 통합 <span class="sol">— 흩어진 발송 로직의 단일화와 유실 없는 발송 체계 구축</span></h3><span class="pj-per">2024 <span class="kstat" style="color:var(--muted-2);font-weight:600">하반기</span></span></div>
       <p class="ctx">환전·선불카드·Tax Refund 등 <b>서비스별로 흩어져 있던 알림 발송 로직을 단일 발송 서비스로 통합</b>하고 <b>채널·템플릿·재시도 정책을 표준화</b>한 프로젝트입니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>중복 구현</b>: 알림 코드가 프로젝트별로 개별 구현되어, 채널이나 문구를 바꾸려면 <b>4개 저장소를 동시에 수정하고 각각 배포</b>해야 하는 비효율 발생</li><li><b>거래 응답 지연</b>: 발송 호출이 거래 트랜잭션에 동기적으로 묶여 있어, <b>외부 발송사의 응답 지연이 거래 응답 시간에 그대로 전가</b>되는 구조</li><li><b>알림 유실</b>: 발송 실패 시 재처리 경로가 없어 누락 건을 운영자가 수동으로 확인해야 했고, <b>실패 원인에 대한 로그 가시성 부재</b></li></ul>
