@@ -8,10 +8,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  @page{size:A4;margin:0.5in}
-  html,body{margin:0;padding:0}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  doc-page{display:block}
+  doc-page:not(:defined){visibility:hidden}
   :root{--ink:#0b1220;--ink-2:#2a3142;--muted:#4f5867;--muted-2:#7b8497;--line:#dfe4ee;--line-2:#eceff6;--accent:#1d4ed8;--accent-soft:#eef4ff;--bg-soft:#f6f8fc;--font-sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;--font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
   doc-page{font-family:var(--font-sans);color:var(--ink);font-size:9.4pt;line-height:1.52;letter-spacing:-.01em}
   p,li,h1,h2,h3,h4,span{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
@@ -95,7 +93,8 @@
   .pj .sub{font-size:8.2pt;color:var(--muted);font-weight:600}
   .pj .per{margin-left:auto;font-family:var(--font-mono);font-size:7.2pt;color:var(--muted-2);white-space:nowrap}
   .pj .svc{margin:2pt 0 0 var(--pj-indent);font-size:8.2pt;color:var(--muted);line-height:1.35}
-  .pj ul.roles{margin:3pt 0 0 var(--pj-indent);padding:0;list-style:none;display:flex;flex-direction:column;gap:1.4pt}
+  .pj ul.roles{margin:3pt 0 0 var(--pj-indent);padding:0;list-style:none}
+  .pj ul.roles li+li{margin-top:1.4pt}
   .pj ul.roles li{position:relative;padding-left:8pt;font-size:8.2pt;line-height:1.36;color:var(--ink-2)}
   .pj ul.roles li::before{content:"";position:absolute;left:0;top:5pt;width:3.4pt;height:.6pt;background:var(--accent)}
   .pj .foot{margin-left:var(--pj-indent);margin-top:4pt;padding-top:4pt;border-top:.5pt dotted var(--line);display:flex;align-items:baseline;gap:4pt 8pt;flex-wrap:wrap;font-family:var(--font-mono);font-size:7.2pt;color:var(--muted-2);letter-spacing:.03em}
