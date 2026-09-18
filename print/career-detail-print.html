@@ -10,6 +10,7 @@
 <style>
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   doc-page:not(:defined){visibility:hidden}
+  @media screen{html.printing{background:#fff}html.printing body{visibility:hidden}}
   :root{--ink:#0b1220;--ink-2:#2a3142;--muted:#4f5867;--muted-2:#7b8497;--line:#dfe4ee;--line-2:#eceff6;--accent:#1d4ed8;--accent-soft:#eef4ff;--bg-soft:#f6f8fc;--font-sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;--font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
   doc-page{font-family:var(--font-sans);color:var(--ink);font-size:9.4pt;line-height:1.5;letter-spacing:-.01em}
   p,li,h1,h2,h3,h4,span{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
@@ -119,14 +120,10 @@
 </script>
 <script>
   if (new URLSearchParams(location.search).has("print")) {
+    document.documentElement.classList.add("printing");
     const fire = () => setTimeout(() => window.print(), 500);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fire); else window.addEventListener("load", fire);
-  }
-</script>
-<script>
-  if (new URLSearchParams(location.search).has("print")) {
-    const fire = () => setTimeout(() => window.print(), 500);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fire); else window.addEventListener("load", fire);
+    window.addEventListener("afterprint", () => { if (history.length > 1) history.back(); else window.close(); });
   }
 </script>
 </body>
