@@ -120,6 +120,45 @@
   .edu-card .body{margin-top:4pt;padding-top:4pt;border-top:.6pt solid var(--line)}
   .kstat{font-family:var(--font-sans);font-weight:700;color:var(--accent)}
   .kmono{font-family:var(--font-sans)}
+  /* ============================================
+     Print page-break rules (visual design unchanged)
+     원칙: 개별 줄·카드 단위에만 break-inside:avoid,
+           헤더는 break-after:avoid로 다음 콘텐츠와 붙이기.
+           flex/grid 리스트는 block으로 전환해 분할 가능하게.
+     ============================================ */
+  /* 프로젝트 roles: flex-column → block (페이지 경계에서 쪼갤 수 있도록) */
+  .pj ul.roles{display:block}
+  .pj ul.roles>li{margin-top:1.4pt}
+  .pj ul.roles>li:first-child{margin-top:0}
+  /* 개별 줄/항목 단위 유지 (섹션·묶음 전체엔 적용 X) */
+  ul.hang li,
+  .pj ul.roles>li{
+    break-inside:avoid;
+    page-break-inside:avoid;
+    orphans:2;widows:2;
+  }
+  /* 작은 자기완결 카드/행은 통째로 유지 */
+  .duty,
+  .skill-row,
+  .edu-card{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+  /* 헤더/라벨을 다음 콘텐츠와 붙여 하단 여백 방지 */
+  section>header.sh,
+  .co-head,
+  .co-lede,
+  .duty .lb,
+  .pj .t,
+  .pj .svc,
+  .edu-card .top{
+    break-after:avoid;
+    page-break-after:avoid;
+  }
+  /* 문단 단위 위젯/고아 방지 */
+  .about p,
+  .co-lede,
+  .pj .svc{orphans:3;widows:3}
 </style>
 </head>
 <body>
