@@ -123,5 +123,11 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fire); else window.addEventListener("load", fire);
   }
 </script>
+<script>
+  if (new URLSearchParams(location.search).has("print")) {
+    const fire = () => setTimeout(() => window.print(), 500);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fire); else window.addEventListener("load", fire);
+  }
+</script>
 </body>
 </html>
