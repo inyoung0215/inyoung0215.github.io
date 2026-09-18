@@ -50,9 +50,8 @@
   .about p{margin:0 0 3pt;font-size:9pt;color:var(--muted);line-height:1.45}
   .about p b{color:var(--ink-2)}
   /* experience */
-  .co{padding-bottom:4pt}
-  .co::after{content:"";display:table;clear:both}
-  .stamp{float:left;width:58pt}
+  .co{position:relative;padding-bottom:4pt}
+  .stamp{position:absolute;left:0;top:0;width:58pt}
   .co-body{margin-left:70pt}
   .co+.co{margin-top:4pt;border-top:.6pt solid var(--line-2);padding-top:4pt}
   .stamp{padding-top:2pt;align-self:start}
@@ -121,6 +120,8 @@
   .edu-card .body{margin-top:4pt;padding-top:4pt;border-top:.6pt solid var(--line)}
   .kstat{font-family:var(--font-sans);font-weight:700;color:var(--accent)}
   .kmono{font-family:var(--font-sans)}
+  section,.co,.co-body,.duties,.duty,.pjs,.pj,.edu,.edu-card,ul.hang,ul.roles{break-inside:auto}
+  p,li{orphans:2;widows:2}
 </style>
 </head>
 <body>
