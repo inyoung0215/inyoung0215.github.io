@@ -80,52 +80,6 @@
   .cline .n{font-size:9.2pt;font-weight:800;color:var(--accent);letter-spacing:-.02em;font-feature-settings:"tnum"}
   .st{display:flex;gap:3pt;flex-wrap:wrap;padding-top:5pt;border-top:.6pt solid var(--line-2)}
   .tag{font-family:var(--font-mono);font-size:6.8pt;color:var(--muted);background:var(--bg-soft);border:.6pt solid var(--line-2);padding:1.4pt 4pt;border-radius:2.5pt;line-height:1.3}
-  /* ============================================
-     Print page-break rules (visual design unchanged)
-     원칙: 개별 줄·카드 단위에만 break-inside:avoid,
-           헤더는 break-after:avoid로 다음 콘텐츠와 붙이기.
-           metrics grid는 float 2컬럼으로 재구성해 페이지 경계 분할 허용.
-     ============================================ */
-  /* metrics: 2컬럼 그리드 → float 레이아웃 (시각적 2단은 유지, 페이지 경계에서 행 단위 분할 가능) */
-  .metrics{display:block}
-  .metrics::after{content:"";display:table;clear:both}
-  .m{
-    float:left;
-    width:calc(50% - 2pt);
-    box-sizing:border-box;
-    margin-top:4pt;
-  }
-  .m:nth-child(2n+1){clear:left;margin-right:4pt}
-  .m:nth-child(-n+2){margin-top:0}
-  /* 개별 줄/항목 단위 유지 */
-  ul.hang li,
-  ol.steps>li,
-  ol.steps .sub li{
-    break-inside:avoid;
-    page-break-inside:avoid;
-    orphans:2;widows:2;
-  }
-  /* 작은 자기완결 카드는 통째로 유지 */
-  .m,
-  .pts .it{
-    break-inside:avoid;
-    page-break-inside:avoid;
-  }
-  /* 헤더/라벨을 다음 콘텐츠와 붙여 하단 여백 방지 */
-  .doc-head .kicker,
-  .doc-head h1,
-  .pj-t,
-  .sec-lb,
-  .q .qt,
-  .sum .k{
-    break-after:avoid;
-    page-break-after:avoid;
-  }
-  /* 문단 위젯/고아 방지 */
-  .ctx,
-  .q .qa,
-  .sum .role,
-  .pts .it .d{orphans:3;widows:3}
 </style>
 </head>
 <body>
