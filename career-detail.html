@@ -479,13 +479,13 @@
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>새벽 통화 집중</b>: 사무소에 "내일 일 있어요?"(근로자) · "5명 보내주세요"(업체) · "일 구하려는데요"(신규)가 05~07시 창에 몰림. 사람이 통화를 받는 것 자체가 병목</li><li><b>사용자층 제약</b>: 50~60대 · 야외 · 저사양 안드로이드 · 장갑. 색 판별·호버·스피너·disabled 상태가 모두 무너지는 조건</li><li><b>법적 책임선</b>: 유료직업소개사업자는 <b>구인자·구직자 자격 확인 의무</b>를 집니다. 요청을 자동으로 공고로 만들거나 미확인자를 배정하면 사업자 자격 자체가 흔들립니다</li><li><b>바이브 코딩의 한계</b>: AI는 "그럴듯한 흐름"을 빠르게 만들지만 <b>이 사업장의 실제 전제·규모·법적 선</b>을 모릅니다. 셔틀 전제, 하루 3~5건 가정, 알림톡 발송 기준 등을 처음엔 전부 틀리게 잡았습니다</li></ul>
       <div class="sec-lb">원인 분석</div>
-      <ul class="hang"><li>통화가 줄지 않는 이유는 "앱이 없어서"가 아니라 <b>"앱이 있어도 눌러지지 않거나, 보여야 할 값이 가려지거나, 판단 재료가 부족하기 때문"</b> → UI 규격을 사용자층 조건으로 역산해야 함</li><li>AI 제안을 그대로 받으면 <b>잘못된 전제 위에 쌓이는 모델</b>이 됩니다 (셔틀 가정으로 commute 컬럼, 소규모 가정으로 관리자 화면 설계). 전제가 틀렸을 때 뒤집는 비용이 코드가 늘수록 커짐</li><li>측정 도구가 조용히 "성공했다"고 말하는 경로가 여러 겹이었습니다 (프로덕션 빌드에서 배율 적용 안 됨 / 죽은 서버 응답 / 빈 CSS / 포트 두 개). <b>통과했다는 말을 믿기 전에 뭘 쟀는지부터 봐야 함</b></li></ul>
+      <ul class="hang"><li>통화가 줄지 않는 이유는 "앱이 없어서"가 아니라 <b>"앱이 있어도 눌러지지 않거나, 보여야 할 값이 가려지거나, 판단 재료가 부족하기 때문"</b> → UI 규격을 사용자층 조건으로 역산해야 함</li><li>AI 제안을 그대로 받으면 <b>처음 가정이 틀렸을 때 뒤집는 비용이 코드가 늘수록 커짐</b> (셔틀 가정으로 commute 컬럼, 소규모 가정으로 관리자 화면 설계)</li><li>측정 도구가 조용히 "성공했다"고 말하는 경로가 여러 겹이었습니다 (프로덕션 빌드에서 배율 적용 안 됨 / 죽은 서버 응답 / 빈 CSS / 포트 두 개). <b>'통과'라고 뜰 때 뭘 쟀는지부터 봐야 함</b></li></ul>
       <div class="sec-lb">해결 과정</div>
       <ol class="steps">
         <li><span class="st-title">판단 기록 중심 — DECISIONS.md 43건</span>
           <ul class="sub">
-            <li>각 결정을 <b>"결정 · 근거 · 대안과 기각 사유 · 따라오는 것"</b> 네 조각으로 서술. 되돌리려는 사람이 근거를 먼저 읽게 하는 구조</li>
-            <li>특히 <b>틀렸다가 바로잡은 것</b>을 명시 — 셔틀 전제 폐기로 <code>commute</code> 컬럼을 지우고 좌표 중요도 상승(D-02), 규모 가정 재정의로 관리자 보드 재설계, 알림톡 판별을 <code>auth_user_id</code>에서 전화번호로 교체. 처음부터 맞은 결정보다 설득력 있는 기록</li>
+            <li>결정마다 <b>왜 그렇게 했는지, 뭘 안 했는지, 그 뒤에 뭐가 따라오는지</b>를 같이 적음. 나중에 뒤집으려는 사람이 이유를 먼저 보도록</li>
+            <li>특히 <b>처음 가정이 틀려서 뒤집은 것</b>을 적어둠 — 셔틀 전제 폐기로 <code>commute</code> 컬럼을 지우고 좌표 중요도 상승(D-02), 규모 가정 재정의로 관리자 보드 재설계, 알림톡 판별을 <code>auth_user_id</code>에서 전화번호로 교체</li>
           </ul>
         </li>
         <li><span class="st-title">법적 책임선을 스키마로 — 코드가 지키지 않아도 DB가 가로막음</span>
@@ -495,9 +495,9 @@
             <li>거절 사유는 text 아닌 <b>enum + CHECK 제약</b>(D-22). 한국어 문장으로 저장했다가 <b>조회가 조용히 0건</b>이 되는 결제 도메인 패턴을 반복하지 않기 위해</li>
           </ul>
         </li>
-        <li><span class="st-title">조용한 실패 추적 — 측정 도구를 네 번 의심해 네 번 다 교정</span>
+        <li><span class="st-title">통계가 조용히 0을 뱉는 버그 잡기 · 측정 도구를 네 번 의심해 네 번 다 교정</span>
           <ul class="sub">
-            <li><b>통계 뷰 권한 누락</b>: <code>service_role</code>에 SELECT가 빠져 M-2 지원자 카드의 "최근 3개월 결근 N회"가 조용히 0으로 리턴. <b>결근 이력 있는 근로자가 "결근 없음"으로 보여 배정 판단에 직접 영향</b>. <code>ALTER DEFAULT PRIVILEGES</code>로 기본값 자체를 교정, 코드 쪽은 오류를 던지도록 변경</li>
+            <li><b>통계 뷰 권한 누락</b>: <code>service_role</code>에 SELECT가 빠져 M-2 지원자 카드의 "최근 3개월 결근 N회"가 0으로 리턴. <b>결근 이력 있는 근로자가 "결근 없음"으로 보여 배정 판단에 직접 영향</b>. <code>ALTER DEFAULT PRIVILEGES</code>로 기본값 자체를 교정, 코드 쪽은 오류를 던지도록 변경</li>
             <li><b>측정 도구 교정 4건</b>: ① <code>dev-scale</code>이 프로덕션 빌드에서 null 반환해 모든 "1.3배" 검사가 실제로는 1.0배였음 → CDP로 배율을 직접 걸기. ② 죽은 dev 서버의 연결 실패 페이지를 재서 1,260건 위반 보고 → <code>&lt;main&gt;</code> 존재 확인. ③ 빈 CSS 서빙 서버를 재서 180건 위반 보고 → CSS 변수로 스타일 로드 판별. ④ 포트 두 개가 떠서 어제 서버로 카탈로그를 찍고 있었음 → <b>두 곳에서 응답하면 고르지 않고 멈추기</b></li>
             <li>환경변수 누락 시 "Invalid URL" 대신 <b>빠진 변수 이름을 즉시 던지기</b>(<code>env.ts</code>) · 크론 라우트에 <code>CRON_SECRET</code> 없으면 401 — <b>설정을 빠뜨린 채 열린 주소를 두지 않음</b></li>
           </ul>
@@ -525,9 +525,9 @@
         </li>
       </ol>
       <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">설계 결정 기록</div><div class="mv"><span class="before">판단 근거가 흩어져 있음</span><span class="ar">→</span><span class="after">결정 43건을 "근거 · 대안 · 따라오는 것" 구조로 문서화 · 바이브 코딩에서 "무엇을 판단했는가"의 증거</span></div></div><div class="m"><div class="mk">법적 책임선 코드화</div><div class="mv"><span class="before">앱 필터 한 곳만 빠뜨리면 미확인자가 배정</span><span class="ar">→</span><span class="after">NOT NULL + DB 트리거로 insert 시점에 가로막음 · 화면 코드가 지키지 않아도 DB가 지킴</span></div></div><div class="m"><div class="mk">조용한 실패 가시화</div><div class="mv"><span class="before">측정 도구가 "통과했다"고 하지만 실제로는 아무것도 재지 않음</span><span class="ar">→</span><span class="after">측정 도구 4건 교정 + 뷰 권한 기본값 교정 · "통과했다는 말" 전에 "무엇을 쟀는가" 먼저 확인</span></div></div><div class="m"><div class="mk">실제 배포</div><div class="mv"><span class="after">가족 사업장 운영용으로 <code>the-kium.co.kr</code>에 배포 완료 · 운영 환경 검증 진행 중</span></div></div></div>
+      <div class="metrics"><div class="m"><div class="mk">설계 결정 기록</div><div class="mv"><span class="before">판단 근거가 흩어져 있음</span><span class="ar">→</span><span class="after">결정 43건을 "왜 그렇게 했는지 · 뭘 안 했는지"로 문서화 · 바이브 코딩에서 어디서 판단했는지의 증거</span></div></div><div class="m"><div class="mk">법적 책임선 코드화</div><div class="mv"><span class="before">앱 필터 한 곳만 빠뜨리면 미확인자가 배정</span><span class="ar">→</span><span class="after">NOT NULL + DB 트리거로 insert 시점에 가로막음 · 화면 코드가 지키지 않아도 DB가 지킴</span></div></div><div class="m"><div class="mk">숨은 통계 오류 교정</div><div class="mv"><span class="before">측정 도구가 "통과"로 뜨지만 실제로는 아무것도 재지 않음</span><span class="ar">→</span><span class="after">측정 도구 4건 교정 + 뷰 권한 기본값 교정 · '통과'라고 뜰 때 뭘 쟀는지부터 보기</span></div></div><div class="m"><div class="mk">실제 배포</div><div class="mv"><span class="after">가족 사업장 운영용으로 <code>the-kium.co.kr</code>에 배포 완료 · 운영 환경 검증 진행 중</span></div></div></div>
       <div class="sec-lb">배운 점</div>
-      <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">바이브 코딩에서 <b>진짜 산출물은 코드가 아니라 "무엇을 판단했는가의 기록"</b>이라는 걸 배웠습니다. 셔틀 전제가 틀렸음을 알고 컬럼을 지운 것, 규모 가정이 틀렸음을 알고 화면을 다시 그린 것, 알림톡 판별 기준이 틀렸음을 알고 재편한 것 — 이 지점들이 설계였고, 코드는 그 판단을 받아 적는 쪽이었습니다. 또한 <b>측정 도구가 "통과했다"고 말할 때 가장 의심해야 한다</b>는 것 — 환경 하나가 어긋나면 네 겹의 검사가 모두 아무것도 재지 않는 상태가 됩니다. 실무 결제 도메인에서 "응답 코드 체계 표준화"로 미분류 예외를 D999 폴백에 몰아 두던 사고가, 여기서는 "조용한 실패 추적"으로 그대로 적용됐습니다. 스택과 도메인이 바뀌어도 <b>"조용한 실패를 거부하는 사고"</b>는 그대로 작동한다는 것을 확인했습니다.</p>
+      <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">바이브 코딩에서 <b>짠 코드보다 "왜 이렇게 짰는지"를 적어둔 게 더 쓸모 있다</b>는 걸 겪었습니다. 셔틀 전제, 규모 가정, 알림톡 판별 기준 — 처음 깔아둔 전제가 모두 한 번씩 틀렸고, 그걸 뒤집어 적어둔 기록이 지금까지 가장 많이 참조하는 자료가 됐습니다. 측정 도구도 그렇습니다. <b>"통과"로 뜰 때 뭘 쟀는지부터 보지 않으면, 환경 하나가 어긋나서 검사 네 개가 다 비어있는 걸 못 알아챕니다.</b> 결제 도메인에서 미분류 예외를 D999 폴백에 몰아 두던 것과 같은 류의 교훈을, 스택이 바뀐 자리에서 다시 받았습니다.</p>
       <div class="sum">
         <div><span class="k">담당 범위</span><div class="role"><b>단독 개발</b>. 설계 결정 43건 문서화(DECISIONS.md), 스키마·DB 트리거·뷰 권한 설계, 측정 도구(CDP 레이아웃 검사·화면 카탈로그·링크 검사) 자체 작성, 감사 로그·개인정보·크론·알림톡 설계.</div></div>
         <div class="cline"><span class="lbl">기여도</span><span class="n">단독</span></div>
