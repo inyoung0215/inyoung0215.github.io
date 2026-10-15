@@ -355,6 +355,15 @@
           <div class="st"><span class="tag">Kotlin</span><span class="tag">Kafka</span><span class="tag">Spring Batch</span></div>
           <div class="links"><a href="https://github.com/inyoung0215/fankit" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
+        <div class="card nolink">
+          <div class="t"><span class="no">13</span><span class="org personal">SIDE</span><span class="p">2026.09—</span></div>
+          <h4>더키움 — 건설 일용직 인력사무소 배차 서비스</h4>
+          <div class="sub">새벽 사무실 인바운드 통화를 없애는 것이 유일한 지표</div>
+          <p class="svc"><span class="kstat">설계 결정 43건 기록</span> · <span class="kstat">법적 책임선을 스키마로 강제</span> — 실제 사업장에 배포한 Next.js·Supabase 기반 서비스. AI 활용 코딩 but 판단·설계·검증 체계는 직접 구성</p>
+          <ul class="roles"><li><b>판단 기록 중심</b> — 설계 결정 43건을 "결정·근거·대안과 기각 사유·따라오는 것" 구조로 문서화 (DECISIONS.md). AI 제안을 뒤집은 지점(셔틀 전제 폐기·규모 재정의·알림톡 판별 재편)이 핵심</li><li><b>법적 책임선을 코드로</b> — 유료직업소개사업자의 구인·구직자 자격 확인 의무를 <code>jobs.site_id/daily_wage NOT NULL</code> + <b>DB 트리거</b>로 가로막아, 화면 한 곳만 빠뜨려도 미확인자가 배정되지 않도록 설계</li><li><b>조용한 실패 추적</b> — <code>service_role</code> 뷰 권한에 SELECT 가 빠져 통계가 조용히 0 리턴(결근 이력 있는 자가 "결근 없음"으로 표시) → <code>ALTER DEFAULT PRIVILEGES</code>로 재발 방지. 측정 도구(dev-scale·check-layout·catalog)가 "성공했다"고 말하지만 실제로 아무것도 재지 않던 사례 4건을 추적·교정 (두 서버 응답 시 멈추기·CDP로 배율 직접 걸기·CSS 변수로 스타일 로드 판별)</li><li><b>감사 로그·개인정보</b> — <code>assignment_logs</code>·<code>id_card_access_logs</code>·<code>consents</code>를 FK 없이 append-only로. 신분증은 private 버킷 + 60초 서명 URL + 접근기록 + 썸네일 금지. 주민번호·계좌 컬럼 미보유</li><li><b>Best-effort 크론 감당</b> — Vercel 크론 전달 보장 X 를 20:00~22:00 창 + 30분 재시도로 설계. 중복 호출은 <code>notification_logs</code> 부분 유니크 + 선점 후 발송 순서로 DB 가 막음</li><li><b>솔직한 상태</b>: 실사용자 0명·3주차 검증 ("새벽 통화 감소 여부") 앞 · 실기기(안드로이드·카톡 인앱) 미확인 · 바이브 코딩 명시</li></ul>
+          <div class="st"><span class="tag">Next.js 15</span><span class="tag">TypeScript</span><span class="tag">Supabase</span><span class="tag">Postgres</span><span class="tag">Vercel</span></div>
+          <div class="links"><a href="https://the-kium.co.kr" target="_blank" rel="noopener">Live ↗</a></div>
+        </div>
       </div>
       <a class="doc-wide" href="career-detail.html">
         <span class="t">

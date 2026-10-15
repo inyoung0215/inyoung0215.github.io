@@ -244,6 +244,12 @@
         <ul class="roles"><li><b>Payment/Settlement 중심 구현</b> — Saga 오케스트레이션과 멱등성 처리 우선 구현</li><li>DB 고유 키 + Redis 이중 체크 <b>멱등성 키</b>로 중복 결제 차단</li><li><b>Transactional Outbox 패턴</b>으로 DB 저장과 이벤트 발행 원자성 확보</li><li><b>Spring Batch</b> 기반 정산 배치 학습 + Testcontainers 통합 테스트</li></ul>
         <div class="foot"><span class="st">Kotlin · Kafka · Spring Batch</span><span class="url">github.com/inyoung0215/fankit</span></div>
       </div>
+      <div class="pj">
+        <div class="t"><span class="no">13</span><span class="org side">SIDE</span><h4>더키움</h4><span class="sub">건설 일용직 인력사무소 배차 서비스 · 새벽 사무실 통화 감소를 유일 지표로</span><span class="per">2026.09—</span></div>
+        <p class="svc"><b>설계 결정 43건 기록</b> · <b>법적 책임선을 스키마로 강제</b> — 실제 사업장 배포한 Next.js·Supabase 서비스. AI 활용 코딩 but 판단·설계·검증 체계는 직접 구성</p>
+        <ul class="roles"><li><b>판단 기록 중심</b> — 설계 결정 43건을 "결정·근거·대안과 기각 사유·따라오는 것" 구조로 문서화. AI 제안을 뒤집은 지점(셔틀 전제 폐기·규모 재정의·알림톡 판별 재편)이 핵심</li><li><b>법적 책임선을 코드로</b> — 유료직업소개사업자 자격 확인 의무를 <code>NOT NULL</code> + <b>DB 트리거</b>로 가로막아, 화면 한 곳 누락 시에도 미확인자 배정 차단</li><li><b>조용한 실패 추적</b> — <code>service_role</code> 뷰 권한 누락으로 통계가 조용히 0 리턴(결근 이력자가 "결근 없음") → <code>ALTER DEFAULT PRIVILEGES</code> 재발 방지. 측정 도구 4건의 "성공했다지만 아무것도 재지 않던" 사례 추적·교정</li><li><b>감사 로그·개인정보</b> — FK 없이 append-only, 신분증 private 버킷 + 60초 서명 URL + 접근기록, 주민번호·계좌 컬럼 미보유</li><li><b>Best-effort 크론 감당</b> — 창(window) + 30분 재시도 설계. 중복은 <code>notification_logs</code> 부분 유니크 + 선점 후 발송으로 DB 가 막음</li><li><b>솔직한 상태</b>: 실사용자 0명·3주차 검증 앞·실기기 미확인·바이브 코딩 명시</li></ul>
+        <div class="foot"><span class="st">Next.js 15 · TypeScript · Supabase · Postgres · Vercel</span><span class="url">the-kium.co.kr</span></div>
+      </div>
     </div>
   </section>
 
