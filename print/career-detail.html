@@ -121,9 +121,9 @@
   </header>
 
   <div class="cases-start">
-    <section id="grafana" class="pj" data-screen-label="그라파나 관측 스택 신규 구축">
-      <div class="pj-t"><span class="no">07</span><h3>그라파나 관측 스택 도입 · 신규 구축 <span class="sol">— 로그만 있던 환경에 통합 모니터링 도입</span></h3><span class="pj-per">2026.08—</span></div>
-      <p class="ctx">팀 내 서비스 클러스터에 <b>통합 모니터링 시스템이 부재</b>하여, 오류 발생 시 각 컨테이너의 로그를 개별적으로 확인해야만 상태를 파악할 수 있었습니다. 늘어나는 서비스 환경에서 <b>운영 비효율을 해결</b>하고자 <b>관측(Observability) 스택 도입을 제안하고 구축</b>하였습니다.</p>
+    <section id="grafana" class="pj" data-screen-label="그라파나 관측 스택 PoC 구성">
+      <div class="pj-t"><span class="no">07</span><h3>그라파나 관측 스택 PoC 구성 <span class="sol">— 로그만 있던 환경에 통합 모니터링을 개발계 PoC로 구성</span></h3><span class="pj-per">2026.08—</span></div>
+      <p class="ctx">팀 내 서비스 클러스터에 <b>통합 모니터링 시스템이 부재</b>하여, 오류 발생 시 각 컨테이너의 로그를 개별 확인해야만 상태를 파악할 수 있었습니다. 운영 효율 개선 방향을 제시하기 위해 <b>관측(Observability) 스택을 개발계 PoC로 구성하고 도입을 제안</b>하였습니다. (알림 규칙은 기존 Slack 경로를 그대로 사용)</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li>팀 내에 <b>통합 모니터링 시스템 부재</b> → 로그 조회 외 서비스 상태 파악 불가</li><li>서비스 오류 발생 시 각 컨테이너 로그를 <b>개별 확인</b>해야 해 재현·진단 시간 과다</li><li>JVM 힙·CPU·스레드·DB Pool 등 <b>실시간 지표 확인 수단 부재</b></li><li>팀 리드가 fleet 전체 상태를 한눈에 볼 수 있는 <b>통합 화면 부재</b></li></ul>
       <div class="sec-lb">원인 분석</div>
@@ -161,12 +161,12 @@
         </li>
       </ol>
       <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">이슈 분석 소요 시간 단축 · 서비스 간 흐름 통합 조회</div><div class="mv"><span class="before">여러 서비스·컨테이너 로그를 오가며 개별 대조 (최소 5~10분)</span><span class="ar">→</span><span class="after">통합 대시보드에서 요청 흐름을 한 번에 조회 · 서비스명/URI 클릭 시 관련 로그 자동 필터 (1~2분)</span></div></div><div class="m"><div class="mk">일일 로그 점검 시간 단축</div><div class="mv"><span class="before">매일 서버별 로그 파일 순차 확인 · 개발자 시간 잠식</span><span class="ar">→</span><span class="after">홈 대시보드에서 즉시 이상 여부 확인 → 개발 리소스 확보</span></div></div><div class="m"><div class="mk">실시간 이상 감지</div><div class="mv"><span class="before">JVM 힙·CPU·DB Pool 확인 수단 없음 · 장애 이후 로그로 추정</span><span class="ar">→</span><span class="after">Application Runtime 대시보드에서 실시간 확인 · 임계치 접근 시 즉시 대응</span></div></div></div>
+      <div class="metrics"><div class="m"><div class="mk">서비스 간 흐름 통합 조회</div><div class="mv"><span class="before">서버·컨테이너마다 접속하여 로그 파일을 개별 확인</span><span class="ar">→</span><span class="after">통합 대시보드에서 요청 흐름을 한 화면에서 조회 · 서비스명/URI 클릭 시 관련 로그 자동 필터로 넘어가는 드릴다운</span></div></div><div class="m"><div class="mk">일일 로그 점검 시간 단축</div><div class="mv"><span class="before">매일 서버별 로그 파일 순차 확인 · 개발자 시간 잠식</span><span class="ar">→</span><span class="after">홈 대시보드에서 즉시 이상 여부 확인 → 개발 리소스 확보</span></div></div><div class="m"><div class="mk">실시간 이상 감지</div><div class="mv"><span class="before">JVM 힙·CPU·DB Pool 확인 수단 없음 · 장애 이후 로그로 추정</span><span class="ar">→</span><span class="after">Application Runtime 대시보드에서 실시간 확인 · 임계치 접근 시 즉시 대응</span></div></div></div>
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">관측 스택을 구축하며 가장 크게 배운 것은 <b>도구를 붙이는 일보다 &ldquo;무엇을 볼 것인가&rdquo;를 정의하는 일이 훨씬 어렵다</b>는 사실이었습니다. Grafana·Prometheus·Loki 같은 도구는 문서만 따라가면 붙일 수 있지만, 우리 팀이 실제로 필요한 지표—어떤 시점에 무엇을 확인해야 오류를 좁힐 수 있는지—를 정의하는 데 훨씬 많은 시간이 들었습니다. 관측의 시작은 도구가 아니라 <b>&ldquo;답을 찾기 위한 질문을 먼저 정의하는 일&rdquo;</b>이라는 것을 이 프로젝트에서 확실히 배웠습니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">관측 스택 <b>도입 제안 및 아키텍처 설계·구축</b>, 자동 온보딩 규약 정립, Docker Swarm configs 관리 패턴 개발, 대시보드 판넬 개발 및 팀 리드 피드백 반영, 온보딩·아키텍처·배포·트러블슈팅 문서화.</div></div>
-        <div class="cline"><span class="lbl">기여도</span><span class="n">90%</span></div>
+        <div><span class="k">담당 범위</span><div class="role">관측 스택 <b>도입 제안 및 개발계 PoC 아키텍처 구성</b>, 자동 온보딩 규약 정립, Docker Swarm configs 관리 패턴 정립, 대시보드 판넬 구성 및 팀 리드 피드백 반영, 온보딩·아키텍처·배포·트러블슈팅 문서화. (알림 규칙은 기존 Slack 경로 사용)</div></div>
+        <div class="cline"><span class="lbl">기여도</span><span class="n">단독 (개발계 PoC)</span></div>
         <div class="st"><span class="tag">Docker Swarm</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Loki</span><span class="tag">Alloy</span><span class="tag">PromQL</span><span class="tag">LogQL</span><span class="tag">Nginx</span></div>
       </div>
     </section>
@@ -184,15 +184,15 @@
         <li><span class="st-title">응답 통보 보장 설계 — &ldquo;어떤 경우에도 종료 코드는 전송된다&rdquo;</span>
           <ul class="sub">
             <li>화면 단위 이탈 지점을 <b>전수 조사</b>해 거래중단 코드 <b>14종</b>을 정의하고, 하드웨어 장애·한도 초과 등을 포함한 <b>결과코드 51종</b> 체계 정립</li>
-            <li>내부 에러코드 ↔ 카드사 결과코드 <b>양방향 매핑 테이블</b>을 구성하고, 미분류 예외는 <b>D999로 폴백</b>시켜 종료 코드 누락 경로 원천 차단</li>
+            <li>내부 에러코드 ↔ 카드사 결과코드 <b>양방향 매핑 테이블</b>을 구성하고, 미분류 예외는 <b>D999로 폴백</b>시켜 종료 코드 누락 경로를 차단</li>
             <li>종료 코드 전송을 <code>@TransactionalEventListener(AFTER_COMPLETION)</code> + <code>REQUIRES_NEW</code>로 분리하여 <b>거래가 롤백되어도 카드사 통보는 보장</b></li>
             <li>전송 결과를 이탈 추적 테이블에 적재해 <b>사후 대사 검증 체계</b> 마련</li>
           </ul>
         </li>
-        <li><span class="st-title">외부 통신 재시도 표준화 — 중복 충전 차단</span>
+        <li><span class="st-title">체크인서울 연동 재시도 정책 정립 — 중복 충전 차단</span>
           <ul class="sub">
-            <li>흩어져 있던 예외 처리를 <code>RetryableCallExecutor</code> / <code>RetryExecutor</code>로 일원화하고 도메인별 카운터를 Redis로 격리 관리</li>
-            <li>재시도 대상을 <b>통신 계층 오류(연결 실패·타임아웃) 2종으로만 한정</b>하고 비즈니스 오류는 즉시 실패시켜 <b>중복 충전 리스크 원천 차단</b></li>
+            <li>체크인서울 연동 한정으로 흩어져 있던 예외 처리를 <code>RetryableCallExecutor</code> / <code>RetryExecutor</code>로 일원화 (총 3회 호출 = 재시도 2회, 백오프 없음)</li>
+            <li>재시도 대상은 <b>통신 계층 오류(연결 실패·타임아웃) 2종으로만 한정</b>하고, <b>5xx 응답은 재시도하지 않음</b> · 비즈니스 오류는 즉시 실패시켜 <b>중복 충전 리스크 차단</b></li>
             <li>카드사 규격에 맞춰 <b>재시도 차수를 요청에 실어 전송</b>하고, 차수에 따라 응답 코드를 단계화하여 불필요한 운영 알림 방지</li>
           </ul>
         </li>
@@ -210,8 +210,8 @@
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">정합성이 중요한 도메인에서는 데이터가 지나는 경로마다 <b>실패 시나리오를 함께 설계</b>해야 합니다. 이 프로젝트에서 안정성을 가른 것도 정상 흐름이 아니라 <b>이탈·타임아웃 같은 예외 경로를 얼마나 빠짐없이 코드 체계로 고정했는가</b>였습니다. 특히 <b>&ldquo;무엇을 재시도하면 안 되는가&rdquo;를 정의하는 일이 재시도 로직 자체보다 중요하다</b>는 것을 배웠습니다. 통신 오류와 비즈니스 오류를 구분하지 않았다면 재시도가 곧 중복 충전이 되었을 것입니다. 또한 <b>외부에 알려야 할 사실은 거래 트랜잭션과 생명주기를 분리해야 한다</b>는 것도 이번에 체감했습니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">선불카드 백엔드 도메인 설계·구현, <b>정산 대사가 성립하는 응답 통보 체계 설계</b>(결과코드 51종·에러코드 65종·D999 폴백 · 정산 대사 로직 자체는 카드사/별도 시스템 소유), <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code> 트랜잭션 분리, 외부 통신 재시도 표준화(<code>RetryableCallExecutor</code>/<code>RetryExecutor</code>), <b>DurableCache</b> 캐시 폴백 모듈 설계(제네릭 추상·3도메인 재사용), 기획 시나리오 그룹 31개 검토 및 <b>테스트 코드 156케이스(4,400줄) 작성</b>, 롯데카드 통합 QA 대응.</div></div>
-        <div class="cline"><span class="lbl">기여도</span><span class="n">40%</span></div>
+        <div><span class="k">담당 범위</span><div class="role"><b>백엔드 2인 체제의 주 담당</b>으로 선불카드 백엔드 도메인 설계·구현, <b>정산 대사가 성립하는 응답 통보 체계 설계</b>(결과코드 51종·에러코드 65종·D999 폴백 · 정산 대사 로직 자체는 카드사/별도 시스템 소유), <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code> 트랜잭션 분리, 체크인서울 연동 재시도 정책 정립(총 3회·백오프 없음·5xx 재시도 제외, <code>RetryableCallExecutor</code>/<code>RetryExecutor</code>), <b>DurableCache</b> 캐시 폴백 모듈 설계(제네릭 추상·3도메인 재사용), 기획 시나리오 그룹 31개 검토 및 <b>테스트 코드 156케이스(4,400줄) 작성</b>, 롯데카드 통합 QA 대응.</div></div>
+        <div class="cline"><span class="lbl">기여도</span><span class="n">백엔드 2인 중 주 담당</span></div>
         <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">JUnit5</span></div>
       </div>
     </section>
@@ -232,16 +232,14 @@
         </li>
         <li><span class="st-title">4계층 중복 수령 방어 설계 (핵심)</span>
           <ul class="sub">
-            <li>&ldquo;락을 어디에 거느냐&rdquo;보다 <b>&ldquo;어느 범위를 하나의 단위로 묶느냐&rdquo;</b>에 집중하여, 성능과 안전성을 모두 잡는 4계층 방어 체계 구축</li>
-            <li><b>1계층 (Redis 진행 플래그, TTL 24h)</b>: 사용자의 단순 재스캔·재요청 차단</li>
-            <li><b>2계층 (Redisson 분산락, 수령 확정 지점)</b>: 멀티 인스턴스 환경의 동시 진입 직렬화 (락 점유 시간 최소화를 위해 확정 지점 한 곳에만 적용, wait 3s / lease 5s, fail-fast)</li>
-            <li><b>3계층 (거래 컨텍스트 스냅샷 동등성 검증)</b>: 단말기 및 조건 변조 여부 검증</li>
-            <li><b>4계층 (<code>tb_agency_product_confirm.product_no UNIQUE</code>)</b>: 최종 물리 방어선</li>
+            <li>&ldquo;락을 어디에 거느냐&rdquo;보다 <b>&ldquo;어느 범위를 하나의 단위로 묶느냐&rdquo;</b>에 집중하여 방출 전 선제 차단 3계층 + 사후 안전망 1계층의 방어 체계를 구성</li>
+            <li><b>방출 전 선제 차단</b>: ① Redis 진행 플래그(TTL 24h, 재스캔·재요청 차단) → ② Redisson 분산락(수령 확정 지점 한 곳에만 적용, wait 3s / lease 5s, fail-fast) → ③ 거래 컨텍스트 스냅샷 동등성 검증(단말기·조건 변조 검증)</li>
+            <li><b>사후 안전망</b>: <code>tb_agency_product_confirm.product_no UNIQUE</code> — 수령 확정 테이블의 UNIQUE 제약은 방출 후 확정 insert 시점에 중복을 감지하는 안전망이며, 방출 자체를 사전에 막는 수단은 아님</li>
           </ul>
         </li>
-        <li><span class="st-title">2-Phase 방출 프로토콜 + 장애 복구 경로</span>
+        <li><span class="st-title">선기록 후확정 방출 + 장애 복구 경로</span>
           <ul class="sub">
-            <li>방출 직전 방출 이력을 <b>PENDING</b>으로 선기록하고 <code>releaseId</code> 발급 · 방출 직후 결과에 따라 <b>SUCCESS/FAILED</b>로 확정</li>
+            <li>방출 전에 대기 이력을 <b>PENDING</b>으로 선기록하고 <code>releaseId</code> 발급 · 방출 결과에 따라 <b>SUCCESS/FAILED</b>로 확정하는 자체 설계 (2PC 같은 분산 트랜잭션 프로토콜이 아닌, 확정 시점을 방출 성공 뒤로 미룬 상태 전이 설계)</li>
             <li>상태 전이를 방출 성공 시점까지 지연시켜, <b>실패 시 원복해야 할 상태 자체가 남지 않는 구조</b> 설계 (별도 보상 트랜잭션 불필요)</li>
             <li>방출 확정 직후 지연 큐에 메시지를 발행해, 일정 시간 내 결과가 오지 않은 <b>미확정 거래를 자동 감지·알림</b></li>
             <li>통신 단절 건을 위한 <b>장애 후처리 전용 API</b> 제공 → <code>releaseId</code> 기준으로 거래를 복구하고, 원장에 정상/장애 거래를 플래그로 분기 기록하여 <b>운영자 DB 직접 수정 없이 복구 가능</b>한 체계 정립</li>
@@ -249,17 +247,17 @@
         </li>
         <li><span class="st-title">이벤트 발행 안정화 및 B2B 정산 원장 스키마 설계</span>
           <ul class="sub">
-            <li>슬랙·정산 알림을 <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 전환하여, <b>롤백된 거래가 알림으로 새어나가는 문제 원천 차단</b></li>
+            <li>슬랙·정산 알림을 <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 전환하여, <b>롤백된 거래가 알림으로 새어나가는 경로를 차단</b></li>
             <li>투입금 0원 거래에 <b>계약 단가·판매 수수료·카드 정가를 분리 기록</b>하여 파트너별 복합 정산이 가능한 원장 구조 설계</li>
           </ul>
         </li>
       </ol>
       <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">중복 방출 방지</div><div class="mv"><span class="before">각 단계 독립 실행 · 재시도 시 중복 방출 가능</span><span class="ar">→</span><span class="after">4계층 방어 체계(진행 플래그·확정 지점 락·스냅샷·DB UNIQUE)로 중복 방출 0건</span></div></div><div class="m"><div class="mk">미확정 거래 자동 처리</div><div class="mv"><span class="before">통신 단절 시 운영자 수동 DB 수정 필요</span><span class="ar">→</span><span class="after">지연 큐 자동 감지 + 복구 전용 API로 운영자 수동 개입 제거</span></div></div><div class="m"><div class="mk">롤백 불가 물리 동작 대응</div><div class="mv"><span class="before">상태 확정 후 실패 시 보상 필요(원복 불가)</span><span class="ar">→</span><span class="after">2-Phase 프로토콜로 보상 트랜잭션 불필요 구조</span></div></div><div class="m"><div class="mk">B2B 정산 원장 확장</div><div class="mv"><span class="before">판매 원장 스키마로 파트너별 정산 표현 불가</span><span class="ar">→</span><span class="after">계약 단가·수수료·정가 분리 원장으로 파트너별 복합 정산 지원</span></div></div></div>
+      <div class="metrics"><div class="m"><div class="mk">중복 방출 방지</div><div class="mv"><span class="before">각 단계 독립 실행 · 재시도 시 중복 방출 가능</span><span class="ar">→</span><span class="after">진행 플래그·확정 지점 락·스냅샷 검증으로 방출 전에 선제 차단하고, 확정 테이블 UNIQUE로 사후 중복 감지 · 중복 방출 0건 유지</span></div></div><div class="m"><div class="mk">미확정 거래 자동 처리</div><div class="mv"><span class="before">통신 단절 시 운영자 수동 DB 수정 필요</span><span class="ar">→</span><span class="after">지연 큐 자동 감지 + 복구 전용 API로 운영자 수동 개입 제거</span></div></div><div class="m"><div class="mk">롤백 불가 물리 동작 대응</div><div class="mv"><span class="before">상태 확정 후 실패 시 보상 필요(원복 불가)</span><span class="ar">→</span><span class="after">선기록 후확정 방출로 보상 트랜잭션 불필요 구조</span></div></div><div class="m"><div class="mk">B2B 정산 원장 확장</div><div class="mv"><span class="before">판매 원장 스키마로 파트너별 정산 표현 불가</span><span class="ar">→</span><span class="after">계약 단가·수수료·정가 분리 원장으로 파트너별 복합 정산 지원</span></div></div></div>
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">여러 단계로 이어지는 흐름에서 중복을 막는 열쇠는 <b>락 자체가 아니라 어느 범위를 하나의 단위로 묶을 것인가</b>였습니다. 처음에는 전 구간에 락을 거는 방안을 검토했지만, 락 점유 시간이 길어져 처리량이 떨어졌습니다. 대신 상태가 실제로 전이되는 지점 한 곳에만 락을 걸고 나머지는 플래그·스냅샷·DB 제약으로 계층화하자 <b>성능과 안전성을 동시에 확보</b>할 수 있었습니다. 또한 <b>롤백이 불가능한 외부 동작 앞에서는 상태를 미리 확정하지 않는 것이 어떤 보상 로직보다 안전하다</b>는 것을 배웠습니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">신규 도메인 단독 설계(테이블 4개·기존 2개 확장), <b>4계층 중복 방어 체계 설계·구현</b>, <b>2-Phase 방출 프로토콜</b> 정립, <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직 자체는 별도 시스템 소유), <code>@TransactionalEventListener(AFTER_COMPLETION)</code> 이벤트 안정화, 예외 분기 중심 <b>단위 테스트 16개 케이스·4개 시나리오 그룹</b> 작성.</div></div>
+        <div><span class="k">담당 범위</span><div class="role">신규 도메인 단독 설계(테이블 4개·기존 2개 확장), <b>4계층 중복 방어 체계 설계·구현</b>, <b>선기록 후확정 방출 설계</b> 정립, <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직 자체는 별도 시스템 소유), <code>@TransactionalEventListener(AFTER_COMPLETION)</code> 이벤트 안정화, 예외 분기 중심 <b>단위 테스트 16개 케이스·4개 시나리오 그룹</b> 작성.</div></div>
         <div class="cline"><span class="lbl">기여도</span><span class="n">100%</span></div>
         <div class="st"><span class="tag">Kotlin</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Redisson</span><span class="tag">JPA</span><span class="tag">JUnit5</span><span class="tag">Swagger</span></div>
       </div>
@@ -302,19 +300,19 @@
         <li><span class="st-title">가상계좌 중복 발급(동시성) 장애 대응</span>
           <ul class="sub">
             <li><b>원인</b>: &ldquo;조회 후 없으면 생성&rdquo;하는 <b>check-then-act</b> 구조로 인해 짧은 간격의 동시 요청이 모두 미발급으로 판단하여 다중 계좌 생성</li>
-            <li><b>해결 (Redisson 분산락)</b>: 자원이 아직 존재하지 않으므로 <b>요청 주체(회원 ID)를 락 키</b>로 삼아 발급 요청 직렬화</li>
+            <li><b>해결 (Redisson 분산락)</b>: 자원이 아직 존재하지 않으므로 <b>요청 주체(회원 ID)를 락 키</b>로 삼아 발급 요청 직렬화 (wait 5s / lease 10s)</li>
             <li><b>트랜잭션 순서 통제</b>: 락 획득 이후에 신규 트랜잭션이 시작되고 커밋이 끝난 뒤 락이 풀리도록 <b>프록시를 구성</b>하여 커밋 전 락 해제로 인한 중복 재발 방지. 실패 시 전용 에러 코드로 반환해 클라이언트에 재시도 위임</li>
-            <li><b>표준화</b>: 동시 요청 재현 통합 테스트로 검증하고 락 규칙을 팀 컨벤션 문서 및 체크리스트로 자산화</li>
+            <li><b>검증·표준화</b>: 멀티 스레드로 동시 발급 요청을 반복 호출하는 단위 테스트로 재발 방지 케이스를 덮고, 락 획득·트랜잭션 순서 규칙을 팀 컨벤션 문서 및 체크리스트로 자산화 (완전한 분산 환경의 재현 통합 테스트는 보강 과제로 남아 있습니다)</li>
           </ul>
         </li>
       </ol>
       <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">환전 신청 경로</div><div class="mv"><span class="before">키오스크 현장 환전만 가능</span><span class="ar">→</span><span class="after">앱 사전 신청 + 100대 이상 키오스크 선택 수령 체계로 확장</span></div></div><div class="m"><div class="mk">백엔드 아키텍처</div><div class="mv"><span class="before">레거시 단일 모듈</span><span class="ar">→</span><span class="after">Kotlin 서비스 2개 분리 · 총 API 32개 구축</span></div></div><div class="m"><div class="mk">재고·환율 정합성</div><div class="mv"><span class="before">정책 부재</span><span class="ar">→</span><span class="after">신청·입금·출금 3중 검증 도입 + 환율 스냅샷으로 변동 분쟁 가능성 원천 차단</span></div></div><div class="m"><div class="mk">데이터 정합성 &amp; CS</div><div class="mv"><span class="before">상태 불일치 QA 중 6건 · 가상계좌 중복 발급 월 12건 CS</span><span class="ar">→</span><span class="after">상태 불일치 0건 · 중복 발급 0건 (수개월 무재발)</span></div></div><div class="m"><div class="mk">품질 &amp; 표준</div><div class="mv"><span class="after">동시 발급 요청 시 사용자당 1건 보장 · 팀 동시성 제어 표준 문서 정립 · 기한 내 런칭 (2025.10)</span></div></div></div>
+      <div class="metrics"><div class="m"><div class="mk">환전 신청 경로</div><div class="mv"><span class="before">키오스크 현장 환전만 가능</span><span class="ar">→</span><span class="after">앱 사전 신청 + 100대 이상 키오스크 선택 수령 체계로 확장</span></div></div><div class="m"><div class="mk">백엔드 아키텍처</div><div class="mv"><span class="before">레거시 단일 모듈</span><span class="ar">→</span><span class="after">Kotlin 서비스 2개 분리 · 총 API 32개 구축</span></div></div><div class="m"><div class="mk">재고·환율 정합성</div><div class="mv"><span class="before">정책 부재</span><span class="ar">→</span><span class="after">신청·입금·출금 3중 검증 도입 + 환율 스냅샷으로 환율 변동 분쟁 요소 제거</span></div></div><div class="m"><div class="mk">데이터 정합성 &amp; CS</div><div class="mv"><span class="before">상태 불일치 QA 중 6건 · 가상계좌 중복 발급 월 12건 CS</span><span class="ar">→</span><span class="after">상태 불일치 0건 · 중복 발급 0건 (수개월 무재발)</span></div></div><div class="m"><div class="mk">품질 &amp; 표준</div><div class="mv"><span class="after">동시 발급 요청 시 사용자당 1건 보장 · 팀 동시성 제어 표준 문서 정립 · 기한 내 런칭 (2025.10)</span></div></div></div>
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">신청과 수령의 시점이 분리되면, 그 사이의 시간을 무엇으로 채울지가 곧 정책이 됩니다. 상태 전이와 환율 스냅샷·기한 정책을 먼저 정의해 둔 덕에 분쟁의 여지를 남기지 않았고, 특히 <b>돈은 이미 들어왔는데 물건이 없을 수 있는 이 도메인 고유의 위험</b>을 검증 시점을 셋으로 늘려 감당했습니다. 뒤이어 겪은 동시성 장애는 다른 교훈을 줬습니다. 문제는 Redisson을 쓸지 말지가 아니라 <b>무엇을 잠글 것인가</b>였고, 자원(계좌)에 락을 걸 수 없다면 요청 주체로 대상을 옮기면 된다는 판단이 핵심이었습니다. 이 과정을 컨벤션으로 남겨 두어야 개인의 경험이 팀의 자산으로 넘어갑니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">앱·키오스크가 사용하는 <b>백엔드 서비스 2개(대외 API·환전 코어) 설계·개발</b>, 상태 기계·기한 2단계·환율 스냅샷·30자리 합성 키 정책 수립, <b>실물 재고 3중 검증</b>(신청·입금·출금) 및 RabbitMQ 보상 트랜잭션 구성, 가상계좌사 콜백 3종 계약 설계, <b>개인정보 3중 보호</b>(SEED-CBC·컬럼 암호화·로그 마스킹) 및 주민번호 파생 식별키 도입, 가상계좌 중복 발급 장애 원인 분석 및 <b>Redisson 분산락 + 트랜잭션 순서 통제 프록시</b> 설계·구현, 동시성 통합 테스트 작성, 락 규칙 팀 컨벤션 문서화 및 전파.</div></div>
-        <div class="cline"><span class="lbl">기여도</span><span class="n">60%</span><span style="font-size:11.5px;color:var(--muted)">환전 도메인 설계·개발</span><span style="color:var(--line)">·</span><span class="n">100%</span><span style="font-size:11.5px;color:var(--muted)">가상계좌 동시성 장애 대응</span></div>
+        <div><span class="k">담당 범위</span><div class="role">클라이언트 2명·QA 1명을 포함한 <b>5인 프로젝트 중 백엔드 2인 체제의 주 담당</b>으로, 앱·키오스크가 사용하는 <b>백엔드 서비스 2개(대외 API·환전 코어) 설계·개발</b>, 상태 기계·기한 2단계·환율 스냅샷·30자리 합성 키 정책 수립, <b>실물 재고 3중 검증</b>(신청·입금·출금) 및 RabbitMQ 보상 트랜잭션 구성, 가상계좌사 콜백 3종 계약 설계, 사내 공통 암호화 라이브러리를 활용한 <b>개인정보 3중 보호</b>(SEED-CBC·컬럼 암호화·로그 마스킹) 적용 및 주민번호 파생 식별키 도입, 가상계좌 중복 발급 장애 원인 분석 및 <b>Redisson 분산락 + 트랜잭션 순서 통제 프록시</b> 설계·구현, 동시 발급 재현 단위 테스트로 재발 방지 케이스 보강, 락 규칙 팀 컨벤션 문서화 및 전파.</div></div>
+        <div class="cline"><span class="lbl">기여도</span><span class="n">백엔드 2인 중 주 담당</span></div>
         <div class="st"><span class="tag">Kotlin</span><span class="tag">Spring Boot 3</span><span class="tag">JPA/QueryDSL</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Redisson</span><span class="tag">RabbitMQ</span><span class="tag">JUnit5</span></div>
       </div>
     </section>
@@ -362,7 +360,7 @@
         </li>
       </ol>
       <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">물리 상태 불일치 방지</div><div class="mv"><span class="before">카드 기록 후 통신 실패 시 서버·카드 불일치 · 고객 금전 손실 경로</span><span class="ar">→</span><span class="after">&ldquo;카드에 기록됐으면 성공&rdquo; 원칙으로 sign3 실패해도 거래 확정 · 고객 손실 원천 제거</span></div></div><div class="m"><div class="mk">불확정 응답 처리</div><div class="mv"><span class="before">성공·실패 2단 모델 · 클라이언트 임의 판단</span><span class="ar">→</span><span class="after">3-state 모델(승인·실패·불확정) + 사후 검증 큐로 임의 판단 지점 제거</span></div></div><div class="m"><div class="mk">중복 충전 방지</div><div class="mv"><span class="before">재시도 시 이즐 측 기존 성공 건과 충돌</span><span class="ar">→</span><span class="after">3중 방어(DB CAS + 이즐 응답 소급 정정 + 원장 복제·체이닝)로 리스크 원천 차단</span></div></div><div class="m"><div class="mk">추적성 확보</div><div class="mv"><span class="before">어느 단계에서 실패했는지 특정 불가</span><span class="ar">→</span><span class="after">요청·외부응답·카드기록 3단계 원장 기록으로 실패 지점 즉시 특정</span></div></div><div class="m"><div class="mk">도메인 확장</div><div class="mv"><span class="before">충전만</span><span class="ar">→</span><span class="after">충전·출금 양방향 지원 (API 11개 · 테스트 49케이스 검증)</span></div></div></div>
+      <div class="metrics"><div class="m"><div class="mk">물리 상태 불일치 방지</div><div class="mv"><span class="before">카드 기록 후 통신 실패 시 서버·카드 불일치 · 고객 금전 손실 경로</span><span class="ar">→</span><span class="after">&ldquo;카드에 기록됐으면 성공&rdquo; 원칙으로 sign3 실패해도 거래 확정 · 고객 금전 손실 경로 제거</span></div></div><div class="m"><div class="mk">불확정 응답 처리</div><div class="mv"><span class="before">성공·실패 2단 모델 · 클라이언트 임의 판단</span><span class="ar">→</span><span class="after">3-state 모델(승인·실패·불확정) + 사후 검증 큐로 임의 판단 지점 제거</span></div></div><div class="m"><div class="mk">중복 충전 방지</div><div class="mv"><span class="before">재시도 시 이즐 측 기존 성공 건과 충돌</span><span class="ar">→</span><span class="after">3중 방어(DB CAS + 이즐 응답 소급 정정 + 원장 복제·체이닝)로 리스크 차단</span></div></div><div class="m"><div class="mk">추적성 확보</div><div class="mv"><span class="before">어느 단계에서 실패했는지 특정 불가</span><span class="ar">→</span><span class="after">요청·외부응답·카드기록 3단계 원장 기록으로 실패 지점 즉시 특정</span></div></div><div class="m"><div class="mk">도메인 확장</div><div class="mv"><span class="before">충전만</span><span class="ar">→</span><span class="after">충전·출금 양방향 지원 (API 11개 · 테스트 49케이스 검증)</span></div></div></div>
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">외부 시스템 응답에 <b>&ldquo;불확정&rdquo;이라는 세 번째 상태</b>가 있는데도 성공·실패 이분법으로 처리하면, 코드는 단순해지지만 정합성이 무너집니다. 더 중요한 배움은 <b>되돌릴 수 없는 물리 동작 앞에서는 &ldquo;무엇을 진실로 볼 것인가&rdquo;를 먼저 정해야 한다</b>는 것이었습니다. 이 도메인의 진실은 서버 상태나 통신 결과가 아니라 <b>카드에 실제로 기록된 잔액</b>이었고, 그 기준을 세우고 나서야 통신 실패 시 어느 방향으로 실패해야 하는지가 명확해졌습니다.</p>
       <div class="sum">
@@ -382,12 +380,8 @@
       <ol class="steps">
         <li><span class="st-title">방출 후 정합성 복구 체계 구축 (핫픽스에서 상시 복구 체계로 전환)</span>
           <ul class="sub">
-            <li>외부 통신 예외를 <b>재처리 / 알림 / 무시 3종으로 타입 분리</b>하여, <b>예외 타입 자체가 운영 정책이 되도록</b> 설계</li>
-            <li>재처리 대상 실패는 재처리 관리 테이블에 시도 횟수와 함께 적재하고, <b>배치가 자동으로 재승인</b>하도록 구성</li>
-            <li>배치 재처리에 필요한 인증 토큰과 여권 정보를 Redis에 별도 보관해 <b>원거래 세션 유실과 무관하게 복구</b> 가능하도록 지원</li>
-            <li>방출 결과를 &lsquo;전액 성공 / 부분 방출 / 전액 실패&rsquo;로 분기하고, 실패 시 환급사 취소 통보 후 망상취소 처리</li>
-            <li><b>운영자용 수동 복구 API 2종</b>(방출 실패 종결 / 방출 성공 및 재처리 실패 승인)을 상비하여 DB 직접 수정 프로세스 완전 제거</li>
-            <li>알림은 트랜잭션 커밋 이후(<code>@TransactionalEventListener(AFTER_COMPLETION)</code>) 발행하도록 처리해 <b>트랜잭션 롤백 시 오알림 원천 차단</b></li>
+            <li>외부 통신 예외를 <b>재처리 / 알림 / 무시 3종으로 타입 분리</b>하여 예외 타입 자체가 운영 정책이 되도록 설계. 재처리 대상은 관리 테이블에 적재하고 배치가 자동 재승인하며, 방출 결과를 <b>전액 성공 / 부분 방출 / 전액 실패</b>로 분기해 실패 시 환급사 망상취소 처리</li>
+            <li><b>운영자용 수동 복구 API 2종</b>(방출 실패 종결 / 방출 성공 및 재처리 실패 승인)을 상비하여 DB 직접 수정 프로세스를 제거하고, 알림은 <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 전환해 <b>롤백 시 오알림이 새어나가는 경로 차단</b></li>
             <li>장애 원인을 QA 체크리스트로 환원하고 방출 후처리 시나리오를 개발 단계의 상시 점검 항목으로 절차화</li>
           </ul>
         </li>
@@ -414,8 +408,8 @@
       <div class="sec-lb">배운 점</div>
       <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">현금처럼 되돌릴 수 없는 자원을 다루는 시스템에서는 <b>&ldquo;실패하지 않게 만드는 것&rdquo;보다 &ldquo;실패한 뒤 어떤 상태로 남는지를 설계하는 것&rdquo;이 훨씬 중요하다</b>는 것을 배웠습니다. 그래서 외부 연동 실패를 예외 타입으로 분류해 재처리·알림·무시 정책을 코드에 명시했고, 운영자가 DB를 직접 건드리지 않고 안전하게 복구할 수 있는 경로를 상시 API로 남겼습니다. 또한 팀에 새 인프라를 처음 들일 때 진짜 산출물은 동작하는 코드가 아니라 <b>다음 사람이 참고할 컨벤션과 문서</b>라는 것을 깨달았습니다. Redis 도입 컨벤션·키 네이밍·TTL 정책을 문서화한 덕분에 이후 팀 프로젝트에서 그대로 재사용될 수 있었습니다.</p>
       <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">Tax Refund 신규 도메인 설계, <b>예외 3종 타입 분리(재처리·알림·무시)</b>로 운영 정책 코드화, 재처리 관리 테이블 + 배치 자동 재승인, <b>운영자 수동 복구 API 2종</b> 상비, <code>@TransactionalEventListener(AFTER_COMPLETION)</code> 오알림 차단, <b>환급사 연동 3계층 분리</b>(전송·규격변환·도메인) · 엔드포인트 15종 설정 외부화 · 응답 코드 40여 개 매핑, <b>민감정보 6중 방어</b>(Redis TTL·해시 식별자·JPA 컨버터 자동 암복호화·SEED 암호화·인터셉터 마스킹·MRZ 체크디짓), <b>팀 내 첫 Redis 도입 제안·판단·컨벤션 정립까지 주도</b>, QA 체크리스트 환원.</div></div>
-        <div class="cline"><span class="lbl">기여도</span><span class="n">80%</span></div>
+        <div><span class="k">담당 범위</span><div class="role">입사 2개월 차에 투입된 <b>백엔드 2인(사수 1인·본인 1인) 체제</b>에서 Tax Refund 신규 도메인 설계·구현에 참여. <b>예외 3종 타입 분리(재처리·알림·무시)</b>로 운영 정책 코드화, 재처리 관리 테이블 + 배치 자동 재승인, <b>운영자 수동 복구 API 2종</b> 상비, <code>@TransactionalEventListener(AFTER_COMPLETION)</code> 오알림 경로 차단, <b>환급사 연동 3계층 분리</b>(전송·규격변환·도메인) · 엔드포인트 15종 설정 외부화 · 응답 코드 40여 개 매핑, 사내 공통 암호화·마스킹 라이브러리를 활용한 <b>민감정보 다층 보호 적용</b>(Redis TTL·해시 식별자·JPA 컨버터 자동 암복호화·SEED 암호화·인터셉터 마스킹·MRZ 체크디짓), <b>팀 내 첫 Redis 도입 제안·판단·컨벤션 정립 참여</b>, QA 체크리스트 환원.</div></div>
+        <div class="cline"><span class="lbl">기여도</span><span class="n">백엔드 2인 중 일부 담당 (입사 초기)</span></div>
         <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot 3</span><span class="tag">JPA</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">RabbitMQ</span><span class="tag">JUnit5</span></div>
       </div>
     </section>
@@ -444,7 +438,7 @@
         <li><span class="st-title">알림톡 도달률 보장 — LMS 자동 대체 발송</span>
           <ul class="sub">
             <li>수신 거부나 채널 미연동 등으로 실패율이 존재하는 알림톡의 한계를 극복하기 위해, 템플릿 모델에 <b>대체 템플릿을 1급 속성으로 설계</b></li>
-            <li>알림톡 발송 실패 시 <b>동일 내용이 LMS로 자동 대체 발송</b>되도록 구성하고, 알림 유형별 대체 템플릿 강제 검증으로 누락 원천 차단</li>
+            <li>알림톡 발송 실패 시 <b>동일 내용이 LMS로 자동 대체 발송</b>되도록 구성하고, 알림 유형별 대체 템플릿 강제 검증으로 누락 경로 차단</li>
           </ul>
         </li>
         <li><span class="st-title">자동 재시도 및 실패 격리 체계</span>

@@ -160,9 +160,9 @@
       <p class="co-lede">외국인 관광객 대상 무인 금융 키오스크 · 전국 100대 운영<br>전국 <b>100대 이상</b> 무인 키오스크에서 운영되는 <b>외화 환전 · 선불카드(THE-Free) · Tax Refund · 교통카드 충전/출금 · 가상계좌</b> 서비스의 백엔드를 개발·운영하고 있습니다.</p>
       <div class="duties">
         <div class="duty"><div class="lb">결제·거래 도메인 백엔드 설계·개발·운영</div><ul class="hang"><li>15개 통화 <b>외화 환전</b>, 선불카드 <b>발급·충전·인출·활성화</b>, Tax Refund, 교통카드 충전·출금, 가상계좌, OTA 예약 카드 수령</li><li>신규 서비스의 <b>ERD·API 단독 설계</b>, 확장을 고려한 원장·상세 원장 구조 설계, 상품 코드 라우팅으로 다종 카드 상품을 단일 흐름에서 처리</li></ul></div>
-        <div class="duty"><div class="lb">외부 기관 S2S 연동 및 응답 통보 체계 설계</div><ul class="hang"><li>카드사·전자화폐사·환급사·OTA·교통카드사 등 <b>외부 기관 5개 이상</b>과 스펙 조율부터 연동 구현까지 담당</li><li>정산 대사가 성립하도록 응답 코드 체계 표준화·트랜잭션 분리 설계, <b>재시도 대상 선별</b>(통신 오류 2종만·차수 전달)로 중복 승인 원천 차단</li></ul></div>
+        <div class="duty"><div class="lb">외부 기관 S2S 연동 및 응답 통보 체계 설계</div><ul class="hang"><li>카드사·전자화폐사·환급사·OTA·교통카드사 등 <b>외부 기관 5개 이상</b>과 스펙 조율부터 연동 구현까지 담당</li><li>정산 대사가 성립하도록 응답 코드 체계 표준화·트랜잭션 분리 설계, <b>재시도 대상 선별</b>(통신 오류 2종만·차수 전달)로 중복 승인 경로 차단</li></ul></div>
         <div class="duty"><div class="lb">동시성 제어와 거래 정합성</div><ul class="hang"><li>Redisson 분산락·상태 전이로 <b>중복 결제·중복 할당·중복 수령</b> 방지, 락 키·타임아웃·트랜잭션 순서 규칙을 팀 컨벤션으로 문서화</li><li>거래 상태 전이·일일 한도 차감 처리, 동시성 시나리오를 <b>테스트 코드로 재현·검증</b></li></ul></div>
-        <div class="duty"><div class="lb">팀 공통 모듈·인프라 도입 주도</div><ul class="hang"><li>캐시(Redis)·외부 통신 재시도·메시징(RabbitMQ) 로직을 <b>재사용 가능한 공통 모듈</b>로 표준화 (DurableCache 3개 도메인 재사용)</li><li>팀 내 <b>Redis·RabbitMQ 첫 도입</b>을 주도하고, Grafana + Prometheus + Loki + Alloy 관측 스택 신규 구축</li></ul></div>
+        <div class="duty"><div class="lb">팀 공통 모듈·인프라 도입 주도</div><ul class="hang"><li>캐시(Redis)·외부 통신 재시도·메시징(RabbitMQ) 로직을 <b>재사용 가능한 공통 모듈</b>로 표준화 (DurableCache 3개 도메인 재사용)</li><li>팀 내 <b>Redis·RabbitMQ 첫 도입</b>을 주도하고, Grafana + Prometheus + Loki + Alloy 관측 스택 PoC 구성</li></ul></div>
         <div class="duty"><div class="lb">운영·장애 대응 및 다직군 협업</div><ul class="hang"><li>운영 장애를 핫픽스로 끝내지 않고 <b>QA 절차·테스트 코드로 환원</b>해 재발 방지, 빌드 시 테스트 통과 강제</li><li>기획·키오스크 클라이언트 개발자·자체 QA와 통합 검증(프로젝트 성격에 따라 앱 개발자 포함), 카드사 담당자와 <b>통합 QA</b> 진행 및 응답 코드 매핑·폴백 규격 협의</li></ul></div>
       </div>
       </div>
@@ -175,7 +175,7 @@
       <div class="pj">
         <div class="t"><span class="no">01</span><span class="org">DOZN</span><h4>롯데카드 협업 체크인서울 선불카드 서비스 구축</h4><span class="sub">외부 카드사 연동과 응답 통보 체계 설계</span><span class="per">2026.05—07</span></div>
         <p class="svc"><span class="kstat">응답 코드 51종 표준화</span> · <span class="kstat">테스트 156케이스</span> — 카드사 규격 준수와 정산 대사가 성립하는 응답 통보 체계 설계가 요구사항의 핵심인 선불카드 백엔드 신규 구축</p>
-        <ul class="roles"><li>선불카드 <b>발급·충전·인출·활성화</b> 전 흐름의 백엔드 도메인 설계·구현 (API 29개·<b>테스트 156케이스</b>)</li><li><b>정산 대사가 성립하는 응답 통보 체계 설계</b> — 결과코드 51종 + D999 폴백 + <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code>로 트랜잭션 분리해 종료 코드 누락 원천 차단</li><li>외부 통신 재시도 표준화(<b>통신 오류 2종만 재시도</b>·차수 전송) + <b>DurableCache 캐시 폴백 모듈</b>(제네릭 추상·3도메인 재사용)</li><li>Redis 장애 대응 · 민감정보 컬럼 암호화 + TTL 임시 저장소로 보안 규약 준수 · 카드사 통합 QA 대응</li></ul>
+        <ul class="roles"><li>선불카드 <b>발급·충전·인출·활성화</b> 전 흐름의 백엔드 도메인 설계·구현 (API 29개·<b>테스트 156케이스</b>)</li><li><b>정산 대사가 성립하는 응답 통보 체계 설계</b> — 결과코드 51종 + D999 폴백 + <code>@TransactionalEventListener(AFTER_COMPLETION)+REQUIRES_NEW</code>로 트랜잭션 분리해 종료 코드 누락 경로 차단</li><li>체크인서울 연동 재시도 정책 정립(<b>통신 오류 2종만 재시도</b>·총 3회·백오프 없음·5xx 제외·차수 전송) + <b>DurableCache 캐시 폴백 모듈</b>(제네릭 추상·3도메인 재사용)</li><li>Redis 장애 대응 · 민감정보 컬럼 암호화 + TTL 임시 저장소로 보안 규약 준수 · 카드사 통합 QA 대응</li></ul>
         <div class="foot"><span class="st">Java 17 · Spring Boot 3 · Redis</span></div>
       </div>
       <div class="pj">
@@ -187,19 +187,19 @@
       <div class="pj">
         <div class="t"><span class="no">03</span><span class="org">DOZN</span><h4>이즐(eZL) 교통카드 충전·출금</h4><span class="sub">되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span><span class="per">2025.01—07</span></div>
         <p class="svc"><span class="kstat">고객 금전 손실 경로 0</span> · <span class="kstat">테스트 49케이스</span> — IC칩 상호 인증 프로토콜 중계 구조에서 되돌릴 수 없는 물리 기록에 대한 거래 정합성 보장</p>
-        <ul class="roles"><li>교통카드 충전·출금 거래 API 설계·개발 (sign1→sign2→sign3 프로토콜 중계) · API 11개·<b>테스트 49케이스</b></li><li><b>“물리 상태 우선” 원칙 정립</b> — 카드에 기록됐으면 통신 실패해도 거래 승인 확정 (고객 금전 손실 원천 제거)</li><li><b>3-state 상태 모델</b>(승인·실패·불확정) + 사후 검증 큐로 클라이언트 임의 판단 지점 제거</li><li><b>중복 충전 3중 방어</b>(DB CAS · 이즐 응답 소급 정정 · 원장 복제 체이닝) + 전자화폐 규격 원장화(SAM 일련번호·서명)</li></ul>
+        <ul class="roles"><li>교통카드 충전·출금 거래 API 설계·개발 (sign1→sign2→sign3 프로토콜 중계) · API 11개·<b>테스트 49케이스</b></li><li><b>“물리 상태 우선” 원칙 정립</b> — 카드에 기록됐으면 통신 실패해도 거래 승인 확정 (고객 금전 손실 경로 제거)</li><li><b>3-state 상태 모델</b>(승인·실패·불확정) + 사후 검증 큐로 클라이언트 임의 판단 지점 제거</li><li><b>중복 충전 3중 방어</b>(DB CAS · 이즐 응답 소급 정정 · 원장 복제 체이닝) + 전자화폐 규격 원장화(SAM 일련번호·서명)</li></ul>
         <div class="foot"><span class="st">Kotlin · Spring Boot 3 · MySQL</span></div>
       </div>
       <div class="pj">
         <div class="t"><span class="no">04</span><span class="org">DOZN</span><h4>OTA 연동 카드 수령 서비스 구축</h4><span class="sub">롤백 불가능한 물리 방출의 중복 방지</span><span class="per">2026.01—02</span></div>
         <p class="svc"><span class="kstat">중복 방출 0건</span> · <span class="kstat">B2B 정산 원장 스키마 설계</span> — 하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
-        <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>2-Phase 방출 프로토콜</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
+        <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>선기록 후확정 방출 설계</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
         <div class="foot"><span class="st">Kotlin · Redisson · MySQL</span></div>
       </div>
       <div class="pj">
         <div class="t"><span class="no">05</span><span class="org">DOZN</span><h4>Tax Refund</h4><span class="sub">현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</span><span class="per">2024.04—12</span></div>
         <p class="svc"><span class="kstat">예외 3종 타입 분리</span> · <span class="kstat">3도메인 재사용 컨벤션</span> — 현금 물리 방출 불가역성과 여권 등 민감정보 보관 최소화가 요구되는 신규 도메인 설계·구현</p>
-        <ul class="roles"><li>Tax Refund 신규 도메인 설계 + <b>예외 3종 타입 분리</b>(재처리·알림·무시)로 “예외 타입 = 운영 정책” 구조화</li><li><b>운영자 수동 복구 API 2종</b> 상비 + <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 오알림 원천 차단</li><li>환급사 연동 <b>3계층 분리</b>(전송·규격변환·도메인) + 엔드포인트 15종 설정 외부화 + 응답 코드 40여 개 매핑 계층</li><li><b>팀 내 첫 Redis 도입</b> + 민감정보 <b>6중 방어</b>(TTL·해시·JPA 컨버터·SEED·마스킹·MRZ 체크디짓) · 컨벤션 문서화로 3도메인 재사용</li></ul>
+        <ul class="roles"><li>Tax Refund 신규 도메인 설계 + <b>예외 3종 타입 분리</b>(재처리·알림·무시)로 “예외 타입 = 운영 정책” 구조화</li><li><b>운영자 수동 복구 API 2종</b> 상비 + <code>@TransactionalEventListener(AFTER_COMPLETION)</code>으로 오알림 경로 차단</li><li>환급사 연동 <b>3계층 분리</b>(전송·규격변환·도메인) + 엔드포인트 15종 설정 외부화 + 응답 코드 40여 개 매핑 계층</li><li><b>팀 내 첫 Redis 도입</b> + 민감정보 <b>6중 방어</b>(TTL·해시·JPA 컨버터·SEED·마스킹·MRZ 체크디짓) · 컨벤션 문서화로 3도메인 재사용</li></ul>
         <div class="foot"><span class="st">Java 17 · Spring Boot 3 · Redis</span></div>
       </div>
       <div class="pj">
@@ -209,9 +209,9 @@
         <div class="foot"><span class="st">RabbitMQ · Handlebars</span></div>
       </div>
       <div class="pj">
-        <div class="t"><span class="no">07</span><span class="org">DOZN</span><h4>그라파나 관측 스택 도입 · 신규 구축</h4><span class="sub">로그만 있던 환경에 통합 모니터링 도입</span><span class="per">2026.08—</span></div>
-        <p class="svc"><span class="kstat">이슈 분석 5~10분 → 1~2분</span> — 팀 내 모니터링 시스템 부재로 로그 개별 조회만 가능했던 환경에 관측 스택 도입을 제안하고 신규 구축</p>
-        <ul class="roles"><li>팀 내 <b>모니터링 시스템 부재</b> → Grafana + Prometheus + Loki 통합 스택 도입 제안·구축</li><li><b>Alloy 단일 수집 에이전트</b>로 node-exporter·cAdvisor·promtail·Prometheus Agent 대체, 컨테이너·설정 단순화</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계 (팀원이 관측 스택 무수정으로 신규 서비스 등록)</li><li>초안 5개를 <b>3개 대시보드로 압축</b>(Overview · Application Runtime · Application Logs), 저트래픽 지표 정합성 통일</li><li><code>STACK_CONFIG_VERSION</code> 버전 suffix로 <b>무중단 config 갱신</b> 패턴 정립</li></ul>
+        <div class="t"><span class="no">07</span><span class="org">DOZN</span><h4>그라파나 관측 스택 PoC 구성</h4><span class="sub">로그만 있던 환경에 통합 모니터링을 개발계 PoC로 구성</span><span class="per">2026.08—</span></div>
+        <p class="svc"><span class="kstat">통합 모니터링 환경 구성 (개발계 PoC)</span> — 팀 내 모니터링 시스템 부재로 서버마다 접속해 로그 파일을 확인하던 환경에, 관측 스택을 개발계 PoC로 구성·제안 (알림은 기존 Slack 경로 유지)</p>
+        <ul class="roles"><li>팀 내 <b>모니터링 시스템 부재</b> → Grafana + Prometheus + Loki 통합 스택을 개발계 PoC로 구성</li><li><b>Alloy 단일 수집 에이전트</b>로 node-exporter·cAdvisor·promtail·Prometheus Agent 대체, 컨테이너·설정 단순화</li><li>Docker 라벨·폴더 규약으로 <b>서비스 자동 온보딩</b> 설계 (팀원이 관측 스택 무수정으로 신규 서비스 등록)</li><li>초안 5개를 <b>3개 대시보드로 압축</b>(Overview · Application Runtime · Application Logs), 저트래픽 지표 정합성 통일</li><li><code>STACK_CONFIG_VERSION</code> 버전 suffix로 <b>config 갱신 패턴 정립</b></li></ul>
         <div class="foot"><span class="st">Docker Swarm · Grafana · Prometheus · Loki</span></div>
       </div>
       <div class="pj">
