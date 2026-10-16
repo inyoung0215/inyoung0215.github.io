@@ -179,22 +179,22 @@
         <div class="foot"><span class="st">Java 17 · Spring Boot 3 · Redis</span></div>
       </div>
       <div class="pj">
-        <div class="t"><span class="no">02</span><span class="org">DOZN</span><h4>THE-Free 온라인 환전 서비스 구축</h4><span class="sub">앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span><span class="per">2025.09—10</span></div>
+        <div class="t"><span class="no">02</span><span class="org">DOZN</span><h4>OTA 연동 카드 수령 서비스 구축</h4><span class="sub">롤백 불가능한 물리 방출의 중복 방지</span><span class="per">2026.01—02</span></div>
+        <p class="svc"><span class="kstat">중복 방출 0건</span> · <span class="kstat">B2B 정산 원장 스키마 설계</span> — 하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
+        <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>선기록 후확정 방출 설계</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
+        <div class="foot"><span class="st">Kotlin · Redisson · MySQL</span></div>
+      </div>
+      <div class="pj">
+        <div class="t"><span class="no">03</span><span class="org">DOZN</span><h4>THE-Free 온라인 환전 서비스 구축</h4><span class="sub">앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span><span class="per">2025.09—10</span></div>
         <p class="svc"><span class="kstat">가상계좌 중복 발급 월 12건 → 0건</span> · <span class="kstat">서비스 2개 분리</span> — 신청-수령 분리 흐름의 백엔드 서비스 2개 설계·구현 및 다중 인스턴스 가상계좌 동시성 장애 해결</p>
         <ul class="roles"><li><b>백엔드 서비스 2개 분리</b>(대외 API + 환전 코어) · 상태 기계 정의 + 기한 2단계 + 환율 스냅샷 &amp; 30자리 합성 키 정책 수립</li><li><b>실물 재고 3중 검증</b>(신청 시·입금 직전·출금 시) + RabbitMQ 보상 트랜잭션으로 “돈은 들어왔는데 물건이 없는” 위험 차단</li><li><b>개인정보 3중 보호</b>(SEED-CBC + 컬럼 암호화 + 로그 마스킹) + 주민번호 파생 식별키로 사람 기준 한도 누적</li><li>가상계좌 중복 발급 장애 해결 — <b>Redisson 분산락 + 트랜잭션 순서 통제 프록시</b>(락 → 신규 트랜잭션 → 커밋 → 락 해제) · 팀 컨벤션 문서화</li></ul>
         <div class="foot"><span class="st">Kotlin · Redisson · RabbitMQ</span></div>
       </div>
       <div class="pj">
-        <div class="t"><span class="no">03</span><span class="org">DOZN</span><h4>이즐(eZL) 교통카드 충전·출금</h4><span class="sub">되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span><span class="per">2025.01—07</span></div>
+        <div class="t"><span class="no">04</span><span class="org">DOZN</span><h4>이즐(eZL) 교통카드 충전·출금</h4><span class="sub">되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span><span class="per">2025.01—07</span></div>
         <p class="svc"><span class="kstat">고객 금전 손실 경로 0</span> · <span class="kstat">테스트 49케이스</span> — IC칩 상호 인증 프로토콜 중계 구조에서 되돌릴 수 없는 물리 기록에 대한 거래 정합성 보장</p>
         <ul class="roles"><li>교통카드 충전·출금 거래 API 설계·개발 (sign1→sign2→sign3 프로토콜 중계) · API 11개·<b>테스트 49케이스</b></li><li><b>“물리 상태 우선” 원칙 정립</b> — 카드에 기록됐으면 통신 실패해도 거래 승인 확정 (고객 금전 손실 경로 제거)</li><li><b>3-state 상태 모델</b>(승인·실패·불확정) + 사후 검증 큐로 클라이언트 임의 판단 지점 제거</li><li><b>중복 충전 3중 방어</b>(DB CAS · 이즐 응답 소급 정정 · 원장 복제 체이닝) + 전자화폐 규격 원장화(SAM 일련번호·서명)</li></ul>
         <div class="foot"><span class="st">Kotlin · Spring Boot 3 · MySQL</span></div>
-      </div>
-      <div class="pj">
-        <div class="t"><span class="no">04</span><span class="org">DOZN</span><h4>OTA 연동 카드 수령 서비스 구축</h4><span class="sub">롤백 불가능한 물리 방출의 중복 방지</span><span class="per">2026.01—02</span></div>
-        <p class="svc"><span class="kstat">중복 방출 0건</span> · <span class="kstat">B2B 정산 원장 스키마 설계</span> — 하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
-        <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(확정 지점) · 스냅샷 동등성 검증 · DB UNIQUE 제약</li><li><b>선기록 후확정 방출 설계</b> — 상태 전이를 방출 성공 시점까지 지연시켜 <b>보상 트랜잭션 불필요 구조</b> + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>AFTER_COMPLETION</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
-        <div class="foot"><span class="st">Kotlin · Redisson · MySQL</span></div>
       </div>
       <div class="pj">
         <div class="t"><span class="no">05</span><span class="org">DOZN</span><h4>Tax Refund</h4><span class="sub">현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</span><span class="per">2024.04—12</span></div>

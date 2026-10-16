@@ -121,55 +121,6 @@
   </header>
 
   <div class="cases-start">
-    <section id="grafana" class="pj" data-screen-label="그라파나 관측 스택 PoC 구성">
-      <div class="pj-t"><span class="no">07</span><h3>그라파나 관측 스택 PoC 구성 <span class="sol">— 로그만 있던 환경에 통합 모니터링을 개발계 PoC로 구성</span></h3><span class="pj-per">2026.08—</span></div>
-      <p class="ctx">팀 내 서비스 클러스터에 <b>통합 모니터링 시스템이 부재</b>하여, 오류 발생 시 각 컨테이너의 로그를 개별 확인해야만 상태를 파악할 수 있었습니다. 운영 효율 개선 방향을 제시하기 위해 <b>관측(Observability) 스택을 개발계 PoC로 구성하고 도입을 제안</b>하였습니다. (알림 규칙은 기존 Slack 경로를 그대로 사용)</p>
-      <div class="sec-lb">문제 상황</div>
-      <ul class="hang"><li>팀 내에 <b>통합 모니터링 시스템 부재</b> → 로그 조회 외 서비스 상태 파악 불가</li><li>서비스 오류 발생 시 각 컨테이너 로그를 <b>개별 확인</b>해야 해 재현·진단 시간 과다</li><li>JVM 힙·CPU·스레드·DB Pool 등 <b>실시간 지표 확인 수단 부재</b></li><li>팀 리드가 fleet 전체 상태를 한눈에 볼 수 있는 <b>통합 화면 부재</b></li></ul>
-      <div class="sec-lb">원인 분석</div>
-      <ul class="hang"><li>관측 스택 자체가 없어 <b>진단 수단이 로그 파일 개별 조회로 한정</b></li><li>서비스마다 로그 위치 파편화 → 단일 UI에서 <b>통합 조회 불가</b></li><li>표준화된 라벨·폴더 규약 부재 → 신규 서비스 온보딩 시마다 <b>개별 대응 발생</b></li><li>서비스 트래픽이 낮아 일반적인 RPS 기반 대시보드는 무의미 → <b>저트래픽 특성을 반영한 지표 설계 필요</b></li><li>Docker Swarm은 config 오브젝트 <b>내용 변경 미지원</b> → 대시보드 무중단 갱신 방식 별도 설계 필요</li><li>Swarm bind mount는 <b>node-local</b> → 서비스 컨테이너와 수집 에이전트의 동일 노드 배치 전제</li></ul>
-      <div class="sec-lb">해결 과정</div>
-      <ol class="steps">
-        <li><span class="st-title">통합 수집 에이전트 채택 (Grafana Alloy)</span>
-          <ul class="sub">
-            <li>Alloy 하나로 node-exporter · cAdvisor · promtail · Prometheus Agent를 대체해 컨테이너 수와 설정을 단순화</li>
-            <li><code>mode: global</code>로 모든 Swarm 노드에 배포해 bind mount의 <b>node-local 제약</b> 해결</li>
-            <li>서비스 식별은 컨테이너 라벨(<code>observability.service</code>)을 <b>단일 진실 원천</b>으로 두고, relabel 우선순위(라벨 → Swarm service → compose service → container name)를 정의</li>
-          </ul>
-        </li>
-        <li><span class="st-title">서비스 자동 온보딩 규약 설계</span>
-          <ul class="sub">
-            <li>Docker 라벨 4개(<code>observability.*</code>)만 붙이면 Prometheus scrape 자동 등록</li>
-            <li>폴더 규약을 통해 Loki 자동 수집 (폴더명 fallback + JSON 필드 override)</li>
-            <li>팀원 누구나 <b>관측 스택 코드를 건드리지 않고</b> 신규 서비스를 온보딩할 수 있도록 가이드 문서화</li>
-          </ul>
-        </li>
-        <li><span class="st-title">하이브리드 배포 · Docker Swarm configs 무중단 갱신 패턴 정립</span>
-          <ul class="sub">
-            <li>관측 서버는 <b>Standalone Docker</b>로, 앱 노드들은 <b>Swarm 클러스터</b>로 운영하는 하이브리드 배포 구조 설계 → Alloy가 Swarm 경계를 넘어 관측 서버의 Nginx 게이트웨이로 push하도록 구성</li>
-            <li>Swarm이 config 내용 변경을 지원하지 않는 제약 → <code>STACK_CONFIG_VERSION</code> 환경변수로 config 이름에 <b>버전 suffix</b> 부여</li>
-            <li>값을 1→2→3 올리면 새 config 생성 후 서비스 자동 갱신, <b>스택 삭제·재배포 없이 대시보드 업데이트</b></li>
-          </ul>
-        </li>
-        <li><span class="st-title">트러블슈팅 중심 대시보드 3종 구성</span>
-          <ul class="sub">
-            <li>초안 5개를 <b>Overview(홈) · Application Runtime · Application Logs</b> 3개로 압축하고, 운영·진단에 필요한 지표만 선별해 패널을 직접 배치</li>
-            <li>Application Runtime에 HTTP 요청·응답과 DB Pool(HikariCP)을 통합 → <b>&ldquo;느린 API 원인이 DB 대기인가&rdquo;를 한 화면에서 판단</b></li>
-            <li>저트래픽 환경에 맞춰 RPS 대신 분당 요청 건수로 전환. 패널마다 집계 방식(단일 창 외삽 vs 서브쿼리 vs Grafana step 기반)이 달라 같은 요청 수가 어긋나던 <b>정합성 문제를 서브쿼리 방식으로 통일</b>해 세 패널 모두 일치하도록 조정</li>
-            <li>표의 서비스명·URI를 클릭하면 <b>필터와 시간 범위가 이어진 채</b> 로그 대시보드로 넘어가는 드릴다운 구성</li>
-          </ul>
-        </li>
-      </ol>
-      <div class="sec-lb">성과</div>
-      <div class="metrics"><div class="m"><div class="mk">서비스 간 흐름 통합 조회</div><div class="mv"><span class="before">서버·컨테이너마다 접속하여 로그 파일을 개별 확인</span><span class="ar">→</span><span class="after">통합 대시보드에서 요청 흐름을 한 화면에서 조회 · 서비스명/URI 클릭 시 관련 로그 자동 필터로 넘어가는 드릴다운</span></div></div><div class="m"><div class="mk">일일 로그 점검 시간 단축</div><div class="mv"><span class="before">매일 서버별 로그 파일 순차 확인 · 개발자 시간 잠식</span><span class="ar">→</span><span class="after">홈 대시보드에서 즉시 이상 여부 확인 → 개발 리소스 확보</span></div></div><div class="m"><div class="mk">실시간 이상 감지</div><div class="mv"><span class="before">JVM 힙·CPU·DB Pool 확인 수단 없음 · 장애 이후 로그로 추정</span><span class="ar">→</span><span class="after">Application Runtime 대시보드에서 실시간 확인 · 임계치 접근 시 즉시 대응</span></div></div></div>
-      <div class="sec-lb">배운 점</div>
-      <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">관측 스택을 구축하며 가장 크게 배운 것은 <b>도구를 붙이는 일보다 &ldquo;무엇을 볼 것인가&rdquo;를 정의하는 일이 훨씬 어렵다</b>는 사실이었습니다. Grafana·Prometheus·Loki 같은 도구는 문서만 따라가면 붙일 수 있지만, 우리 팀이 실제로 필요한 지표—어떤 시점에 무엇을 확인해야 오류를 좁힐 수 있는지—를 정의하는 데 훨씬 많은 시간이 들었습니다. 관측의 시작은 도구가 아니라 <b>&ldquo;답을 찾기 위한 질문을 먼저 정의하는 일&rdquo;</b>이라는 것을 이 프로젝트에서 확실히 배웠습니다.</p>
-      <div class="sum">
-        <div><span class="k">담당 범위</span><div class="role">관측 스택 <b>도입 제안 및 개발계 PoC 아키텍처 구성</b>, 자동 온보딩 규약 정립, Docker Swarm configs 관리 패턴 정립, 대시보드 판넬 구성 및 팀 리드 피드백 반영, 온보딩·아키텍처·배포·트러블슈팅 문서화. (알림 규칙은 기존 Slack 경로 사용)</div></div>
-        <div class="cline"><span class="lbl">기여도</span><span class="n">단독 (개발계 PoC)</span></div>
-        <div class="st"><span class="tag">Docker Swarm</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Loki</span><span class="tag">Alloy</span><span class="tag">PromQL</span><span class="tag">LogQL</span><span class="tag">Nginx</span></div>
-      </div>
-    </section>
     <section id="checkin" class="pj" data-screen-label="롯데카드 협업 선불카드">
       <div class="pj-t"><span class="no">01</span><h3>롯데카드 협업 체크인서울 선불카드 서비스 구축 <span class="sol">— 외부 카드사 연동과 응답 통보 체계 설계</span></h3><span class="pj-per">2026.05—07</span></div>
       <p class="ctx">롯데카드와 공동으로 <b>외국인 관광객 대상 선불카드 서비스</b>를 신규 구축했습니다. 선불카드(발급·충전·인출·활성화) 전 흐름의 백엔드를 담당했으며, <b>카드사 규격 준수와 정산 대사가 성립하는 응답 통보 체계</b>가 요구사항의 핵심이었습니다. (정산 대사 로직 자체는 카드사·별도 시스템 소유) <b>API 29개 · 카드사 결과코드 51종 · 도메인 에러코드 65종 · 테스트 156케이스(4,400여 줄)</b> 규모의 백엔드를 설계·구현·테스트했습니다.</p>
@@ -216,7 +167,7 @@
       </div>
     </section>
     <section id="ota" class="pj" data-screen-label="OTA 연동 카드 수령">
-      <div class="pj-t"><span class="no">04</span><h3>OTA 연동 카드 수령 서비스 구축 <span class="sol">— 롤백 불가능한 물리 방출의 중복 방지</span></h3><span class="pj-per">2026.01—02</span></div>
+      <div class="pj-t"><span class="no">02</span><h3>OTA 연동 카드 수령 서비스 구축 <span class="sol">— 롤백 불가능한 물리 방출의 중복 방지</span></h3><span class="pj-per">2026.01—02</span></div>
       <p class="ctx">해외 <b>OTA(온라인 여행사)</b>가 사전 발행한 교통·선불카드를 국내 무인 키오스크에서 <b>QR로 수령</b>하는 신규 서비스입니다. 카드 방출은 <b>하드웨어 제어라 소프트웨어적 롤백이 불가능</b>하므로, 중복 수령 1건이 곧 <b>실물 자산 손실과 정산 오류로 직결</b>되는 높은 도메인 정합성이 요구되었습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>중복 수령 위험</b>: 수령 흐름이 &lsquo;수령 가능 판별 → 수령 확정 → 카드 방출&rsquo; <b>3단계</b>로 분리되어, 방출 지연 중 사용자가 재시도하면 동일 QR이 <b>두 번 방출</b>될 수 있는 구조</li><li><b>정산 불일치</b>: 방출기·네트워크 장애로 방출 결과가 서버에 도달하지 않으면 거래가 미확정 상태로 영구 잔류 → <b>실물은 나갔으나 원장은 없는</b> 불일치 발생</li><li><b>B2B 정산 한계</b>: 파트너별 계약 단가와 수수료가 달라, 기존 <b>B2C 판매 원장 모델로는 정산 표현이 불가능</b></li></ul>
@@ -264,7 +215,7 @@
     </section>
     <section id="thefree" class="pj" data-screen-label="THE-Free 온라인 환전">
       <span id="lock" aria-hidden="true"></span>
-      <div class="pj-t"><span class="no">02</span><h3>THE-Free 온라인 환전 서비스 구축 <span class="sol">— 앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span></h3><span class="pj-per">2025.09—10</span></div>
+      <div class="pj-t"><span class="no">03</span><h3>THE-Free 온라인 환전 서비스 구축 <span class="sol">— 앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</span></h3><span class="pj-per">2025.09—10</span></div>
       <p class="ctx">오프라인 키오스크에서만 가능하던 외화 환전을, <b>앱에서 미리 신청하고 가상계좌로 입금한 뒤 전국 100대 이상 키오스크 중 원하는 곳에서 현금을 수령</b>하는 형태로 확장한 신규 서비스입니다. 앱·키오스크 클라이언트 개발자와 QA를 포함한 <b>5인 프로젝트에서 백엔드 서비스 2개(앱 대외 API·환전 코어)의 설계와 구현</b>을 담당했고, 오픈 이후 발생한 <b>가상계좌 중복 발급 장애의 원인 분석과 해결</b>까지 맡았습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>시점과 공간의 분리</b>: 기존 환전은 &ldquo;결제와 수령이 같은 순간, 같은 장소&rdquo;라는 전제였으나, 앱 신청 → 가상계좌 입금 → 키오스크 수령으로 시점이 쪼개지며 <b>환율·재고·기한 정책이 모두 미정의 상태</b>로 대두</li><li><b>실물 재고 불일치</b>: 수령 대상이 키오스크 안의 실물 지폐라, 신청 시점에 있던 권종이 수령 시점에는 소진되거나 <b>현금 수송으로 방출함 통화 자체가 교체될 수 있는 위험</b> 상존</li><li><b>일정 압박</b>: 사외 앱 개발사와 연동해야 하므로 <b>서버가 확정한 계약이 곧 앱 일정</b> · 스펙 확정이 개발보다 선행되어야 하는 제약</li><li><b>가상계좌 중복 발급 장애</b>: 오픈 후 동일 사용자에게 가상계좌가 중복 발급되는 장애 접수 (<b>월 12건 CS</b>) · 실제 입금이 연결되는 계좌라 정산 정합성 직접 위협</li></ul>
@@ -317,7 +268,7 @@
       </div>
     </section>
     <section id="ezl" class="pj" data-screen-label="이즐 교통카드 충전·출금">
-      <div class="pj-t"><span class="no">03</span><h3>이즐(eZL) 교통카드 충전·출금 <span class="sol">— 되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span></h3><span class="pj-per">2025.01—07</span></div>
+      <div class="pj-t"><span class="no">04</span><h3>이즐(eZL) 교통카드 충전·출금 <span class="sol">— 되돌릴 수 없는 물리 기록과 서버 상태의 정합성</span></h3><span class="pj-per">2025.01—07</span></div>
       <p class="ctx">키오스크에서 <b>교통카드 충전과 잔액 출금</b>을 지원하기 위해 이즐(eZL) 시스템과 연동한 프로젝트입니다. 서버가 <b>IC칩의 상호 인증 프로토콜(sign1 → sign2 → sign3)을 중계</b>하는 구조로, <b>카드에 금액이 기록되는 순간 서버는 그것을 되돌릴 수 없다</b>는 점이 모든 설계의 출발점이었습니다. <b>API 11개 · 신규 테이블 3개 · EZL 연동 API 6종 · 테스트 49케이스(14 시나리오 그룹)</b> 규모의 백엔드를 설계·구현·테스트했습니다.</p>
       <div class="sec-lb">문제 상황</div>
       <ul class="hang"><li><b>물리 기록 후 통신 단절</b>: 충전은 서버 요청 → 이즐 승인(sign2) → 키오스크의 실물 카드 기록 → 결과 통보(sign3) 순서인데, 카드 기록 이후 단계에서 통신이 끊기면 <b>카드에는 금액이 충전되었으나 서버·이즐은 미확정 상태로 남는 불일치</b> 발생</li><li><b>상태 판정 불가</b>: 키오스크가 카드 잔액 변동 여부 자체를 확인하지 못하는 예외 케이스 존재 (성공도 실패도 아닌 상태)</li><li><b>중복 충전 위험</b>: 재시도 시 이전 요청이 이즐 측에서 이미 성공했을 수 있어 동일 요청 재전송 시 중복 충전 위험 상존</li></ul>
@@ -473,6 +424,55 @@
       </div>
     </section>
 
+    <section id="grafana" class="pj" data-screen-label="그라파나 관측 스택 PoC 구성">
+      <div class="pj-t"><span class="no">07</span><h3>그라파나 관측 스택 PoC 구성 <span class="sol">— 로그만 있던 환경에 통합 모니터링을 개발계 PoC로 구성</span></h3><span class="pj-per">2026.08—</span></div>
+      <p class="ctx">팀 내 서비스 클러스터에 <b>통합 모니터링 시스템이 부재</b>하여, 오류 발생 시 각 컨테이너의 로그를 개별 확인해야만 상태를 파악할 수 있었습니다. 운영 효율 개선 방향을 제시하기 위해 <b>관측(Observability) 스택을 개발계 PoC로 구성하고 도입을 제안</b>하였습니다. (알림 규칙은 기존 Slack 경로를 그대로 사용)</p>
+      <div class="sec-lb">문제 상황</div>
+      <ul class="hang"><li>팀 내에 <b>통합 모니터링 시스템 부재</b> → 로그 조회 외 서비스 상태 파악 불가</li><li>서비스 오류 발생 시 각 컨테이너 로그를 <b>개별 확인</b>해야 해 재현·진단 시간 과다</li><li>JVM 힙·CPU·스레드·DB Pool 등 <b>실시간 지표 확인 수단 부재</b></li><li>팀 리드가 fleet 전체 상태를 한눈에 볼 수 있는 <b>통합 화면 부재</b></li></ul>
+      <div class="sec-lb">원인 분석</div>
+      <ul class="hang"><li>관측 스택 자체가 없어 <b>진단 수단이 로그 파일 개별 조회로 한정</b></li><li>서비스마다 로그 위치 파편화 → 단일 UI에서 <b>통합 조회 불가</b></li><li>표준화된 라벨·폴더 규약 부재 → 신규 서비스 온보딩 시마다 <b>개별 대응 발생</b></li><li>서비스 트래픽이 낮아 일반적인 RPS 기반 대시보드는 무의미 → <b>저트래픽 특성을 반영한 지표 설계 필요</b></li><li>Docker Swarm은 config 오브젝트 <b>내용 변경 미지원</b> → 대시보드 무중단 갱신 방식 별도 설계 필요</li><li>Swarm bind mount는 <b>node-local</b> → 서비스 컨테이너와 수집 에이전트의 동일 노드 배치 전제</li></ul>
+      <div class="sec-lb">해결 과정</div>
+      <ol class="steps">
+        <li><span class="st-title">통합 수집 에이전트 채택 (Grafana Alloy)</span>
+          <ul class="sub">
+            <li>Alloy 하나로 node-exporter · cAdvisor · promtail · Prometheus Agent를 대체해 컨테이너 수와 설정을 단순화</li>
+            <li><code>mode: global</code>로 모든 Swarm 노드에 배포해 bind mount의 <b>node-local 제약</b> 해결</li>
+            <li>서비스 식별은 컨테이너 라벨(<code>observability.service</code>)을 <b>단일 진실 원천</b>으로 두고, relabel 우선순위(라벨 → Swarm service → compose service → container name)를 정의</li>
+          </ul>
+        </li>
+        <li><span class="st-title">서비스 자동 온보딩 규약 설계</span>
+          <ul class="sub">
+            <li>Docker 라벨 4개(<code>observability.*</code>)만 붙이면 Prometheus scrape 자동 등록</li>
+            <li>폴더 규약을 통해 Loki 자동 수집 (폴더명 fallback + JSON 필드 override)</li>
+            <li>팀원 누구나 <b>관측 스택 코드를 건드리지 않고</b> 신규 서비스를 온보딩할 수 있도록 가이드 문서화</li>
+          </ul>
+        </li>
+        <li><span class="st-title">하이브리드 배포 · Docker Swarm configs 무중단 갱신 패턴 정립</span>
+          <ul class="sub">
+            <li>관측 서버는 <b>Standalone Docker</b>로, 앱 노드들은 <b>Swarm 클러스터</b>로 운영하는 하이브리드 배포 구조 설계 → Alloy가 Swarm 경계를 넘어 관측 서버의 Nginx 게이트웨이로 push하도록 구성</li>
+            <li>Swarm이 config 내용 변경을 지원하지 않는 제약 → <code>STACK_CONFIG_VERSION</code> 환경변수로 config 이름에 <b>버전 suffix</b> 부여</li>
+            <li>값을 1→2→3 올리면 새 config 생성 후 서비스 자동 갱신, <b>스택 삭제·재배포 없이 대시보드 업데이트</b></li>
+          </ul>
+        </li>
+        <li><span class="st-title">트러블슈팅 중심 대시보드 3종 구성</span>
+          <ul class="sub">
+            <li>초안 5개를 <b>Overview(홈) · Application Runtime · Application Logs</b> 3개로 압축하고, 운영·진단에 필요한 지표만 선별해 패널을 직접 배치</li>
+            <li>Application Runtime에 HTTP 요청·응답과 DB Pool(HikariCP)을 통합 → <b>&ldquo;느린 API 원인이 DB 대기인가&rdquo;를 한 화면에서 판단</b></li>
+            <li>저트래픽 환경에 맞춰 RPS 대신 분당 요청 건수로 전환. 패널마다 집계 방식(단일 창 외삽 vs 서브쿼리 vs Grafana step 기반)이 달라 같은 요청 수가 어긋나던 <b>정합성 문제를 서브쿼리 방식으로 통일</b>해 세 패널 모두 일치하도록 조정</li>
+            <li>표의 서비스명·URI를 클릭하면 <b>필터와 시간 범위가 이어진 채</b> 로그 대시보드로 넘어가는 드릴다운 구성</li>
+          </ul>
+        </li>
+      </ol>
+      <div class="sec-lb">성과</div>
+      <div class="metrics"><div class="m"><div class="mk">서비스 간 흐름 통합 조회</div><div class="mv"><span class="before">서버·컨테이너마다 접속하여 로그 파일을 개별 확인</span><span class="ar">→</span><span class="after">통합 대시보드에서 요청 흐름을 한 화면에서 조회 · 서비스명/URI 클릭 시 관련 로그 자동 필터로 넘어가는 드릴다운</span></div></div><div class="m"><div class="mk">일일 로그 점검 시간 단축</div><div class="mv"><span class="before">매일 서버별 로그 파일 순차 확인 · 개발자 시간 잠식</span><span class="ar">→</span><span class="after">홈 대시보드에서 즉시 이상 여부 확인 → 개발 리소스 확보</span></div></div><div class="m"><div class="mk">실시간 이상 감지</div><div class="mv"><span class="before">JVM 힙·CPU·DB Pool 확인 수단 없음 · 장애 이후 로그로 추정</span><span class="ar">→</span><span class="after">Application Runtime 대시보드에서 실시간 확인 · 임계치 접근 시 즉시 대응</span></div></div></div>
+      <div class="sec-lb">배운 점</div>
+      <p style="margin:0;font-size:12.5px;line-height:1.72;color:var(--ink-2);padding:12px 14px;background:#fafbfd;border-left:3px solid var(--muted-2);border-radius:0 6px 6px 0;">관측 스택을 구축하며 가장 크게 배운 것은 <b>도구를 붙이는 일보다 &ldquo;무엇을 볼 것인가&rdquo;를 정의하는 일이 훨씬 어렵다</b>는 사실이었습니다. Grafana·Prometheus·Loki 같은 도구는 문서만 따라가면 붙일 수 있지만, 우리 팀이 실제로 필요한 지표—어떤 시점에 무엇을 확인해야 오류를 좁힐 수 있는지—를 정의하는 데 훨씬 많은 시간이 들었습니다. 관측의 시작은 도구가 아니라 <b>&ldquo;답을 찾기 위한 질문을 먼저 정의하는 일&rdquo;</b>이라는 것을 이 프로젝트에서 확실히 배웠습니다.</p>
+      <div class="sum">
+        <div><span class="k">담당 범위</span><div class="role">관측 스택 <b>도입 제안 및 개발계 PoC 아키텍처 구성</b>, 자동 온보딩 규약 정립, Docker Swarm configs 관리 패턴 정립, 대시보드 판넬 구성 및 팀 리드 피드백 반영, 온보딩·아키텍처·배포·트러블슈팅 문서화. (알림 규칙은 기존 Slack 경로 사용)</div></div>
+        <div class="cline"><span class="lbl">기여도</span><span class="n">단독 (개발계 PoC)</span></div>
+        <div class="st"><span class="tag">Docker Swarm</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Loki</span><span class="tag">Alloy</span><span class="tag">PromQL</span><span class="tag">LogQL</span><span class="tag">Nginx</span></div>
+      </div>
+    </section>
     <section id="thekium" class="pj" data-screen-label="더키움">
       <div class="pj-t"><span class="no">08</span><h3>더키움 — 건설 일용직 인력사무소 배차 서비스 <span class="sol">— 실제 사업장 배포 서비스에서 판단·설계·검증을 어떻게 가져갈 것인가</span></h3><span class="pj-per">2026.09—</span></div>
       <p class="ctx">가족이 운영하는 <b>건설 일용직 인력사무소</b>를 위해 만든 배차 서비스입니다. 목적이 하나입니다 — <b>새벽 5~7시 사무실 인바운드 통화를 없애는 것.</b> 전화는 세 방향에서 옵니다(근로자·업체·신규 근로자). <b>Next.js 15 + Supabase 기반</b>이며 <code>the-kium.co.kr</code>에 배포돼 있습니다. <b>바이브 코딩이지만 판단·설계·검증 체계는 직접 구성</b>했고, 그 흔적을 <b>설계 결정 43건(DECISIONS.md)</b>으로 남겼습니다. 실무 결제 도메인에서 다루던 "트랜잭션 분리·재시도 선별·응답 코드 체계"와 같은 사고를, 스택과 도메인을 바꿔 어떻게 다시 적용했는지가 이 섹션의 주제입니다.</p>

@@ -251,8 +251,17 @@
           <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot 3</span><span class="tag">Redis</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
+<a class="card" href="career-detail.html#ota">
+          <div class="t"><span class="no">02</span><span class="org dozn">DOZN</span><span class="p">2026.01—02</span></div>
+          <h4>OTA 연동 카드 수령 서비스 구축</h4>
+          <div class="sub">롤백 불가능한 물리 방출의 중복 방지</div>
+          <p class="svc"><span class="kstat">중복 방출 0건</span> · <span class="kstat">B2B 정산 원장 스키마 설계</span> — 하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
+          <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(수령 확정 지점, wait 3s / lease 5s) · 거래 컨텍스트 스냅샷 동등성 검증 · 확정 테이블 UNIQUE(사후 안전망)</li><li><b>선기록 후확정 방출 설계</b> — PENDING 선기록 후 결과에 따라 SUCCESS/FAILED 확정하는 자체 설계(2PC 아님) · 보상 트랜잭션 불필요 구조 + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>@TransactionalEventListener(AFTER_COMPLETION)</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
+          <div class="st"><span class="tag">Kotlin</span><span class="tag">Redisson</span><span class="tag">MySQL</span></div>
+          <span class="more">상세 보기 <span class="ar">→</span></span>
+        </a>
 <a class="card" href="career-detail.html#thefree">
-  <div class="t"><span class="no">02</span><span class="org dozn">DOZN</span><span class="p">2025.09—10</span></div>
+  <div class="t"><span class="no">03</span><span class="org dozn">DOZN</span><span class="p">2025.09—10</span></div>
   <h4>THE-Free 온라인 환전 서비스 구축</h4>
   <div class="sub">앱 신청·키오스크 수령 분리 설계와 가상계좌 동시성 장애 해결</div>
   <p class="svc"><span class="kstat">가상계좌 중복 발급 월 12건 → 0건</span> · <span class="kstat">서비스 2개 분리</span> — 신청-수령 분리 흐름의 백엔드 서비스 2개 설계·구현 및 다중 인스턴스 가상계좌 동시성 장애 해결</p>
@@ -265,8 +274,8 @@
   <div class="st"><span class="tag">Kotlin</span><span class="tag">Redisson</span><span class="tag">RabbitMQ</span></div>
   <span class="more">상세 보기 <span class="ar">→</span></span>
 </a>
-        <a class="card" href="career-detail.html#ezl">
-          <div class="t"><span class="no">03</span><span class="org dozn">DOZN</span><span class="p">2025.01—07</span></div>
+<a class="card" href="career-detail.html#ezl">
+          <div class="t"><span class="no">04</span><span class="org dozn">DOZN</span><span class="p">2025.01—07</span></div>
           <h4>이즐(eZL) 교통카드 충전·출금</h4>
           <div class="sub">되돌릴 수 없는 물리 기록과 서버 상태의 정합성</div>
           <p class="svc"><span class="kstat">고객 금전 손실 경로 0</span> · <span class="kstat">테스트 49케이스</span> — IC칩 상호 인증 프로토콜 중계 구조에서 되돌릴 수 없는 물리 기록에 대한 거래 정합성 보장</p>
@@ -274,16 +283,7 @@
           <div class="st"><span class="tag">Kotlin</span><span class="tag">Spring Boot 3</span><span class="tag">MySQL</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
-        <a class="card" href="career-detail.html#ota">
-          <div class="t"><span class="no">04</span><span class="org dozn">DOZN</span><span class="p">2026.01—02</span></div>
-          <h4>OTA 연동 카드 수령 서비스 구축</h4>
-          <div class="sub">롤백 불가능한 물리 방출의 중복 방지</div>
-          <p class="svc"><span class="kstat">중복 방출 0건</span> · <span class="kstat">B2B 정산 원장 스키마 설계</span> — 하드웨어 롤백 불가능한 카드 방출에 대한 정합성 보장 · 신규 도메인 단독 설계·구현</p>
-          <ul class="roles"><li>신규 도메인 단독 설계(테이블 4개·기존 2개 확장) · 도메인 전용 에러코드 대역 정의 및 Swagger 자동 예시</li><li><b>4계층 중복 방어 체계</b> — Redis 진행 플래그(TTL 24h) · Redisson 분산락(수령 확정 지점, wait 3s / lease 5s) · 거래 컨텍스트 스냅샷 동등성 검증 · 확정 테이블 UNIQUE(사후 안전망)</li><li><b>선기록 후확정 방출 설계</b> — PENDING 선기록 후 결과에 따라 SUCCESS/FAILED 확정하는 자체 설계(2PC 아님) · 보상 트랜잭션 불필요 구조 + 지연 큐 + 장애 후처리 API로 운영자 수동 개입 제거</li><li>이벤트 발행 안정화(<code>@TransactionalEventListener(AFTER_COMPLETION)</code>) · <b>B2B 정산 원장 스키마 설계</b>(계약 단가·수수료·정가 컬럼 분리 · 정산 로직은 별도 시스템 소유)</li></ul>
-          <div class="st"><span class="tag">Kotlin</span><span class="tag">Redisson</span><span class="tag">MySQL</span></div>
-          <span class="more">상세 보기 <span class="ar">→</span></span>
-        </a>
-        <a class="card" href="career-detail.html#tax">
+<a class="card" href="career-detail.html#tax">
           <div class="t"><span class="no">05</span><span class="org dozn">DOZN</span><span class="p">2024.04—12</span></div>
           <h4>Tax Refund</h4>
           <div class="sub">현금 환급 정합성 보장과 확장 가능한 환급사 연동 설계</div>
@@ -292,7 +292,7 @@
           <div class="st"><span class="tag">Java 17</span><span class="tag">Spring Boot 3</span><span class="tag">Redis</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
-        <a class="card" href="career-detail.html#mq">
+<a class="card" href="career-detail.html#mq">
           <div class="t"><span class="no">06</span><span class="org dozn">DOZN</span><span class="p">2024 <span class="kmono">하반기</span></span></div>
           <h4>알림 발송 서비스 통합</h4>
           <div class="sub">흩어진 발송 로직의 단일화와 유실 없는 발송 체계 구축</div>
@@ -301,7 +301,7 @@
           <div class="st"><span class="tag">RabbitMQ</span><span class="tag">Handlebars</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
-        <a class="card" href="career-detail.html#grafana">
+<a class="card" href="career-detail.html#grafana">
           <div class="t"><span class="no">07</span><span class="org dozn">DOZN</span><span class="p">2026.08—</span></div>
           <h4>그라파나 관측 스택 PoC 구성</h4>
           <div class="sub">로그만 있던 환경에 통합 모니터링을 개발계 PoC로 구성</div>
@@ -310,7 +310,7 @@
           <div class="st"><span class="tag">Docker Swarm</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Loki</span></div>
           <span class="more">상세 보기 <span class="ar">→</span></span>
         </a>
-        <div class="card nolink">
+<div class="card nolink">
           <div class="t"><span class="no">08</span><span class="org team">TEAM</span><span class="p">2023.10—12</span></div>
           <h4>CATCHER</h4>
           <div class="sub">일정 공유 서비스</div>
@@ -319,7 +319,7 @@
           <div class="st"><span class="tag">Java</span><span class="tag">QueryDSL</span></div>
           <div class="links"><a href="https://github.com/Project-Catcher" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
-        <div class="card nolink">
+<div class="card nolink">
           <div class="t"><span class="no">09</span><span class="org team">TEAM</span><span class="p">2023.08—10</span></div>
           <h4>PETNURI</h4>
           <div class="sub">반려동물 커뮤니티</div>
@@ -328,7 +328,7 @@
           <div class="st"><span class="tag">Spring Security</span><span class="tag">Redis</span></div>
           <div class="links"><a href="https://github.com/FINAL-TEAM4/itoxi-be" target="_blank" rel="noopener">GitHub ↗</a><a href="https://petnuri.netlify.app/" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
-        <div class="card nolink">
+<div class="card nolink">
           <div class="t"><span class="no">10</span><span class="org team">TEAM</span><span class="p">2023.07—08</span></div>
           <h4>당연하지</h4>
           <div class="sub">연차·당직 관리</div>
@@ -337,7 +337,7 @@
           <div class="st"><span class="tag">JUnit5</span><span class="tag">Swagger</span></div>
           <div class="links"><a href="https://github.com/FastCampus-Mini5/BE_server" target="_blank" rel="noopener">GitHub ↗</a><a href="https://group5ofcourse.netlify.app/" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
-        <div class="card nolink">
+<div class="card nolink">
           <div class="t"><span class="no">11</span><span class="org team">TEAM</span><span class="p">2023.06—10</span></div>
           <h4>FOODIE-LOG</h4>
           <div class="sub">맛집 공유 SNS</div>
@@ -346,7 +346,7 @@
           <div class="st"><span class="tag">Docker</span><span class="tag">AWS S3</span></div>
           <div class="links"><a href="https://github.com/FoodieLog/foodie-log-server" target="_blank" rel="noopener">GitHub ↗</a><a href="https://foodie-log-client.vercel.app/accounts/login" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
-        <div class="card nolink">
+<div class="card nolink">
           <div class="t"><span class="no">12</span><span class="org personal">SIDE</span><span class="p">2026—</span></div>
           <h4>FanKit <span style="font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--muted-2);letter-spacing:.02em;margin-left:6px">학습 프로젝트</span></h4>
           <div class="sub">결제 도메인 Saga · Outbox · Spring Batch 학습</div>
@@ -355,7 +355,7 @@
           <div class="st"><span class="tag">Kotlin</span><span class="tag">Kafka</span><span class="tag">Spring Batch</span></div>
           <div class="links"><a href="https://github.com/inyoung0215/fankit" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
-        <div class="card nolink">
+<div class="card nolink">
           <div class="t"><span class="no">13</span><span class="org personal">SIDE</span><span class="p">2026.09—</span></div>
           <h4>더키움 — 건설 일용직 인력사무소 배차 서비스</h4>
           <div class="sub">새벽 사무실 인바운드 통화를 없애는 것이 유일한 지표</div>
