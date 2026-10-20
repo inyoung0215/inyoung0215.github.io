@@ -136,18 +136,18 @@
         <div class="rl">Backend Developer</div>
       </div>
     </div>
-    <h1><span class="w-thin">결제 승인 흐름과 외부 기관 연동에서</span> <span class="hl">데이터 정합성</span><span class="w-thin">을 지키는</span><br> <span class="w-fat">백엔드 개발자.</span></h1>
-    <p class="tagline">카드사·전자화폐사·환급사 등 <b>외부 승인 연동</b>에서 발생하는 종료 코드 누락·재시도 시 중복 승인 문제를, 정산 대사가 성립하도록 트랜잭션 분리·재시도 대상 선별·응답 코드 체계 표준화로 해결해 왔습니다.<br> 입사 이후 <b>신규 도메인 단독 설계와 운영자 복구 API·QA 프로세스 자산화</b>를 통해, 팀의 반복 작업을 줄이고 정합성이 흔들리지 않는 구조를 만드는 데 집중해 왔습니다.</p>
+    <h1><span class="w-thin">실제 사용자가 쓰는 서비스를 끝까지 책임지는</span><br> <span class="w-fat">서비스 백엔드 개발자.</span></h1>
+    <p class="tagline">카드사·전자화폐사·환급사·OTA·교통카드사 등 <b>외부 기관 5개 이상과 연동하는 서비스 백엔드</b>를 설계·개발·운영해 왔습니다. 반복되던 캐시·외부 통신·메시징 로직을 <b>공통 플랫폼으로 자산화</b>하고(DurableCache · Transactional Outbox 통합 알림 · Grafana 관측 스택), 운영 중 발견한 문제는 <b>테스트·QA 절차·운영자 복구 API</b>로 환원해 팀 자산으로 남기는 쪽에 집중해 왔습니다.<br> 최근에는 가족이 운영하는 사업장을 위한 사이드 서비스를 <b>Next.js 15 · TypeScript · Supabase · Claude Code 바이브 코딩</b>으로 단독 설계·배포하며 풀스택 범위로 넓혀가고 있습니다.</p>
     <div class="cts"><span>hinyoung0215@gmail.com</span><span class="dot">·</span><span>github.com/inyoung0215</span><span class="dot">·</span><span>velog.io/@nyoung215</span></div>
   </header>
 
   <section>
     <header class="sh"><div class="over"><span class="no">01</span><span class="kicker">About</span></div> <div class="row"><h2>소개</h2><span class="rule"></span></div></header>
     <div class="about">
-      <p>선불카드 발급·충전·인출, 15개 통화 환전, Tax Refund, 교통카드 충전·출금, OTA 예약 카드 수령 등 <b>결제·정산 도메인</b>을 개발·운영해 왔습니다.</p>
-      <p>신규 서비스의 <b>ERD·API 설계부터 카드사·환급사·OTA 연동, QA와 운영까지</b> 전 과정에 참여했습니다. 종료 코드 누락·중복 승인·상태 불일치·외부 응답 실패를 다루며 <b>트랜잭션 분리·재시도 대상 선별·응답 코드 체계 표준화</b>로 정산 대사가 성립하는 결제 도메인을 설계했습니다.</p>
-      <p>요청 한 건이 실물 현금과 직결되어 재시도도 사후 보정도 불가능한 조건에서 정합성을 설계해야 했습니다. 온라인 결제는 취소 전문을 보내면 되돌릴 수 있지만 <b>현금이 방출된 뒤에는 되돌릴 경로 자체가 없기에</b>, 실패 시나리오를 코드 체계로 사전에 고정하는 방향으로 정합성을 설계해 왔습니다.</p>
-      <p>반복되는 캐시·외부 통신·메시징 로직은 <b>공통 모듈</b>로 만들어 3개 도메인이 재사용하고 있으며, 운영 중 발견한 문제는 테스트와 QA 절차에 반영해 <b>팀의 자산</b>으로 남기고 있습니다.</p>
+      <p>무인 금융 키오스크 100대 이상에서 운영되는 <b>서비스 백엔드</b>를 개발·운영해 왔습니다. 환전 · 선불카드 · Tax Refund · 교통카드 · 가상계좌 · OTA 예약 카드 수령 등 다양한 서비스 흐름을 다루며, <b>카드사·전자화폐사·환급사·OTA·교통카드사 등 외부 기관 5개 이상과 S2S 연동</b>해 왔습니다.</p>
+      <p>반복되던 캐시·외부 통신·메시징 로직을 <b>공통 플랫폼으로 자산화</b>해 왔습니다. <b>DurableCache</b>(Redis 1차 · DB 2차 폴백 캐시) · <b>Transactional Outbox 기반 통합 알림 발송 서비스</b>(Spring Event → RabbitMQ → Slack 실시간 통보) · <b>Grafana + Prometheus + Loki + Alloy 관측 스택 PoC</b>를 신규 구성해 3개 도메인에서 재사용하고 있습니다.</p>
+      <p>신규 서비스의 <b>ERD·API 설계부터 외부 연동·QA·운영까지</b> 전 과정에 참여했습니다. 운영 중 발견한 문제는 <b>운영자 복구 API·재처리 자동화·QA 체크리스트</b>로 환원해 다음에는 사람이 DB를 직접 건드리지 않아도 되는 체계로 남기는 걸 지향합니다.</p>
+      <p>최근에는 <b>가족이 운영하는 실제 사업장</b>을 위한 사이드 서비스(Next.js 15 · TypeScript · Supabase)를 <code>the-kium.co.kr</code>에 배포하고 운영 중입니다. <b>Claude Code · 바이브 코딩</b>을 설계·분석·구현 전반에 적극 활용하며, 설계 결정 43건을 <b>"결정 · 근거 · 대안 · 따라오는 것"</b> 구조로 기록하고 있습니다.</p>
     </div>
   </section>
 

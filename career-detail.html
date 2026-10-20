@@ -108,14 +108,14 @@
     <div class="kicker">Career Description</div>
     <h1>상세 경력기술서</h1>
     <div class="q">
-      <p class="qt">사람이 없는 기기에서 현금이 오갈 때, 가장 먼저 지켜야 하는 건 무엇일까요?</p>
-      <p class="qa">더즌에서 저는 "기능이 동작하는가"보다 <b>같은 요청이 두 번 들어와도 돈이 두 번 움직이지 않는가</b>를 먼저 봤습니다. 이 문서는 그 판단이 실제 프로젝트에서 어떤 설계로 이어졌는지를 정리한 기록입니다.</p>
+      <p class="qt">실제 사용자가 쓰는 서비스를 끝까지 책임질 수 있을까요?</p>
+      <p class="qa">더즌에서 저는 "기능이 동작하는가"보다 <b>외부 기관과 연결된 서비스가 지연·실패·장애에서 어떻게 복구되는가</b>, 그리고 <b>반복되는 캐시·통신·메시징·관측을 어떻게 공통 플랫폼으로 올릴 것인가</b>를 먼저 봤습니다. 이 문서는 그 판단이 실제 프로젝트와 사이드에서 어떤 설계로 이어졌는지를 정리한 기록입니다.</p>
     </div>
     <div class="pts">
-      <div class="it"><div class="t">거래 정합성</div><div class="d">중복 결제·발급·수령을 상태 전이와 분산락으로 차단</div></div>
-      <div class="it"><div class="t">외부 연동 신뢰성</div><div class="d">카드사·환급사·OTA가 지연·실패해도 거래가 깨지지 않게</div></div>
-      <div class="it"><div class="t">재사용 가능한 자산</div><div class="d">반복되는 캐시·통신·메시징을 공통 모듈로 남기기</div></div>
-      <div class="it"><div class="t">장애의 환원</div><div class="d">핫픽스로 끝내지 않고 테스트·QA 절차로 재발 방지</div></div>
+      <div class="it"><div class="t">외부 시스템 연동</div><div class="d">카드사·전자화폐사·환급사·OTA·교통카드사 5개+ S2S 연동 · 재시도·보상 설계</div></div>
+      <div class="it"><div class="t">공통 플랫폼 자산화</div><div class="d">DurableCache · Transactional Outbox 통합 알림 · Grafana 관측 스택 PoC</div></div>
+      <div class="it"><div class="t">장애 대응·운영 자동화</div><div class="d">운영자 복구 API 상비 · 재처리 자동화 · Slack 실시간 통보 파이프라인</div></div>
+      <div class="it"><div class="t">풀스택 사이드</div><div class="d">Next.js·TypeScript·Supabase · Claude Code 바이브 코딩 · 설계 결정 43건</div></div>
     </div>
     <div class="co-foot"><span class="nm">주식회사 더즌</span><span class="sep">·</span><span>키오스크 개발팀 · 서비스 백엔드 개발자</span><span class="per">2024.02 — <span class="kstat">재직 중</span></span></div>
   </header>
